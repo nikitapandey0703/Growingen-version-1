@@ -58,12 +58,12 @@ const cardImageWrapperClassName =
 const cardImageClassName =
   'h-full w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.08]'
 
-const sectionContainerClassName = 'relative mx-auto max-w-[1360px]'
+const sectionContainerClassName = 'relative'
 
 const sectionHeadingClassName =
   'mt-4 text-[32px] font-bold leading-[1.08] tracking-[-0.04em] text-black sm:text-[40px] lg:text-[50px]'
 
-const gridClassName = 'grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6 mx-8 sm:mx-12 lg:mx-0'
+const gridClassName = 'grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 lg:gap-6'
 
 function DeliverCardAbout({ step }) {
   return (
@@ -86,7 +86,7 @@ function DeliverCardAbout({ step }) {
 
 export default function WhatWeDeliverAbout() {
   return (
-    <SectionWrapper as="section" className="relative bg-transparent pt-12 sm:pt-14 lg:pt-16">
+    <SectionWrapper as="section" className="section-spacing relative bg-transparent pt-12 sm:pt-14 lg:pt-16">
       <div className={sectionContainerClassName}>
         <div className="mx-auto mb-12 max-w-[760px] text-center sm:mb-16">
           <p className="text-[10px] font-medium uppercase tracking-[0.28em] text-[#7a7f8e]">

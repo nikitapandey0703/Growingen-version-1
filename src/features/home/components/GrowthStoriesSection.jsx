@@ -146,13 +146,13 @@ function SolutionPreviewCard({ card }) {
 
 export default function GrowthStoriesSection() {
   return (
-    <section className="relative overflow-visible bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-0 lg:py-0">
+    <section className="section-spacing relative overflow-visible bg-transparent">
       {/* BACKGROUND GLOW */}
       <div className="pointer-events-none absolute left-[16%] top-[18%] h-[200px] w-[200px] rounded-full bg-[radial-gradient(circle,rgba(255,171,144,0.18)_0%,transparent_70%)] blur-3xl" />
       <div className="pointer-events-none absolute right-[10%] top-[10%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(102,145,255,0.18)_0%,transparent_70%)] blur-3xl" />
 
-      <div className="relative mx-auto max-w-[1360px] lg:mx-12 lg:mb-16 xl:mx-auto">
-        <div className="relative mx-auto max-w-[1120px]">
+      <div className="site-container relative">
+        <div className="section-content relative">
           {/* SECTION HEADING */}
           <div className="mx-auto mb-2 max-w-[620px] text-center sm:mb-3">
             <h2 className="text-[32px] font-semibold leading-[1.08] tracking-[-0.05em] text-[#111827] sm:text-[40px] lg:text-[50px]">

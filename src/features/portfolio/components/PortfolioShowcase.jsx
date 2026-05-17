@@ -132,11 +132,12 @@ export default function PortfolioShowcase() {
   )
 
   return (
-    <section className="relative overflow-hidden bg-transparent py-12 sm:py-14 lg:py-16">
+    <section className="section-spacing relative overflow-hidden bg-transparent">
       <div className="pointer-events-none absolute left-[10%] top-[16%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(255,151,113,0.18)_0%,rgba(255,151,113,0.06)_44%,rgba(255,151,113,0)_74%)] blur-3xl" />
       <div className="pointer-events-none absolute bottom-[14%] right-[8%] h-[240px] w-[240px] rounded-full bg-[radial-gradient(circle,rgba(104,141,255,0.18)_0%,rgba(104,141,255,0.06)_42%,rgba(104,141,255,0)_74%)] blur-3xl" />
 
-      <div className="relative mx-auto max-w-[1080px] px-4 sm:px-6 lg:px-8 xl:px-10">
+      <div className="site-container relative">
+        <div className="section-content max-w-[1080px]">
         <div className="mx-auto max-w-[560px] text-center">
           <h2 className="text-[32px] font-semibold leading-[1.08] tracking-[-0.05em] text-[#111827] sm:text-[40px] lg:text-[50px]">
             Visual{' '}
@@ -209,6 +210,7 @@ export default function PortfolioShowcase() {
               ))}
             </motion.div>
           </AnimatePresence>
+        </div>
         </div>
       </div>
     </section>

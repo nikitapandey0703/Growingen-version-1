@@ -24,6 +24,13 @@
   --font-sans: "Visby", "Avenir Next", "Segoe UI", sans-serif;
   --font-heading: "Visby", "Avenir Next", "Segoe UI", sans-serif;
 
+  /* Responsive breakpoints aligned with Tailwind defaults */
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
+
   /* Shared tokens */
   --radius-card: 1.5rem;
   --radius-pill: 9999px;

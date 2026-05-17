@@ -66,7 +66,7 @@ export default function BrandBanner() {
         `}
       </style>
 
-      <SectionWrapper className="relative z-10 mx-auto max-w-[1360px] py-0 xl:px-16">
+      <SectionWrapper className="relative z-10 py-0">
         <div className="grid w-full items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-12">
           <div className="brand-banner-copy max-w-[650px]" style={{ color: '#ffffff' }}>
             <h1

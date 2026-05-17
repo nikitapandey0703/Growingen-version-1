@@ -137,7 +137,7 @@ export default function PortfolioHero() {
         }
       `}</style>
 
-      <div className="relative mx-auto max-w-[1360px] px-4 pb-12 pt-8 sm:px-6 sm:pt-10 lg:px-10 xl:px-12 lg:pb-16">
+      <div className="site-container relative pt-8 sm:pt-10 lg:pb-16">
         <div className="grid items-center gap-12 lg:min-h-[calc(100vh-140px)] lg:grid-cols-[minmax(0,680px)_minmax(280px,1fr)] lg:gap-x-3 xl:grid-cols-[minmax(0,720px)_minmax(300px,1fr)] xl:gap-x-0">
           
           {/* LEFT CONTENT */}

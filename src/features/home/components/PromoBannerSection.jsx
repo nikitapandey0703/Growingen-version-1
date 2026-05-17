@@ -258,7 +258,7 @@ function ServicePromoBanner() {
         BRAND
       </div>
 
-      <div className="relative z-10 mx-auto w-full max-w-[1360px] px-4 sm:px-6 lg:px-12 xl:px-16">
+      <div className="site-container relative z-10">
         <div className="grid w-full items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-12">
           <div className="max-w-[650px]">
             <h1 className="text-[32px] font-bold leading-[1.18] tracking-tight text-white sm:text-[40px] lg:text-[50px]">
@@ -318,9 +318,9 @@ export default function PromoBannerSection({ variant = 'default' }) {
   }
 
   return (
-    <section className="relative overflow-hidden bg-transparent px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-      <div className="relative mx-auto max-w-[1060px]">
-        <div className="mx-auto w-full max-w-[1020px]">
+    <section className="section-spacing relative overflow-hidden bg-transparent">
+      <div className="site-container relative">
+        <div className="mx-auto w-full max-w-[1060px]">
           <div className="relative flex flex-col gap-6 md:min-h-[326px] md:justify-center">
             
             <div className="relative z-20 mx-auto md:absolute md:-left-[10px] md:top-1/2 md:mx-0 md:-translate-y-1/2 lg:-left-[20px]">

@@ -368,11 +368,12 @@ export default function AnimatedContactForm() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-transparent px-4 py-10 sm:px-6 sm:py-14 lg:px-8 lg:py-20 2xl:py-24">
+    <section className="section-spacing relative overflow-hidden bg-transparent">
       <div className="pointer-events-none absolute left-[12%] top-[18%] h-[190px] w-[190px] rounded-full bg-[radial-gradient(circle,rgba(255,192,172,0.3)_0%,rgba(255,192,172,0)_74%)] blur-3xl" />
       <div className="pointer-events-none absolute bottom-[12%] right-[10%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(147,181,255,0.26)_0%,rgba(147,181,255,0)_76%)] blur-3xl" />
 
-      <div className="relative mx-auto max-w-[980px] 2xl:max-w-[1180px]">
+      <div className="site-container relative">
+        <div className="relative mx-auto max-w-[980px] 2xl:max-w-[1180px]">
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
@@ -611,6 +612,7 @@ export default function AnimatedContactForm() {
             </AnimatePresence>
           </div>
         </motion.div>
+        </div>
       </div>
     </section>
   )

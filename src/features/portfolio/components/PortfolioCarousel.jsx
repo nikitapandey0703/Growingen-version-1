@@ -167,8 +167,9 @@ export default function PortfolioCarousel() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-transparent py-20">
-        <div className="mx-auto max-w-[1320px] px-4 sm:px-6 lg:px-10 xl:px-12">
+      <section className="section-spacing relative overflow-hidden bg-transparent">
+        <div className="site-container">
+          <div className="mx-auto max-w-[1320px]">
           <div className="mb-14 text-center">
             <h2 className="text-[32px] font-semibold leading-[1.08] tracking-[-0.04em] text-[#111827] sm:text-[40px] lg:text-[50px]">
               Build a Brand{' '}
@@ -239,6 +240,7 @@ export default function PortfolioCarousel() {
                 </div>
               ))}
             </div>
+          </div>
           </div>
         </div>
       </section>

@@ -13,7 +13,7 @@ const SectionWrapper = forwardRef(function SectionWrapper(
     <Component
       ref={ref}
       className={[
-        'w-full px-4 pb-12 sm:px-6 sm:pb-14 md:px-8 md:pb-16 lg:px-12 lg:pb-16',
+        'site-container w-full',
         className,
       ]
         .filter(Boolean)

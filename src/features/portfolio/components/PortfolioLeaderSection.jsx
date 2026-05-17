@@ -2,8 +2,8 @@ import CurvedUnderlineText from '../../../components/common/CurvedUnderlineText'
 
 export default function PortfolioLeaderSection() {
   return (
-    <section className="relative overflow-hidden bg-transparent">
-      <div className="mx-auto max-w-[1360px] px-4 pb-24 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-10 lg:pb-28 lg:pt-24 xl:px-12">
+    <section className="section-spacing relative overflow-hidden bg-transparent">
+      <div className="site-container pb-24 pt-16 sm:pb-28 sm:pt-20 lg:pb-28 lg:pt-24">
         <div className="grid items-center gap-12 lg:grid-cols-[minmax(0,560px)_minmax(360px,1fr)] lg:gap-x-16 xl:grid-cols-[minmax(0,590px)_minmax(400px,1fr)]">
           <div className="mx-auto w-full max-w-[560px] text-center lg:mx-0 lg:text-left">
             <h2 className="text-[32px] font-semibold leading-[1.06] tracking-[-0.05em] text-[#111827] sm:text-[40px] lg:text-[50px]">

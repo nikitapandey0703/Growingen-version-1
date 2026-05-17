@@ -27,6 +27,11 @@
 
 @theme{
   --font-sans: var(--font-sans);
+  --breakpoint-sm: 40rem;
+  --breakpoint-md: 48rem;
+  --breakpoint-lg: 64rem;
+  --breakpoint-xl: 80rem;
+  --breakpoint-2xl: 96rem;
   --color-primary: var(--color-primary);
   --color-primary-soft: var(--color-primary-soft);
   --color-secondary: var(--color-secondary);
@@ -172,6 +177,60 @@ textarea
 
 #root {
   min-height: 100vh;
+}
+
+.site-container {
+  width: 100%;
+  max-width: 1694px;
+  margin-inline: auto;
+  padding-inline: 16px;
+}
+
+.section-spacing {
+  padding-block: 64px;
+}
+
+.section-content {
+  max-width: 1120px;
+  margin-inline: auto;
+}
+
+@media (min-width: 640px) {
+  .site-container {
+    padding-inline: 24px;
+  }
+}
+
+@media (min-width: 768px) {
+  .site-container {
+    padding-inline: 32px;
+  }
+
+  .section-spacing {
+    padding-block: 72px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-container {
+    padding-inline: 48px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .site-container {
+    padding-inline: 72px;
+  }
+
+  .section-spacing {
+    padding-block: 90px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .site-container {
+    padding-inline: 104px;
+  }
 }
 
 .cta-gradient-button {

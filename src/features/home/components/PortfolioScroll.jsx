@@ -69,7 +69,7 @@ export default function PortfolioScroll() {
   return (
     <>
       {/* ======================= MOBILE / TABLET VIEW ======================= */}
-      <section className="w-full px-4 pb-16 pt-6 sm:px-6 sm:pt-8 lg:hidden">
+      <section className="site-container w-full pb-16 pt-6 sm:pt-8 lg:hidden">
         <div className="mx-auto max-w-[760px] text-center">
           <h2 className="text-[32px] font-semibold leading-[1.08] tracking-[-0.04em]  sm:text-[40px] lg:text-[50px]">
             Our Recent Projects

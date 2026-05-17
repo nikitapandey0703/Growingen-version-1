@@ -99,8 +99,9 @@ function GaugeCard() {
 
 export default function TopRatedSection() {
   return (
-    <section className="relative mt-8 px-4 py-12 sm:px-6 sm:py-16 lg:px-8 lg:py-20">
-      <div className="mx-auto max-w-[1030px]">
+    <section className="section-spacing relative mt-8">
+      <div className="site-container">
+        <div className="mx-auto max-w-[1030px]">
         
         {/* Main Div Styling remains Static & Unchanged as requested */}
         <div className="relative overflow-hidden rounded-[18px] px-5 py-5 sm:px-6 sm:py-6 lg:min-h-[288px] lg:px-8 lg:py-8">
@@ -169,6 +170,7 @@ export default function TopRatedSection() {
 </div>
             
           </div>
+        </div>
         </div>
       </div>
     </section>

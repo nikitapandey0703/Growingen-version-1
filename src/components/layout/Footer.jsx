@@ -29,7 +29,7 @@ const Footer = ({
       className="relative flex justify-center overflow-hidden bg-[#FFF1F0] text-black font-['Visby',_sans-serif]"
       style={{ width, maxWidth, minHeight }}
     >
-      <div className="flex w-full max-w-[1350px] flex-col items-center justify-between px-[60px] py-12 lg:flex-row lg:px-[80px]">
+      <div className="site-container flex w-full flex-col items-center justify-between py-12 lg:flex-row">
         <div className="flex w-full flex-col justify-center self-start lg:w-auto lg:self-center">
           <div className="mb-8">
             <img

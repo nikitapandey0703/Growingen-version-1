@@ -369,8 +369,8 @@ export default function FeaturedSection() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-transparent pb-16 pt-2 sm:pt-4 lg:pb-20">
-      <div className="relative mx-auto max-w-[1360px] px-4 sm:px-6 lg:px-10 xl:px-12">
+    <section className="section-spacing relative overflow-hidden bg-transparent pt-2 sm:pt-4">
+      <div className="site-container relative">
         <div className="mx-auto max-w-[760px] text-center">
           <h2 className="text-[32px] font-semibold leading-[1.1] tracking-[-0.05em] text-[#111827] sm:text-[40px] lg:text-[50px]">
             We Provide The Best Service

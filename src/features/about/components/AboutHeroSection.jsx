@@ -27,7 +27,7 @@ function AboutHeroVisual() {
 export default function AboutHeroSection() {
   return (
     <section className="relative overflow-hidden bg-transparent">
-      <SectionWrapper className="relative mx-auto max-w-[1360px] pt-8 sm:pt-10 xl:px-12">
+      <SectionWrapper className="relative pt-8 sm:pt-10">
         <div className="grid items-center gap-12 lg:min-h-[calc(100vh-140px)] lg:grid-cols-[520px_minmax(360px,1fr)] lg:gap-8 lg:pt-0">
           <div className="relative z-40 mx-auto max-w-[520px] pt-2 text-center font-sans text-black lg:mx-0 lg:pt-0 lg:text-left">
            

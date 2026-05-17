@@ -66,11 +66,11 @@ function HeroVisual() {
 
 export default function HeroSection() {
   return (
-    <section id="home" className="hero-section relative overflow-hidden bg-transparent">
+    <section id="home" className="hero-section relative overflow-hidden bg-transparent section-spacing">
       <div className="hero-section__ambient hero-section__ambient--left" aria-hidden="true" />
       <div className="hero-section__ambient hero-section__ambient--right" aria-hidden="true" />
 
-      <div className="relative mx-auto max-w-[1360px] px-4 pb-12 pt-8 sm:px-6 sm:pb-14 sm:pt-10 lg:px-10 lg:pb-16 lg:pt-12 xl:px-12">
+      <div className="site-container relative pt-8 sm:pt-10 lg:pt-12">
         <div className="grid items-center gap-10 lg:min-h-[calc(100vh-140px)] lg:grid-cols-[minmax(0,560px)_minmax(360px,1fr)] lg:gap-8 xl:grid-cols-[minmax(0,600px)_minmax(420px,1fr)]">
           {/* Copy stays centered on compact screens, then locks to the left once the two-column layout has enough breathing room. */}
           <div className="relative z-40 mx-auto flex w-full max-w-[580px] flex-col items-center pt-2 text-center font-sans  lg:mx-0 lg:max-w-[600px] lg:items-start lg:pt-0 lg:text-left">

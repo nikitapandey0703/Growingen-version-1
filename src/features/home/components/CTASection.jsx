@@ -276,12 +276,12 @@ export default function CTASection() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-transparent px-4 pb-16 pt-8 sm:px-6 sm:pb-20 lg:px-0">
+    <section className="section-spacing relative overflow-hidden bg-transparent pt-8">
       <div className="pointer-events-none absolute left-[10%] top-[30%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(255,151,113,0.24)_0%,rgba(255,151,113,0.09)_42%,rgba(255,151,113,0)_74%)] blur-3xl" />
       <div className="pointer-events-none absolute right-[8%] bottom-[8%] h-[240px] w-[240px] rounded-full bg-[radial-gradient(circle,rgba(104,141,255,0.22)_0%,rgba(104,141,255,0.08)_42%,rgba(104,141,255,0)_74%)] blur-3xl" />
 
-      <div className="relative mx-auto max-w-[1360px] lg:pt-12 lg:pr-12 lg:pb-12 lg:pl-16">
-        <div className="mx-auto max-w-[1120px]">
+      <div className="site-container relative lg:pt-12">
+        <div className="section-content">
           <div className="mx-auto max-w-[520px] text-center">
             <h2 className="text-[32px] font-semibold leading-[1.08] tracking-[-0.05em] text-[#111827] sm:text-[40px] lg:text-[50px]">
               <span className="block sm:whitespace-nowrap">

@@ -83,7 +83,7 @@ export default function ServiceHero() {
       <div className="hero-section__ambient hero-section__ambient--left" aria-hidden="true" />
       <div className="hero-section__ambient hero-section__ambient--right" aria-hidden="true" />
 
-      <SectionWrapper className="relative mx-auto max-w-[1360px] pt-8 sm:pt-10 xl:px-12">
+      <SectionWrapper className="relative pt-8 sm:pt-10">
         <div className="grid items-center gap-12 lg:min-h-[calc(100vh-140px)] lg:grid-cols-[470px_minmax(400px,1fr)] lg:gap-8 lg:pt-0">
           <div className="relative z-40 mx-auto max-w-[470px] pt-2 text-center font-sans text-black lg:mx-0 lg:max-w-[520px] lg:pt-0 lg:text-left">
             <h1 className="w-full text-[30px] font-bold leading-[1.04] tracking-[-0.05em] text-black sm:text-[36px] lg:text-[54px]">
