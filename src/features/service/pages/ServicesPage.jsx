@@ -7,7 +7,7 @@ import PortfolioTestimonialSection from '../../portfolio/components/PortfolioTes
 import HowWeWorkSection from '../components/HowWeWorkSection'
 import ServiceBusinessFitSection from '../components/ServiceBusinessFitSection'
 import WhatSetsUsApartSection from '../components/WhatSetsUsApartSection'
-import BrandIdentityAnimation from '../components/BrandIdentityAnimation'
+
 
 export function ServicesPage() {
   return (

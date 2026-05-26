@@ -11,39 +11,39 @@ const tabs = [
 ]
 
 const tabLayouts = [
-  // 0: Web Design (7 Images)
+  // Tab 0: Web Design (6-row grid system for perfect fractional proportions)
   [
-    { id: 'wd-1', src: '/images/grid/web-design-1.webp', alt: 'Web design presentation 1', className: 'sm:col-span-1 lg:col-[1] lg:row-[1/3] min-h-[340px] sm:min-h-[420px] lg:min-h-0' },
-    { id: 'wd-2', src: '/images/grid/web-design-2.webp', alt: 'Web design presentation 2', className: 'sm:col-span-1 lg:col-[2/4] lg:row-[1] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
-    { id: 'wd-3', src: '/images/grid/web-design-3.webp', alt: 'Web design presentation 3', className: 'sm:col-span-1 lg:col-[4] lg:row-[1] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
-    { id: 'wd-4', src: '/images/grid/web-design-4.webp', alt: 'Web design presentation 4', className: 'sm:col-span-2 lg:col-[2/4] lg:row-[2] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
-    { id: 'wd-5', src: '/images/grid/web-design-5.webp', alt: 'Web design presentation 5', className: 'sm:col-span-1 lg:col-[1/3] lg:row-[3] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
-    { id: 'wd-6', src: '/images/grid/web-design-6.webp', alt: 'Web design presentation 6', className: 'sm:col-span-1 lg:col-[3] lg:row-[3] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
-    { id: 'wd-7', src: '/images/grid/web-design-7.webp', alt: 'Web design presentation 7', className: 'sm:col-span-1 lg:col-[4] lg:row-[2/4] min-h-[340px] sm:min-h-[420px] lg:min-h-0' },
+    { id: 'wd-1', src: '/images/grid/web-design-1.webp', alt: 'Web design presentation 1', className: 'min-h-[390px] sm:col-span-1 sm:min-h-[500px] lg:col-[1] lg:row-[1/5] lg:min-h-0' },
+    { id: 'wd-2', src: '/images/grid/web-design-2.webp', alt: 'Web design presentation 2', className: 'min-h-[260px] sm:col-span-2 sm:min-h-[320px] lg:col-[2/4] lg:row-[1/3] lg:min-h-0' },
+    { id: 'wd-3', src: '/images/grid/web-design-3.webp', alt: 'Web design presentation 3', className: 'min-h-[390px] sm:col-span-1 sm:min-h-[500px] lg:col-[4] lg:row-[1/4] lg:min-h-0' },
+    { id: 'wd-4', src: '/images/grid/web-design-4.webp', alt: 'Web design presentation 4', className: 'min-h-[260px] sm:col-span-2 sm:min-h-[320px] lg:col-[2/4] lg:row-[3/5] lg:min-h-0' },
+    { id: 'wd-5', src: '/images/grid/web-design-5.webp', alt: 'Web design presentation 5', className: 'min-h-[260px] sm:col-span-2 sm:min-h-[320px] lg:col-[1/3] lg:row-[5/7] lg:min-h-0' },
+    { id: 'wd-6', src: '/images/grid/web-design-6.webp', alt: 'Web design presentation 6', className: 'min-h-[260px] sm:col-span-1 sm:min-h-[320px] lg:col-[3] lg:row-[5/7] lg:min-h-0' },
+    { id: 'wd-7', src: '/images/grid/web-design-7.webp', alt: 'Web design presentation 7', className: 'min-h-[260px] sm:col-span-1 sm:min-h-[320px] lg:col-[4] lg:row-[4/7] lg:min-h-0' },
   ],
-  // 1: UI/UX (4 Images)
+  // Tab 1: UI/UX (Restored to exact prior 2-row layout)
   [
-    { id: 'ui-1', src: '/images/grid/ui-ux-1.webp', alt: 'UI/UX Interface 1', className: 'sm:col-span-1 lg:col-[1] lg:row-[1/3] min-h-[340px] sm:min-h-[400px] lg:min-h-0' },
-    { id: 'ui-2', src: '/images/grid/ui-ux-2.webp', alt: 'UI/UX Interface 2', className: 'sm:col-span-2 lg:col-[2/4] lg:row-[1] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
-    { id: 'ui-3', src: '/images/grid/ui-ux-3.webp', alt: 'UI/UX Interface 3', className: 'sm:col-span-1 lg:col-[4] lg:row-[1/3] min-h-[340px] sm:min-h-[420px] lg:min-h-0' },
-    { id: 'ui-4', src: '/images/grid/ui-ux-4.webp', alt: 'UI/UX Interface 4', className: 'sm:col-span-2 lg:col-[2/4] lg:row-[2] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
+    { id: 'ui-1', src: '/images/grid/ui-ux-1.webp', alt: 'UI/UX interface 1', className: 'min-h-[390px] sm:col-span-1 sm:min-h-[500px] lg:col-[1] lg:row-[1/3] lg:min-h-0' },
+    { id: 'ui-2', src: '/images/grid/ui-ux-2-1.webp', alt: 'UI/UX interface 2', className: 'min-h-[260px] sm:col-span-2 sm:min-h-[320px] lg:col-[2/4] lg:row-[1] lg:min-h-0', imageClassName: 'object-cover scale-[1.38]' },
+    { id: 'ui-3', src: '/images/grid/ui-ux-3.webp', alt: 'UI/UX interface 3', className: 'min-h-[390px] sm:col-span-1 sm:min-h-[500px] lg:col-[4] lg:row-[1/3] lg:min-h-0' },
+    { id: 'ui-4', src: '/images/grid/ui-ux-4.webp', alt: 'UI/UX interface 4', className: 'min-h-[260px] sm:col-span-2 sm:min-h-[320px] lg:col-[2/4] lg:row-[2] lg:min-h-0' },
   ],
-  // 2: Branding (7 Images)
+  // Tab 2: Branding (6-row grid system for perfect fractional proportions)
   [
-    { id: 'br-1', src: '/images/grid/branding-1.webp', alt: 'Branding Showcase 1', className: 'sm:col-span-1 lg:col-[1] lg:row-[1/3] min-h-[340px] sm:min-h-[420px] lg:min-h-0' },
-    { id: 'br-2', src: '/images/grid/branding-2.webp', alt: 'Branding Showcase 2', className: 'sm:col-span-2 lg:col-[2/4] lg:row-[1] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
-    { id: 'br-3', src: '/images/grid/branding-3.webp', alt: 'Branding Showcase 3', className: 'sm:col-span-1 lg:col-[4] lg:row-[1/3] min-h-[340px] sm:min-h-[420px] lg:min-h-0' },
-    { id: 'br-4', src: '/images/grid/branding-4.webp', alt: 'Branding Showcase 4', className: 'sm:col-span-2 lg:col-[2/4] lg:row-[2] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
-    { id: 'br-5', src: '/images/grid/branding-5.webp', alt: 'Branding Showcase 5', className: 'sm:col-span-1 lg:col-[1/3] lg:row-[3] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
-    { id: 'br-6', src: '/images/grid/branding-6.webp', alt: 'Branding Showcase 6', className: 'sm:col-span-1 lg:col-[3] lg:row-[3] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
-    { id: 'br-7', src: '/images/grid/branding-7.webp', alt: 'Branding Showcase 7', className: 'sm:col-span-1 lg:col-[4] lg:row-[3] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
+    { id: 'br-1', src: '/images/grid/branding-1.webp', alt: 'Branding showcase 1', className: 'min-h-[390px] sm:col-span-1 sm:min-h-[500px] lg:col-[1] lg:row-[1/5] lg:min-h-0' },
+    { id: 'br-2', src: '/images/grid/branding-2.webp', alt: 'Branding showcase 2', className: 'min-h-[260px] sm:col-span-2 sm:min-h-[320px] lg:col-[2/4] lg:row-[1/3] lg:min-h-0' },
+    { id: 'br-3', src: '/images/grid/branding-3.webp', alt: 'Branding showcase 3', className: 'min-h-[390px] sm:col-span-1 sm:min-h-[500px] lg:col-[4] lg:row-[1/4] lg:min-h-0' },
+    { id: 'br-4', src: '/images/grid/branding-4.webp', alt: 'Branding showcase 4', className: 'min-h-[260px] sm:col-span-2 sm:min-h-[320px] lg:col-[2/4] lg:row-[3/5] lg:min-h-0' },
+    { id: 'br-5', src: '/images/grid/branding-5.webp', alt: 'Branding showcase 5', className: 'min-h-[260px] sm:col-span-2 sm:min-h-[320px] lg:col-[1/3] lg:row-[5/7] lg:min-h-0' },
+    { id: 'br-6', src: '/images/grid/branding-6.webp', alt: 'Branding showcase 6', className: 'min-h-[260px] sm:col-span-1 sm:min-h-[320px] lg:col-[3] lg:row-[5/7] lg:min-h-0' },
+    { id: 'br-7', src: '/images/grid/branding-7.webp', alt: 'Branding showcase 7', className: 'min-h-[260px] sm:col-span-1 sm:min-h-[320px] lg:col-[4] lg:row-[4/7] lg:min-h-0' },
   ],
-  // 3: Social Media (4 Images)
+  // Tab 3: Social Media (Restored to exact prior 2-row layout)
   [
-    { id: 'sm-1', src: '/images/grid/social-media-1.webp', alt: 'Social Media Post 1', className: 'sm:col-span-1 lg:col-[1] lg:row-[1/3] min-h-[340px] sm:min-h-[420px] lg:min-h-0' },
-    { id: 'sm-2', src: '/images/grid/social-media-2.webp', alt: 'Social Media Post 2', className: 'sm:col-span-2 lg:col-[2/4] lg:row-[1] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
-    { id: 'sm-3', src: '/images/grid/social-media-3.webp', alt: 'Social Media Post 3', className: 'sm:col-span-1 lg:col-[4] lg:row-[1/3] min-h-[340px] sm:min-h-[420px] lg:min-h-0' },
-    { id: 'sm-4', src: '/images/grid/social-media-4.webp', alt: 'Social Media Post 4', className: 'sm:col-span-2 lg:col-[2/4] lg:row-[2] min-h-[270px] sm:min-h-[300px] lg:min-h-0' },
+    { id: 'sm-1', src: '/images/grid/social-media-1.webp', alt: 'Social media post 1', className: 'min-h-[390px] sm:col-span-1 sm:min-h-[500px] lg:col-[1] lg:row-[1/3] lg:min-h-0' },
+    { id: 'sm-2', src: '/images/grid/social-media-2.webp', alt: 'Social media post 2', className: 'min-h-[260px] sm:col-span-2 sm:min-h-[320px] lg:col-[2/4] lg:row-[1] lg:min-h-0' },
+    { id: 'sm-3', src: '/images/grid/social-media-3.webp', alt: 'Social media post 3', className: 'min-h-[390px] sm:col-span-1 sm:min-h-[500px] lg:col-[4] lg:row-[1/3] lg:min-h-0' },
+    { id: 'sm-4', src: '/images/grid/social-media-4.svg', alt: 'Social media post 4', className: 'min-h-[260px] sm:col-span-2 sm:min-h-[320px] lg:col-[2/4] lg:row-[2] lg:min-h-0' },
   ],
 ]
 
@@ -77,25 +77,17 @@ const MotionArticle = motion.article
 const MotionButton = motion.button
 const MotionDiv = motion.div
 
-function ShowcaseCard({ item, isAutoFocused }) {
+function ShowcaseCard({ item }) {
   return (
     <MotionArticle
       variants={cardVariants}
-      className={`group overflow-hidden rounded-[16px] sm:rounded-[18px] ${item.className}`}
+      className={`h-full w-full overflow-hidden rounded-[clamp(14px,1.8vw,30px)] ${item.className}`}
     >
-      <div className="relative h-full w-full overflow-hidden rounded-[16px] sm:rounded-[18px]">
+      <div className="relative h-full w-full overflow-hidden rounded-[clamp(14px,1.8vw,30px)] sm:rounded-[clamp(16px,2.2vw,36px)]">
         <img
           src={item.src}
           alt={item.alt}
-          className="h-full w-full object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06]"
-        />
-        <div
-          className={[
-            'absolute inset-0 transition duration-500',
-            isAutoFocused
-              ? 'bg-[linear-gradient(180deg,rgba(0,0,0,0.02)_0%,rgba(0,0,0,0.22)_100%)]'
-              : 'bg-black/0 group-hover:bg-black/10',
-          ].join(' ')}
+          className={`h-full w-full ${item.imageClassName || 'object-cover'}`}
         />
       </div>
     </MotionArticle>
@@ -107,23 +99,19 @@ export default function PortfolioShowcase() {
 
   const animatedItems = useMemo(
     () =>
-      tabLayouts[activeTab].map((item, index) => ({
+      tabLayouts[activeTab].map((item) => ({
         ...item,
         animationKey: `${activeTab}-${item.id}`,
-        isAutoFocused: index === 0,
       })),
     [activeTab],
   )
 
   return (
     <SectionWrapper as="section" className="section-spacing relative overflow-hidden bg-transparent">
-      <div className="pointer-events-none absolute left-[10%] top-[16%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(255,151,113,0.18)_0%,rgba(255,151,113,0.06)_44%,rgba(255,151,113,0)_74%)] blur-3xl" />
-      <div className="pointer-events-none absolute bottom-[14%] right-[8%] h-[240px] w-[240px] rounded-full bg-[radial-gradient(circle,rgba(104,141,255,0.18)_0%,rgba(104,141,255,0.06)_42%,rgba(104,141,255,0)_74%)] blur-3xl" />
-
       <div className="relative">
         <div className="section-content max-w-[1080px]">
           <div className="mx-auto max-w-[560px] text-center">
-            <h2 className="text-[32px] font-semibold leading-[1.08] tracking-[-0.05em]  sm:text-[40px] lg:text-[50px]">
+            <h2 className="text-[32px] font-semibold leading-[1.08] tracking-[-0.05em] sm:text-[40px] lg:text-[50px]">
               Visual{' '}
               <CurvedUnderlineText
                 className="hero-highlight pb-[0.18em]"
@@ -145,12 +133,12 @@ export default function PortfolioShowcase() {
                   onClick={() => setActiveTab(index)}
                   whileTap={{ scale: 0.97 }}
                   className={[
-                    'relative flex items-center justify-center overflow-hidden rounded-full border-[1.5px] text-center font-extrabold tracking-tight transition-[border-color,color,box-shadow,background-color] duration-300',
+                    'relative flex items-center justify-center overflow-hidden rounded-full border-[1.5px] text-center font-extrabold tracking-tight transition-[border-color,color,background-color] duration-300',
                     'w-[48%] sm:w-[calc(50%-0.5rem)] lg:h-[32px] lg:w-[200px]',
                     'h-10 text-[11px] sm:text-[12px] lg:text-[13px]',
                     isActive
-                      ? 'border-[#F45328] text-white shadow-[0_10px_22px_rgba(244,83,40,0.22),0_0_0_1px_rgba(255,255,255,0.08)_inset]'
-                      : 'border-[#b8bec9] bg-transparent text-black shadow-[0_1px_0_rgba(255,255,255,0.65)_inset] hover:border-[#8b94a3] hover:shadow-[0_8px_18px_rgba(15,23,42,0.08)]',
+                      ? 'border-[#F45328] text-white'
+                      : 'border-[#b8bec9] bg-transparent text-black hover:border-[#8b94a3]',
                   ].join(' ')}
                 >
                   {isActive ? (
@@ -175,13 +163,17 @@ export default function PortfolioShowcase() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="mx-auto mt-8 grid max-w-[1020px] grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-4 lg:mt-10 lg:grid-cols-4 lg:auto-rows-[236px] lg:gap-3"
+                // The dynamic shift happens here: For 0 & 2, col 2 shrinks and col 3 expands equally by 0.25fr.
+                className={`mx-auto mt-8 grid max-w-[1020px] grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-10 ${
+                  activeTab === 0 || activeTab === 2 
+                    ? 'lg:grid-cols-[1.25fr_0.75fr_1.25fr_1.25fr] lg:auto-rows-[140px]' 
+                    : 'lg:grid-cols-[1.25fr_1fr_1fr_1.25fr] lg:auto-rows-[280px]'
+                } lg:gap-4`}
               >
                 {animatedItems.map((item) => (
                   <ShowcaseCard
                     key={item.animationKey}
                     item={item}
-                    isAutoFocused={item.isAutoFocused}
                   />
                 ))}
               </MotionDiv>

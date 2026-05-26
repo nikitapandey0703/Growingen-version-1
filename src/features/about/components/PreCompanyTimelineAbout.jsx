@@ -118,10 +118,6 @@ function TimelineImageCard({ item, isActive }) {
   const [stack, setStack] = useState(item.images)
 
   useEffect(() => {
-    setStack(item.images)
-  }, [item.images])
-
-  useEffect(() => {
     if (stack.length <= 1) {
       return undefined
     }
@@ -256,7 +252,7 @@ function TimelineTextCard({ item, align, isActive }) {
             {item.tag && (
               <span
                 className={[
-                  'mb-0.5 text-[3px] font-light uppercase tracking-[0.18em] leading-none transition-colors duration-500 ease-out sm:text-[4px] md:text-[5px] xl:text-[6px]',
+                  'mb-0.5 text-[clamp(6px,1.1vw,18px)] font-light uppercase tracking-[0.18em] leading-none transition-colors duration-500 ease-out',
                   isActive ? '!text-white/80' : '!text-[#7a7f8e]',
                 ].join(' ')}
               >
@@ -313,10 +309,10 @@ export default function PreCompanyTimelineAbout() {
   const finalLineRef = useRef(null)
   const dotRefs = useRef([])
   const finalDotRef = useRef(null)
+  
   const [progress, setProgress] = useState(0)
   const [dotOffsets, setDotOffsets] = useState([])
-  const [finalDotOffset, setFinalDotOffset] = useState(null)
-  const [finalLineMetrics, setFinalLineMetrics] = useState({ top: 0, height: 0 })
+  const [trackHeight, setTrackHeight] = useState(0) // Moved height from render phase to state
 
   const { scrollYProgress } = useScroll({
     target: timelineTrackRef,
@@ -332,11 +328,13 @@ export default function PreCompanyTimelineAbout() {
   useLayoutEffect(() => {
     const measureDots = () => {
       const trackRect = timelineTrackRef.current?.getBoundingClientRect()
-      const finalConnectorRect = finalConnectorRef.current?.getBoundingClientRect()
 
-      if (!trackRect || !finalConnectorRect) {
+      if (!trackRect) {
         return
       }
+
+      // Safe evaluation that doesn't trigger ref warnings in render
+      setTrackHeight(trackRect.height)
 
       const nextDotOffsets = dotRefs.current.map((dot) => {
         if (!dot) {
@@ -347,21 +345,7 @@ export default function PreCompanyTimelineAbout() {
         return dotRect.top + dotRect.height / 2 - trackRect.top
       })
 
-      const finalRect = finalDotRef.current?.getBoundingClientRect()
-      const finalLineRect = finalLineRef.current?.getBoundingClientRect()
-      const nextFinalOffset = finalRect
-        ? finalRect.top + finalRect.height / 2 - finalConnectorRect.top
-        : null
-      const nextFinalLineMetrics = finalLineRect
-        ? {
-            top: finalLineRect.top - finalConnectorRect.top,
-            height: finalLineRect.height,
-          }
-        : { top: 0, height: 0 }
-
       setDotOffsets(nextDotOffsets)
-      setFinalDotOffset(nextFinalOffset)
-      setFinalLineMetrics(nextFinalLineMetrics)
     }
 
     measureDots()
@@ -373,23 +357,11 @@ export default function PreCompanyTimelineAbout() {
       resizeObserver?.observe(timelineTrackRef.current)
     }
 
-    if (finalConnectorRef.current) {
-      resizeObserver?.observe(finalConnectorRef.current)
-    }
-
     dotRefs.current.forEach((dot) => {
       if (dot) {
         resizeObserver?.observe(dot)
       }
     })
-
-    if (finalDotRef.current) {
-      resizeObserver?.observe(finalDotRef.current)
-    }
-
-    if (finalLineRef.current) {
-      resizeObserver?.observe(finalLineRef.current)
-    }
 
     window.addEventListener('resize', measureDots)
 
@@ -399,18 +371,14 @@ export default function PreCompanyTimelineAbout() {
     }
   }, [])
 
-  const trackHeight = timelineTrackRef.current?.offsetHeight ?? 0
   const filledTrackHeight = progress * trackHeight
-  const finalConnectorStart = 0.94
+  
+  const finalConnectorStart = 0.99
   const finalConnectorProgress = Math.min(
     Math.max((progress - finalConnectorStart) / (1 - finalConnectorStart), 0),
     1,
   )
-  const filledFinalConnectorHeight = finalConnectorProgress * finalLineMetrics.height
-  const isFinalDotActive =
-    finalDotOffset != null &&
-    finalLineMetrics.height > 0 &&
-    filledFinalConnectorHeight + finalLineMetrics.top >= finalDotOffset - 2
+  const isFinalDotActive = progress >= finalConnectorStart
 
   return (
     <SectionWrapper ref={sectionRef} as="section" className="relative overflow-hidden bg-transparent section-spacing">
@@ -442,7 +410,6 @@ export default function PreCompanyTimelineAbout() {
             />
           </div>
 
-          {/* Increased space-y heavily on mobile to account for the stacked cards */}
           <div className="space-y-12 md:space-y-6 lg:space-y-7">
             {timelineSteps.map((item, index) => {
               const dotOffset = dotOffsets[index]
@@ -450,8 +417,6 @@ export default function PreCompanyTimelineAbout() {
 
               return (
                 <div key={item.id} className="relative">
-                  
-                  {/* Timeline Map Dot - Aligned with the Text Card Top Center on Mobile, Exact center on desktop */}
                   <div
                     ref={(node) => {
                       dotRefs.current[index] = node
@@ -479,14 +444,13 @@ export default function PreCompanyTimelineAbout() {
 
       <div className="relative mx-auto mt-14 max-w-[1140px] sm:mt-20">
         
-        {/* Connector bridging the shifted track to the final block */}
-        <div ref={finalConnectorRef} className="pointer-events-none absolute left-[20px] top-[-50px] h-[50px] w-4 -translate-x-1/2 md:left-1/2">
-          <div className="absolute left-1/2 top-[8px] h-[42px] w-px -translate-x-1/2 bg-[#d8dcef]" />
-          <div ref={finalLineRef} className="absolute left-1/2 top-[8px] h-[42px] w-[3px] -translate-x-1/2">
+        <div ref={finalConnectorRef} className="pointer-events-none absolute left-[20px] top-[-56px] h-[56px] w-4 -translate-x-1/2 sm:top-[-80px] sm:h-[80px] md:left-1/2">
+          <div className="absolute bottom-0 left-1/2 top-[8px] w-px -translate-x-1/2 bg-[#d8dcef]" />
+          <div ref={finalLineRef} className="absolute bottom-0 left-1/2 top-[8px] w-[3px] -translate-x-1/2">
             <motion.div
-              className="h-full w-full origin-bottom rounded-full bg-[linear-gradient(180deg,#5b4dff_0%,#f45328_100%)]"
+              className="h-full w-full origin-top rounded-full bg-[linear-gradient(180deg,#5b4dff_0%,#f45328_100%)]"
               style={{
-                scaleY: finalLineMetrics.height > 0 ? filledFinalConnectorHeight / finalLineMetrics.height : 0.001,
+                scaleY: Math.max(finalConnectorProgress, 0.001),
               }}
             />
           </div>

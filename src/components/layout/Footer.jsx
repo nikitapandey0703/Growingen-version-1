@@ -12,7 +12,7 @@ const footerMedia = {
 
 const socialIcons = [
   { href: 'https://www.linkedin.com/company/growingen-solutions/', src: footerMedia.linkedinIcon, alt: 'LinkedIn' },
-  { href: 'https://www.instagram.com/growin.gen?igsh=YWI3MThuNnltc3Fl', src: footerMedia.instagramIcon, alt: 'Instagram' },
+  { href: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==', src: footerMedia.instagramIcon, alt: 'Instagram' },
   { href: 'https://www.facebook.com/profile.php?id=61576986820913', src: footerMedia.facebookIcon, alt: 'Facebook' },
   { href: 'https://in.pinterest.com/infogrowingen/', src: footerMedia.pinterestIcon, alt: 'Pinterest' },
 ];

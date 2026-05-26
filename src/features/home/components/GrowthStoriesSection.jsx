@@ -12,9 +12,9 @@ const solutionCards = [
     description:
       'Why traditional hashtags like #MarketingStrategy are becoming less effective. People are now searching for direct solutions to their specific problems rather than browsing broad categories. By using "Social SEO"—writing captions that match the exact questions people ask—you can ensure your content appears right when they need it most.',
     buttonLabel: "Let's Explore",
-    ctaHref: 'https://www.instagram.com/growin.gen?igsh=YWI3MThuNnltc3Fl',
+    ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/social-seo-thumbnail.webp',
-    videoSrc: '/videos/saves-matter-video.webm',
+    videoSrc: '/videos/human-glitch-video.mp4',
   },
   {
     id: 2,
@@ -23,9 +23,9 @@ const solutionCards = [
     description:
       'While a "like" is a brief nod of approval, a "save" represents a long-term commitment to a piece of content. To drive real impact, focus on creating a "reference library" of blueprints, checklists, and guides that offer lasting utility. Content reaches its highest value when it is useful enough to be revisited later. By prioritising practical resources over fleeting interactions, a feed becomes an essential tool for its audience.',
     buttonLabel: "Let's Explore",
-    ctaHref: 'https://www.instagram.com/growin.gen?igsh=YWI3MThuNnltc3Fl',
+    ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/saves-matter-thumbnail.webp',
-    videoSrc: '/videos/human-glitch-video.mp4',
+    videoSrc: '/videos/social-seo-video.webm',
   },
   {
     id: 3,
@@ -34,7 +34,7 @@ const solutionCards = [
     description:
       'In an era of highly polished AI content, perfection can often feel robotic or untrustworthy. Real connection is built through "human glitches"—the raw, unedited moments like a simple stutter or a coffee stain that show personality. Keeping audio and visuals authentic makes a brand feel more relatable and grounded. The goal is to move away from cold logos and lean into the messy, genuine traits that make people want to connect.',
     buttonLabel: "Let's Explore",
-    ctaHref: 'https://www.instagram.com/growin.gen?igsh=YWI3MThuNnltc3Fl',
+    ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/human-glitch-thumbnail.webp',
     videoSrc: '/videos/saves-matter-video.webm',
   },

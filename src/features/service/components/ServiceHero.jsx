@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
 import Button from '../../../components/common/Button'
 import HeroYellowUnderlineText from '../../../components/common/HeroYellowUnderlineText'
@@ -8,27 +8,6 @@ const secondaryHeroButtonClassName =
   'relative isolate inline-flex h-[48px] w-[214px] items-center justify-center overflow-hidden rounded-full border border-black/50 bg-transparent px-6 text-center text-[length:var(--fs-button)] font-medium !text-black transition-all duration-[500ms] ease-[cubic-bezier(0.23,1,0.32,1)] hover:scale-[1.02] hover:border-[#f65a2d] hover:!text-white hover:shadow-[0_0_20px_rgba(246,90,45,0.4)] active:scale-[0.99] sm:h-[52px] sm:w-[232px] sm:px-7 md:h-[54px] md:w-[244px] md:px-7 lg:h-[50px] lg:w-[232px] lg:px-7 xl:h-[52px] xl:w-[244px] xl:px-7 2xl:h-[58px] 2xl:w-[270px] 2xl:px-8 before:absolute before:inset-0 before:m-auto before:h-[50px] before:w-[50px] before:-z-10 before:rounded-full before:bg-[#f65a2d] before:scale-0 before:transition-all before:duration-[800ms] before:ease-[cubic-bezier(0.23,1,0.32,1)] hover:before:scale-[6]'
 
 function ServiceVisual() {
-  const [count, setCount] = useState(0)
-
-  useEffect(() => {
-    let start = 0
-    const end = 230
-    const duration = 2000 
-    const increment = end / (duration / 16)
-
-    const timer = setInterval(() => {
-      start += increment
-      if (start >= end) {
-        setCount(end)
-        clearInterval(timer)
-      } else {
-        setCount(Math.floor(start))
-      }
-    }, 16)
-
-    return () => clearInterval(timer)
-  }, [])
-
   return (
     // UPDATED: Changed xl:mx-0 to xl:ml-auto to push the visual entirely to the right edge
     <div className="hero-visual-reveal relative mx-auto flex w-full max-w-[360px] items-center justify-center sm:max-w-[460px] md:max-w-[540px] xl:ml-auto xl:max-w-[500px] xl:justify-end 2xl:max-w-[620px]">
@@ -38,7 +17,7 @@ function ServiceVisual() {
         <div className="hero-ambient-orb hero-ambient-orb--primary" aria-hidden="true" />
         <div className="hero-ambient-orb hero-ambient-orb--secondary" aria-hidden="true" />
 
-        <div className="grid aspect-[1.95/1.08] w-full grid-cols-[1.08fr_0.92fr] items-stretch gap-3 sm:aspect-[2/1.02] sm:gap-4 lg:aspect-[2.08/1.08] xl:aspect-[2.02/1.02]">
+        <div className="grid aspect-[1.95/1.08] w-full grid-cols-[minmax(0,1.24fr)_minmax(132px,0.76fr)] items-stretch gap-2.5 sm:aspect-[2/1.02] sm:grid-cols-[minmax(0,1.18fr)_minmax(156px,0.82fr)] sm:gap-4 lg:aspect-[2.08/1.08] lg:grid-cols-[minmax(0,1.12fr)_minmax(170px,0.88fr)] xl:aspect-[2.02/1.02]">
           <div className="dashboard-hover relative z-10 h-full w-full overflow-hidden">
             <div
               className="relative h-full w-full overflow-hidden"
@@ -49,19 +28,22 @@ function ServiceVisual() {
               <img
                 src="/images/service/service-header-3.png"
                 alt="Marketing analytics dashboard"
-                className="absolute inset-[2%] h-[99%] w-[99%] object-contain object-center"
+                className="absolute inset-[1.5%] h-[100%] w-[100%] object-contain object-center"
               />
             </div>
           </div>
 
-          <div className="dashboard-hover relative z-10 flex h-full w-full flex-col justify-between rounded-[14px] bg-[#f65a2d] p-5 text-white shadow-[0_24px_44px_rgba(246,90,45,0.24)] sm:p-6">
-            <div>
-              <h3 className="text-[2.35rem] font-bold leading-none tracking-[-0.04em] text-white sm:text-[2.75rem]">
-                {count}+
-              </h3>
-              <p className="mt-4 pt-4 max-w-[12ch] text-[12px] font-light leading-[1.35] text-white sm:text-[14px]">
-                Creating powerful brands that achieve stronger digital growth
-              </p>
+          <div className="dashboard-hover relative z-10 flex h-full w-full flex-col items-start rounded-[14px] bg-[#f65a2d] p-2 text-white shadow-[0_24px_44px_rgba(246,90,45,0.24)] sm:p-3 lg:p-4">
+            <h3 className="w-full text-left text-[1.85rem] font-bold leading-none tracking-[-0.04em] text-white sm:text-[2.2rem] lg:text-[2.75rem]">
+              Branding
+            </h3>
+
+            <div className="mt-3 flex h-full w-full flex-1 items-center overflow-hidden rounded-[12px] bg-transparent sm:mt-4">
+              <img
+                className="h-full w-full object-contain object-left"
+                src="/images/service/brand-identity.svg"
+                alt="Brand identity illustration"
+              />
             </div>
           </div>
         </div>

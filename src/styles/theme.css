@@ -218,58 +218,23 @@
    ===================================================== */
 @media (min-width: 1536px) {
   :root {
-    /* Hero */
-    --fs-hero-title: 70px;
-    --fs-hero-subtitle: 24px;
+    --fs-hero-title: 60px;
+    --fs-hero-subtitle: 20px;
 
-    /* Section */
-    --fs-section-title: 70px;
-    --fs-section-subtitle: 24px;
+    --fs-section-title: 60px;
+    --fs-section-subtitle: 20px;
 
-    /* Cards */
-    --fs-card-title: 40px;
-    --fs-card-body: 18px;
+    --fs-card-title: 36px;
+    --fs-card-body: 17px;
 
-    /* Buttons */
-    --fs-button: 16px;
+    --fs-nav-link: 18px;
+    --fs-nav-cta: 16px;
 
-    /* Navigation */
-    --fs-nav-link: 22px;
-    --fs-nav-mobile-link: 17px;
-    --fs-nav-cta: 18px;
-    --fs-nav-logo-label: 16px;
-    --lh-nav-link: 1.25;
-    --lh-nav-cta: 1.25;
+    --nav-shell-px: 72px;
+    --nav-pill-px: 72px;
 
-    /* Layout */
-    --nav-shell-px: 96px;
-    --nav-shell-pt: 24px;
-    --nav-pill-px: 96px;
-    --nav-logo-height: 72px;
+    --nav-logo-height: 64px;
   }
 }
 
-/* =====================================================
-   3XL DESKTOPS (>= 1920px)
-   ===================================================== */
-@media (min-width: 1920px) {
-  :root {
-    --fs-hero-title: 80px;
-    --fs-hero-subtitle: 26px;
-    --fs-section-title: 80px;
-    --fs-section-subtitle: 26px;
-    --fs-card-title: 44px;
-    --fs-card-body: 19px;
-    --fs-button: 17px;
-    --fs-nav-link: 22px;
-    --fs-nav-mobile-link: 18px;
-    --fs-nav-cta: 19px;
-    --fs-nav-logo-label: 18px;
-    --lh-nav-link: 1.25;
-    --lh-nav-cta: 1.25;
-    --nav-shell-px: 140px;
-    --nav-shell-pt: 28px;
-    --nav-pill-px: 130px;
-    --nav-logo-height: 80px;
-  }
-}
+

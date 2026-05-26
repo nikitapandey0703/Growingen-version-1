@@ -9,6 +9,7 @@ import { ServicesPage } from './features/service'
 import ScrollNavigator from './components/common/ScrollNavigator'
 import ScrollToTop from './components/common/ScrollToTop'
 
+
 function App() {
   return (
     <div className="flex min-h-screen flex-col bg-transparent">
@@ -32,6 +33,8 @@ function App() {
         maxWidth="100%"
         minHeight="490px"
       />
+     
+
     </div>
     
   )

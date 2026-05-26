@@ -1,4 +1,3 @@
-import emailjs from '@emailjs/browser'
 import { AnimatePresence, motion } from 'framer-motion'
 import { CheckCircle2, ChevronDown } from 'lucide-react'
 import { useMemo, useState } from 'react'
@@ -6,7 +5,6 @@ import { useMemo, useState } from 'react'
 import Button from '../../../components/common/Button'
 import CurvedUnderlineText from '../../../components/common/CurvedUnderlineText'
 import ContactAvatarCanvas from './ContactAvatarCanvas'
-import { EMAILJS_CONFIG } from '../config/emailjs'
 
 const SERVICE_OPTIONS = [
   'Web Development',
@@ -202,8 +200,15 @@ export default function AnimatedContactForm() {
   const handleFieldBlur = (event) => {
     const { name, value } = event.target
     setActiveField('')
-    const fieldError = validateField(name, value)
-    setFieldErrors((prev) => ({ ...prev, [name]: fieldError }))
+    
+    // Only validate if the user actually typed something
+    // If it's left empty, we remove any error instead of validating
+    if (!value.trim()) {
+      setFieldErrors((prev) => ({ ...prev, [name]: '' }))
+    } else {
+      const fieldError = validateField(name, value)
+      setFieldErrors((prev) => ({ ...prev, [name]: fieldError }))
+    }
   }
 
   const handleSubmit = async (event) => {
@@ -240,22 +245,20 @@ export default function AnimatedContactForm() {
     setSubmitState('sending')
 
     try {
-      await emailjs.send(
-        EMAILJS_CONFIG.serviceId,
-        EMAILJS_CONFIG.templateId,
-        {
-          from_name: sanitizedFormData.name,
-          from_email: sanitizedFormData.email,
-          phone: sanitizedFormData.phone,
-          service: sanitizedFormData.service,
-          message: sanitizedFormData.message,
-          time: new Date().toLocaleString('en-IN', {
-            dateStyle: 'medium',
-            timeStyle: 'short',
-          }),
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
-        EMAILJS_CONFIG.publicKey,
-      )
+        body: JSON.stringify(sanitizedFormData),
+      })
+
+      const result = await response.json()
+
+      if (!response.ok || !result.success) {
+        throw new Error(result.message || 'SMTP submission failed.')
+      }
 
       setSubmittedName(sanitizedFormData.name)
       setFormData(initialFormState)
@@ -271,7 +274,7 @@ export default function AnimatedContactForm() {
   }
 
   const baseInputClass = "w-full rounded-[5px] bg-[#f6f5f8] px-3 text-[13px] font-medium text-[#101828] outline-none transition placeholder:text-[13px] placeholder:font-medium placeholder:text-[#8D8D90] h-[34px] sm:h-[36px] lg:h-[38px]"
-  const baseTextareaClass = "w-full resize-none rounded-[5px] bg-[#f6f5f8] px-3 pb-2 pt-2 text-[13px] font-medium text-[#101828] outline-none transition placeholder:text-[13px] placeholder:font-medium placeholder:text-[#8D8D90] h-[66px] sm:h-[70px] lg:h-[76px]"
+  const baseTextareaClass = "w-full leading-[1.45] resize-none rounded-[5px] bg-[#f6f5f8] px-3 px-3 py-2.5 text-[13px] font-medium text-[#101828] outline-none transition placeholder:text-[13px] placeholder:font-medium placeholder:text-[#8D8D90] h-[66px] sm:h-[70px] lg:h-[76px]"
 
   return (
     <section className="section-spacing relative w-full overflow-hidden bg-transparent">
@@ -300,12 +303,12 @@ export default function AnimatedContactForm() {
               <div className="mx-auto flex w-full max-w-[560px] flex-col items-center gap-2 text-center 2xl:max-w-[620px]">
                 <h1 className="font-[var(--font-heading)] text-[28px] font-bold leading-[1.03] tracking-[-0.05em] text-[#101828] sm:text-[34px] md:text-[38px] lg:text-[40px] 2xl:text-[42px]">
                   Let&apos;s build{' '}
-                  <CurvedUnderlineText className="pb-[0.2em]" lineClassName="2xl:h-[0.46em] h-[0.38em] w-full left-[2%] -bottom-[6px] sm:-bottom-[8px] md:-bottom-[10px] lg:-bottom-[12px] xl:-bottom-[14px] 2xl:-bottom-[16px]">
+                  <CurvedUnderlineText className="pb-[0.2em]" lineClassName="2xl:h-[0.46em] h-[0.38em] w-full left-[2%] -bottom-[4px] sm:-bottom-[6px] md:-bottom-[8px] lg:-bottom-[10px] xl:-bottom-[12px] ">
                     your plan
                   </CurvedUnderlineText>
                   {' '}together!
                 </h1>
-                <p className="mx-auto mt-3 max-w-[440px] text-center text-[13px] font-medium leading-[1.42] text-[#666f80] lg:text-[14px] xl:text-[15px] 2xl:max-w-[490px] 2xl:text-[17px]">
+                <p className="mx-auto mt-8 sm:mt-10 md:mt-12 lg:mt-14 xl:mt-16 max-w-[440px] text-center text-[13px] font-medium leading-[1.42] text-[#666f80] lg:text-[14px] xl:text-[15px] 2xl:max-w-[490px] 2xl:text-[17px] pt-2">
                   Have a question about training, nutrition, or which program fits you
                   best? Reach out we&apos;ll help you find your next step forward
                 </p>
@@ -498,14 +501,15 @@ export default function AnimatedContactForm() {
                       </div>
 
                       <div className="relative">
-                        <label htmlFor="contact-message" className="mb-2.5 block text-[14px] font-semibold leading-none text-[#101828]">
+                        {/* Changed mb-2.5 to mb-1.5 to exactly match the other fields */}
+                        <label htmlFor="contact-message" className="mb-1.5 block text-[14px] font-semibold leading-none text-[#101828]">
                           Message
                         </label>
                         <textarea
                           id="contact-message"
                           name="message"
                           required
-                          rows={5}
+                          
                           value={formData.message}
                           onChange={handleChange}
                           onFocus={() => setActiveField('message')}
@@ -529,15 +533,17 @@ export default function AnimatedContactForm() {
                       </div>
 
                       <div className="flex flex-col pt-[12px] sm:pt-0">
-                        <label className="mb-2.5 hidden text-[14px] font-semibold leading-none opacity-0 sm:block" aria-hidden="true">
+                        {/* Changed mb-2.5 to mb-1.5 to exactly match the other fields */}
+                        <label className="mb-1.5 hidden text-[14px] font-semibold leading-none opacity-0 sm:block" aria-hidden="true">
                           Spacer
                         </label>
                         <div className="flex w-full items-center sm:h-[70px] lg:h-[76px]">
+                          {/* Increased button heights: from 40px to 46px standard, and 44px to 50px on 2xl */}
                           <Button
                             type="submit"
                             size="hero"
                             disabled={submitState === 'sending'}
-                            className="w-full [&>button]:h-[40px] [&>button]:w-full [&>button]:pl-5 [&>button]:pr-[50px] [&>button]:text-[10.5px] [&>button_span:last-child]:h-[40px] [&>button_span:last-child]:w-[40px] 2xl:[&>button]:h-[44px] 2xl:[&>button]:text-[11px] 2xl:[&>button_span:last-child]:h-[44px] 2xl:[&>button_span:last-child]:w-[44px]"
+                            className="w-full [&>button]:h-[46px] [&>button]:w-full [&>button]:pl-5 [&>button]:pr-[54px] [&>button]:text-[11.5px] [&>button_span:last-child]:h-[46px] [&>button_span:last-child]:w-[46px] 2xl:[&>button]:h-[50px] 2xl:[&>button]:text-[12.5px] 2xl:[&>button_span:last-child]:h-[50px] 2xl:[&>button_span:last-child]:w-[50px]"
                           >
                             {submitState === 'sending' ? 'Sending...' : 'Send Message'}
                           </Button>

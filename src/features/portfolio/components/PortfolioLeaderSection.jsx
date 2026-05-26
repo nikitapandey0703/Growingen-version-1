@@ -13,7 +13,7 @@ export default function PortfolioLeaderSection() {
               <span className="block">From Vision </span>
               <span className="mt-1 block">
                 To Profitable{" "}
-                <CurvedUnderlineText className="hero-highlight pb-[0.16em]" lineClassName="h-[0.22em] w-full left-[-50%] -bottom-[8px] sm:-bottom-[10px] md:-bottom-[12px] lg:-bottom-[14px] xl:-bottom-[16px] 2xl:-bottom-[18px]">
+                <CurvedUnderlineText className="hero-highlight pb-[0.16em]" lineClassName="h-[0.22em] w-full left-[0%] -bottom-[6px] sm:-bottom-[8px] md:-bottom-[10px] lg:-bottom-[12px] xl:-bottom-[14px] ">
                   Growth
                 </CurvedUnderlineText>
               </span>
