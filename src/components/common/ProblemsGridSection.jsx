@@ -10,8 +10,9 @@ function ProblemCard({ item, index, isActive, onEnter, onLeave }) {
 
   const isLeftAligned = index % 2 === 0
   const alignmentClass = isLeftAligned
-  ? 'items-end text-right sm:items-start sm:text-left'
-  : 'items-end text-right sm:items-end sm:text-right'
+    ? 'items-end text-right sm:items-start sm:text-left'
+    : 'items-end text-right sm:items-end sm:text-right'
+    
   let numberPosClass = ''
   if (index === 0) numberPosClass = 'left-5 top-5 sm:left-auto sm:right-6 sm:top-11 sm:bottom-auto'
   if (index === 1) numberPosClass = 'left-5 top-5 sm:left-6 sm:right-auto sm:top-11 sm:bottom-auto'
@@ -28,8 +29,9 @@ function ProblemCard({ item, index, isActive, onEnter, onLeave }) {
     >
       <div
         className={[
-          'relative min-h-[160px] w-full overflow-hidden bg-transparent transition-all duration-500 ease-out sm:min-h-[206px] sm:overflow-visible lg:min-h-[220px] 2xl:min-h-[248px]',
-          isActive ? 'z-20 scale-[1.035] drop-shadow-[0_20px_35px_rgba(244,83,40,0.15)]' : 'z-10 scale-100',
+          // CHANGED: Added `flex flex-col` so height can dynamically grow with content on mobile
+          'relative flex flex-col min-h-[170px] w-full overflow-hidden bg-transparent transition-all duration-500 ease-out sm:min-h-[206px] sm:overflow-visible lg:min-h-[220px] 2xl:min-h-[248px]',
+          isActive ? 'z-20 scale-100 sm:scale-[1.035] drop-shadow-[0_20px_35px_rgba(244,83,40,0.15)]' : 'z-10 scale-100',
         ].join(' ')}
       >
         {/* Background Images */}
@@ -66,8 +68,11 @@ function ProblemCard({ item, index, isActive, onEnter, onLeave }) {
           }`}
         />
 
+        {/* CHANGED: Swapped absolute inset-0 for a relative wrapper so it pushes the card boundaries natively if text overflows */}
         <div
-          className={`absolute inset-0 z-10 flex flex-col justify-start overflow-hidden px-4 py-4 transition-colors duration-500 ease-out sm:px-10 sm:py-10 md:px-10 md:py-10 lg:px-14 lg:py-11 2xl:px-16 2xl:py-12 ${alignmentClass}`}
+          className={`relative z-10 flex h-full w-full flex-col justify-start px-5 py-6 transition-colors duration-500 ease-out sm:px-10 sm:py-10 md:px-10 md:py-10 lg:px-14 lg:py-11 2xl:px-16 2xl:py-12 ${
+            isLeftAligned ? 'items-end sm:items-start' : 'items-end sm:items-end'
+          }`}
         >
           
           {/* NUMBER */}
@@ -79,7 +84,8 @@ function ProblemCard({ item, index, isActive, onEnter, onLeave }) {
             {index + 1}
           </span>
 
-          <div className={`relative z-10 ml-auto mr-5 mt-1 flex w-[calc(100%-4.5rem)] max-w-full flex-col items-end gap-1.5 text-right sm:ml-0 sm:mr-0 sm:mt-0 sm:w-full sm:max-w-[320px] sm:gap-2 sm:pr-0 ${alignmentClass} lg:max-w-[340px] 2xl:max-w-[390px]`}>
+          {/* CHANGED: Removed rigid calc() widths. We now use standard flex + pl-[4.2rem] to clear the number gracefully without cutting off */}
+          <div className={`relative z-10 flex w-full flex-col gap-1.5 pt-1 pl-[4.2rem] sm:pl-0 sm:pt-0 sm:w-full sm:max-w-[320px] sm:gap-2 lg:max-w-[340px] 2xl:max-w-[390px] ${alignmentClass}`}>
             <h3
               className={[
                 'order-1 text-[18px] font-bold leading-[1.25] tracking-[-0.03em] transition-colors duration-500 ease-out sm:order-2 sm:text-[22px] lg:text-[24px] 2xl:text-[28px]',
@@ -94,7 +100,7 @@ function ProblemCard({ item, index, isActive, onEnter, onLeave }) {
 
             <p
               className={[
-                'order-2 max-w-[31ch] text-[12px] font-normal leading-[1.55] transition-colors duration-500 ease-out sm:order-1 sm:max-w-none lg:text-[15px] 2xl:text-[17px]',
+                'order-2 max-w-full text-[12px] font-normal leading-[1.55] transition-colors duration-500 ease-out sm:order-1 sm:max-w-[31ch] lg:max-w-none lg:text-[15px] 2xl:text-[17px]',
                 isActive ? '!text-white/90' : '!text-[#000000]',
               ].join(' ')}
               style={{ fontSize: 'clamp(12px, 0.76rem + 0.22vw, var(--fs-card-body))' }}
@@ -123,7 +129,8 @@ export default function ProblemsGridSection({
       <div className="pointer-events-none absolute left-[10%] top-[22%] h-[180px] w-[180px] rounded-full bg-[radial-gradient(circle,rgba(255,151,113,0.22)_0%,rgba(255,151,113,0.08)_44%,rgba(255,151,113,0)_74%)] blur-3xl sm:h-[220px] sm:w-[220px] 2xl:h-[320px] 2xl:w-[320px]" />
       <div className="pointer-events-none absolute bottom-[10%] right-[8%] h-[190px] w-[190px] rounded-full bg-[radial-gradient(circle,rgba(104,141,255,0.2)_0%,rgba(104,141,255,0.08)_42%,rgba(104,141,255,0)_74%)] blur-3xl sm:h-[240px] sm:w-[240px] 2xl:h-[340px] 2xl:w-[340px]" />
 
-      <div className="relative mx-auto max-w-[1200px] 2xl:max-w-[1400px]">
+      {/* CHANGED: Added px-4 sm:px-8 xl:px-0 padding so the cards don't bleed completely off screen edges on small devices */}
+      <div className="relative mx-auto max-w-[1200px] 2xl:max-w-[1400px] px-4 sm:px-8 xl:px-0">
         <div className={`mx-auto text-center ${maxWidthClass}`}>
           {eyebrow ? (
             <p className="mb-2 text-[16px] sm:text-[18px] lg:text-[20px] xl:text-[22px] 2xl:text-[24px] font-medium uppercase tracking-[0.28em] ">

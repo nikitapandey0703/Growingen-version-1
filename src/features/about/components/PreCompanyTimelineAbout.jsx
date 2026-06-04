@@ -458,7 +458,7 @@ export default function PreCompanyTimelineAbout() {
         <div className="flex w-full flex-col overflow-hidden rounded-[28px] bg-[#f45328] shadow-[0_24px_50px_rgba(244,83,40,0.25)] lg:h-[492px] lg:flex-row lg:items-stretch lg:justify-between">
           
           <div className="flex flex-col justify-center px-7 py-8 lg:w-[50%] lg:px-[56px] lg:py-0">
-            <h3 className="!text-white text-[34px] font-bold leading-[1.04] tracking-[-0.03em] sm:text-[42px] lg:text-[54px]">
+            <h3 className="!text-white text-[32px] font-bold leading-[1.04] tracking-[-0.03em] sm:text-[42px] lg:text-[54px]">
               <span className="block whitespace-nowrap">Most Offer Services.</span>
               <HeroYellowUnderlineText className="hero-highlight mt-2 inline-block whitespace-nowrap !text-white pb-2" lineClassName=" left-[10%] h-[16px] !w-[70%] -bottom-[8px] sm:-bottom-[10px] md:-bottom-[12px] lg:-bottom-[14px] xl:-bottom-[16px] 2xl:-bottom-[18px]">
                 We Build Systems.

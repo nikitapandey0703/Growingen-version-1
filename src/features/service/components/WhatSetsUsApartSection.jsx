@@ -60,15 +60,14 @@ export default function WhatSetsUsApartSection() {
           </h2>
         </div>
 
-        {/* === CONTENT GRID === 
-            UPDATED: Increased the right column width to ensure single-line bullets
-        */}
+        {/* === CONTENT GRID === */}
         <div className="grid grid-cols-1 items-start gap-10 sm:gap-12 sm:grid-cols-[0px_1fr] md:grid-cols-[0px_1fr] lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-14 2xl:grid-cols-[minmax(0,1fr)_500px] 2xl:gap-18">
           
           {/* LEFT SIDE: Image Collage */}
           <div className="relative mx-auto aspect-[4/4.5] w-full max-w-[360px] sm:max-w-[430px] md:max-w-[500px] lg:mx-0 lg:max-w-none 2xl:aspect-[4.2/4.4]">
             
-            <div className="hero-float absolute left-0 top-0 z-10 h-[72%] w-[62%] overflow-hidden rounded-[18px] shadow-lg transition-transform duration-500 ease-out hover:scale-105 hover:z-40 sm:rounded-[22px] lg:rounded-[24px] 2xl:rounded-[28px]">
+            {/* Image 1 */}
+            <div className="hero-float absolute left-0 top-0 z-10 h-[72%] w-[62%] overflow-hidden rounded-[clamp(12px,1vw,20px)] shadow-lg transition-transform duration-500 ease-out hover:scale-105 hover:z-40 ">
               <img
                 src="/images/service/service-set-1.webp"
                 alt="Growingen Team"
@@ -77,8 +76,9 @@ export default function WhatSetsUsApartSection() {
               />
             </div>
 
+            {/* Image 2 */}
             <div 
-              className="hero-float absolute right-[0%] top-[25%] z-20 h-[35%] w-[32%] overflow-hidden rounded-[16px] shadow-[0_12px_24px_rgba(0,0,0,0.12)] transition-transform duration-500 ease-out hover:scale-105 hover:z-40 sm:rounded-[18px] lg:rounded-[20px] 2xl:rounded-[24px]"
+              className="hero-float absolute right-[0%] top-[25%] z-20 h-[35%] w-[32%] overflow-hidden rounded-[clamp(12px,1vw,20px)] shadow-[0_12px_24px_rgba(0,0,0,0.12)] transition-transform duration-500 ease-out hover:scale-105 hover:z-40 "
               style={{ animationDelay: '-2s' }}
             >
               <img
@@ -89,15 +89,15 @@ export default function WhatSetsUsApartSection() {
               />
             </div>
 
+            {/* Image 3 - UPDATED to never clip and not have CSS rounded borders */}
             <div 
-              className="hero-float absolute bottom-[5%] left-[50%] z-30 h-[30%] w-[57%] overflow-hidden rounded-[16px] shadow-[0_16px_32px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out hover:scale-105 hover:z-40 sm:rounded-[18px] lg:rounded-[20px] 2xl:rounded-[24px]"
+              className="hero-float absolute bottom-[5%] right-[0%] z-30 w-[57%] transition-transform duration-500 ease-out hover:scale-105 hover:z-40"
               style={{ animationDelay: '-4s' }}
             >
               <img
                 src="/images/service/service-set-3.webp"
                 alt="Team strategy meeting"
-                className="h-full w-full object-cover"
-                style={{ backgroundColor: '#94a3b8' }}
+                className="h-auto w-full object-contain"
               />
             </div>
 
@@ -119,7 +119,6 @@ export default function WhatSetsUsApartSection() {
           </div>
 
           {/* RIGHT SIDE: Content Card */}
-          {/* UPDATED: max-w values expanded to allow single-line bullet points */}
           <div className="relative mx-auto w-full max-w-[500px] lg:mx-0 lg:max-w-none lg:w-full">
             <div className="relative flex min-h-[300px] flex-col gap-5 rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] rounded-br-[58px] bg-white px-5 pb-20 pt-7 shadow-[0_20px_50px_rgba(15,23,42,0.08)] sm:min-h-[312px] sm:px-7 sm:pb-22 sm:pt-8 md:px-8 md:pt-9 lg:rounded-br-[70px] 2xl:min-h-[352px] 2xl:gap-5 2xl:px-10 2xl:pb-24 2xl:pt-10">
               
