@@ -9,6 +9,7 @@ export default function ScrollNavigator() {
   const [isBottom, setIsBottom] = useState(false)
   const [visible, setVisible] = useState(false)
   const [scrollProgress, setScrollProgress] = useState(0)
+  const [liftOffset, setLiftOffset] = useState(0)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -17,16 +18,36 @@ export default function ScrollNavigator() {
       const fullHeight = document.documentElement.scrollHeight
       const scrollableHeight = Math.max(fullHeight - windowHeight, 1)
       const progress = Math.min(scrollTop / scrollableHeight, 1)
+      const distanceToBottom = fullHeight - (scrollTop + windowHeight)
 
       setVisible(scrollTop > 120)
       setScrollProgress(progress)
-      setIsBottom(scrollTop + windowHeight >= fullHeight - 60)
+      setIsBottom(distanceToBottom <= 60)
+
+      // --- FOOTER COLLISION AVOIDANCE LOGIC ---
+      // Distance from bottom to start lifting the button (adjust based on your footer height)
+      const FOOTER_TRIGGER_DISTANCE = 350; 
+      // How many pixels to lift the button up on mobile
+      const MOBILE_LIFT_AMOUNT = -140; 
+
+      if (window.innerWidth < 768 && distanceToBottom < FOOTER_TRIGGER_DISTANCE) {
+        setLiftOffset(MOBILE_LIFT_AMOUNT)
+      } else {
+        setLiftOffset(0)
+      }
     }
 
+    // Attach scroll and resize listeners
     window.addEventListener('scroll', handleScroll, { passive: true })
+    window.addEventListener('resize', handleScroll, { passive: true })
+    
+    // Initial check
     handleScroll()
 
-    return () => window.removeEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
   }, [])
 
   const handleClick = () => {
@@ -52,10 +73,11 @@ export default function ScrollNavigator() {
       animate={{
         opacity: visible ? 1 : 0,
         scale: visible ? 1 : 0.82,
-        y: visible ? 0 : 18,
+        // Apply the dynamic lift offset when visible, else hide below (18px)
+        y: visible ? liftOffset : 18, 
       }}
       transition={{ duration: 0.36, ease: [0.22, 1, 0.36, 1] }}
-      whileHover={{ scale: 1.06, y: -2 }}
+      whileHover={{ scale: 1.06, y: liftOffset - 2 }} // Keep hover effect relative to lifted position
       whileTap={{ scale: 0.96 }}
       className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full border border-white/55 bg-white/72 text-[#0f172a] shadow-[0_18px_38px_rgba(15,23,42,0.16)] backdrop-blur-xl sm:bottom-6 sm:right-6"
       style={{

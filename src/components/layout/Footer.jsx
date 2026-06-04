@@ -130,7 +130,7 @@ const Footer = ({
               href={contactPhoneHref}
               target="_blank"
               rel="noreferrer"
-              className="group flex cursor-pointer items-center gap-4 sm:gap-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B1CC1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF1F0]"
+              className="group footer-email-text flex cursor-pointer items-center gap-4 sm:gap-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B1CC1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF1F0]"
               aria-label={`Message ${contactPhoneLabel} on WhatsApp`}
             >
               <div className="h-10 w-10 flex-shrink-0 transition-transform group-hover:-translate-y-1 sm:h-12 sm:w-12 lg:h-[48px] lg:w-[48px]">

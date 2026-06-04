@@ -104,7 +104,7 @@ function ShowcaseCard({ item }) {
         src={item.src}
         alt={item.alt}
         // CHANGED: h-full w-full object-cover ensures it hugs the grid corners perfectly without distorting pixels
-        className={`block h-full w-full object-cover rounded-[clamp(14px,2vw,31px)] shadow-[0_2px_12px_rgba(0,0,0,0.06)] ${item.imageClassName || ''}`}
+        className={`block h-full w-full object-cover rounded-[clamp(16px,1vw,24px)] shadow-[0_2px_12px_rgba(0,0,0,0.06)] ${item.imageClassName || ''}`}
       />
     </MotionArticle>
   )

@@ -103,7 +103,7 @@ function NavArrow({ direction, onClick, disabled }) {
       onClick={onClick}
       disabled={disabled}
       className={[
-        'absolute top-1/2 z-20 flex h-[70px] w-[26px] sm:h-[100px] sm:w-[36px] lg:h-[110px] lg:w-[40px] -translate-y-1/2 items-center justify-center rounded-[24px] transition-all duration-300 ease-out outline-none',
+        'absolute top-1/2 z-20 flex h-[70px] w-[26px] sm:h-[100px] sm:w-[36px] lg:h-[110px] lg:w-[40px] -translate-y-1/2 items-center justify-center rounded-[24px] transition-all duration-300 ease-out outline-none bg-white sm:bg-white md:bg-white lg:bg-transparent xl:bg-transparent',
         'shadow-[0_0_18px_rgba(244,83,40,0.5)] border-[1.5px] border-[#F45328]/40', // Red/Orange glowing border and shadow
         isLeft ? 'left-1 sm:left-4 lg:left-1 xl:-left-6' : 'right-1 sm:right-4 lg:right-1 xl:-right-6',
         disabled ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:scale-[1.05] cursor-pointer'

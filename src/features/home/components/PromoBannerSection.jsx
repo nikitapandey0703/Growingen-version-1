@@ -52,10 +52,7 @@ function CardRotate({ children, onSendToBack, sensitivity, disableDrag = false }
   const rotateY = useTransform(x, [-100, 100], [-16, 16])
 
   function handleDragEnd(_, info) {
-    if (
-      Math.abs(info.offset.x) > sensitivity ||
-      Math.abs(info.offset.y) > sensitivity
-    ) {
+    if (Math.abs(info.offset.x) > sensitivity || Math.abs(info.offset.y) > sensitivity) {
       onSendToBack()
     } else {
       x.set(0)
@@ -93,20 +90,16 @@ function PromoStack({
   autoplayDelay = 1800,
   pauseOnHover = true,
   mobileClickOnly = true,
-  mobileBreakpoint = 768,
+  mobileBreakpoint = 1024,
 }) {
   const [isMobile, setIsMobile] = useState(false)
   const [isPaused, setIsPaused] = useState(false)
   const [stack, setStack] = useState(stackedPromoCards)
 
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < mobileBreakpoint)
-    }
-
+    const checkMobile = () => setIsMobile(window.innerWidth < mobileBreakpoint)
     checkMobile()
     window.addEventListener('resize', checkMobile)
-
     return () => window.removeEventListener('resize', checkMobile)
   }, [mobileBreakpoint])
 
@@ -117,11 +110,7 @@ function PromoStack({
     setStack((prev) => {
       const next = [...prev]
       const index = next.findIndex((card) => card.id === id)
-
-      if (index === -1) {
-        return prev
-      }
-
+      if (index === -1) return prev
       const [card] = next.splice(index, 1)
       next.unshift(card)
       return next
@@ -129,21 +118,18 @@ function PromoStack({
   }
 
   useEffect(() => {
-    if (!autoplay || stack.length <= 1 || isPaused) {
-      return undefined
-    }
-
+    if (!autoplay || stack.length <= 1 || isPaused) return undefined
     const interval = window.setInterval(() => {
       const topCardId = stack[stack.length - 1].id
       sendToBack(topCardId)
     }, autoplayDelay)
-
     return () => window.clearInterval(interval)
   }, [autoplay, autoplayDelay, stack, isPaused])
 
   return (
     <div
-className="relative h-[240px] w-[220px] sm:h-[272px] sm:w-[246px] md:h-[312px] md:w-[286px]"      style={{ perspective: 700 }}
+      className="relative h-[250px] w-[220px] sm:h-[285px] sm:w-[246px] md:h-[320px] md:w-[286px]"
+      style={{ perspective: 700 }}
       onMouseEnter={() => pauseOnHover && setIsPaused(true)}
       onMouseLeave={() => pauseOnHover && setIsPaused(false)}
     >
@@ -155,8 +141,13 @@ className="relative h-[240px] w-[220px] sm:h-[272px] sm:w-[246px] md:h-[312px] m
           disableDrag={shouldDisableDrag}
         >
           <MotionDiv
+            /* 
+               UPDATED PADDING: 
+               Changed from 'p-7' to responsive values.
+               Increased bottom padding (pb-11) and top padding (pt-9) for balance.
+            */
             className={[
-              'flex h-full w-full flex-col rounded-[24px] p-7 shadow-[0_24px_44px_rgba(15,23,42,0.2)]',
+              'flex h-full w-full flex-col rounded-[24px] px-7 pt-8 pb-10 sm:pt-9 sm:pb-11 lg:p-8 shadow-[0_24px_44px_rgba(15,23,42,0.2)]',
               card.theme === 'white'
                 ? 'border border-[#f3f3f3] bg-white text-[#111111] shadow-[0_22px_44px_rgba(255,255,255,0.2)]'
                 : 'bg-[#ff5b2e] text-white shadow-[0_22px_40px_rgba(255,91,46,0.32)]',
@@ -177,13 +168,12 @@ className="relative h-[240px] w-[220px] sm:h-[272px] sm:w-[246px] md:h-[312px] m
             }}
           >
             <div>
-              <p className="text-[52px] font-semibold leading-none tracking-[-0.06em] sm:text-[58px]">
+              <p className="text-[50px] font-semibold leading-none tracking-[-0.06em] sm:text-[58px]">
                 {card.stat}
               </p>
-              {/* Bold text for the label */}
               <p
                 className={[
-                  'mt-2 w-full text-[16px] font-bold leading-[1.2] tracking-[-0.03em] sm:text-[18px] lg:text-[22px]',
+                  'mt-1 w-full text-[16px] font-bold leading-[1.2] tracking-[-0.03em] sm:text-[18px] lg:text-[22px]',
                   card.theme === 'white' ? '' : 'text-white',
                 ].join(' ')}
               >
@@ -191,7 +181,7 @@ className="relative h-[240px] w-[220px] sm:h-[272px] sm:w-[246px] md:h-[312px] m
               </p>
             </div>
 
-            <div className="mt-4 flex items-center">
+            <div className="mt-3 flex items-center sm:mt-4">
               <span
                 aria-hidden="true"
                 className={[
@@ -203,32 +193,22 @@ className="relative h-[240px] w-[220px] sm:h-[272px] sm:w-[246px] md:h-[312px] m
               />
             </div>
 
-            <div className="mt-4">
-              {/* Below text with SAME size as label, but NORMAL weight */}
-              <p
-                className={[
-                  'text-[12px] font-light leading-[1.25] sm:text-[18px] lg:text-[16px]',
-                  card.theme === 'white' ? 'text-[#111111]/85' : 'text-white/90',
-                ].join(' ')}
-              >
+            <div className="mt-3 sm:mt-4">
+              <p className={['text-[12px] font-light leading-[1.25] sm:text-[15px] lg:text-[16px]', card.theme === 'white' ? 'text-[#111111]/85' : 'text-white/90'].join(' ')}>
                 {card.detailPrimary}
               </p>
-              <p
-                className={[
-                  'text-[12px] font-light leading-[1.25] sm:text-[18px] lg:text-[16px]',
-                  card.theme === 'white' ? 'text-[#111111]/85' : 'text-white/90',
-                ].join(' ')}
-              >
+              <p className={['text-[12px] font-light leading-[1.25] sm:text-[15px] lg:text-[16px]', card.theme === 'white' ? 'text-[#111111]/85' : 'text-white/90'].join(' ')}>
                 {card.detailSecondary}
               </p>
             </div>
 
-            <div className="mt-auto flex justify-center pt-4">
+            {/* Icon Container: Lifted by the container's pb-10 and adjusted padding top */}
+            <div className="mt-auto flex justify-center pt-2 sm:pt-4">
               <img
                 src={card.icon}
                 alt=""
                 aria-hidden="true"
-                className="h-[40px] w-[40px] object-contain sm:h-[42px] sm:w-[42px] md:h-[44px] md:w-[44px] lg:h-[46px] lg:w-[46px] xl:h-[48px] xl:w-[48px] 2xl:h-[50px] 2xl:w-[50px]"
+                className="h-[38px] w-[38px] object-contain sm:h-[42px] sm:w-[42px] md:h-[44px] md:w-[44px]"
               />
             </div>
           </MotionDiv>
@@ -238,144 +218,49 @@ className="relative h-[240px] w-[220px] sm:h-[272px] sm:w-[246px] md:h-[312px] m
   )
 }
 
-function ServicePromoBanner() {
+export default function PromoBannerSection() {
   return (
     <SectionWrapper
       as="section"
-      className="relative flex w-full flex-col justify-center overflow-hidden bg-[linear-gradient(90deg,#2d2fd3_0%,#2576cf_48%,#13c6a7_100%)] py-12 lg:h-[360px] lg:py-0"
-    >
-      <style>
-        {`
-          @keyframes drawEllipse {
-            0% { stroke-dashoffset: 100; }
-            100% { stroke-dashoffset: 0; }
-          }
-          .animate-draw-ellipse {
-            stroke-dasharray: 100;
-            stroke-dashoffset: 100;
-            animation: drawEllipse 1.5s cubic-bezier(0.22, 1, 0.36, 1) 0.3s forwards;
-          }
-        `}
-      </style>
-
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-[10%] top-1/2 hidden -translate-y-1/2 text-[160px] font-bold tracking-[0.05em] text-transparent [-webkit-text-stroke:2px_#ffffff] [text-shadow:0_0_35px_rgba(255,255,255,0.4)] lg:block xl:-right-[5%] xl:text-[240px]"
-      >
-        BRAND
-      </div>
-
-      <div className="relative z-10">
-        <div className="grid w-full items-center gap-8 lg:grid-cols-[1fr_auto] lg:gap-12">
-          <div className="max-w-[650px]">
-            <h1 className="text-[32px] font-bold leading-[1.18] tracking-tight text-white sm:text-[40px] lg:text-[50px]">
-              Why Most{' '}
-              <span className="relative inline-block whitespace-nowrap text-white">
-                <span className="relative z-10 text-white">Brands Fail</span>
-                <svg
-                  className="absolute -bottom-2 -left-4 -right-4 -top-1 z-0 h-[130%] w-[120%] text-[#FBBF24]"
-                  viewBox="0 0 100 40"
-                  preserveAspectRatio="none"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M 12 25 C 5 15 18 4 50 4 C 82 4 95 15 95 22 C 95 30 75 36 50 36 C 25 36 10 30 15 20"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    vectorEffect="non-scaling-stroke"
-                    strokeLinecap="round"
-                    pathLength="100"
-                    className="animate-draw-ellipse"
-                  />
-                </svg>
-              </span>{' '}
-              —
-              <br />
-              And How We Fix It
-            </h1>
-
-            <p className="mt-5 max-w-[55ch] text-[14px] font-normal leading-[1.65] text-white/90 sm:text-[15px] lg:text-[16px]">
-              Most businesses invest in marketing... but ignore branding. <br className="hidden sm:block" />
-              They run ads, post content, build websites yet struggle to stand out.
-            </p>
-            
-            <p className="mt-6 max-w-[50ch] text-[15px] font-semibold leading-[1.55] text-white sm:text-[16px] lg:text-[17px]">
-              Branding isn&apos;t an expense. It&apos;s the foundation <br className="hidden sm:block" />
-              of everything that follows.
-            </p>
-          </div>
-
-          <div className="relative mx-auto flex w-full max-w-[480px] items-center justify-center lg:mx-0 lg:max-w-[520px] lg:justify-end lg:pr-6 xl:max-w-[580px] xl:pr-10">
-            <img
-              src="/images/service/service-banner.webp"
-              alt="Ant standing on an elephant to represent brand pressure and positioning"
-              className="relative z-10 max-h-[280px] w-full object-contain drop-shadow-[0_24px_35px_rgba(15,23,42,0.25)] lg:max-h-[340px]"
-            />
-          </div>
-        </div>
-      </div>
-    </SectionWrapper>
-  )
-}
-
-export default function PromoBannerSection({ variant = 'default' }) {
-  if (variant === 'service') {
-    return <ServicePromoBanner />
-  }
-
-  return (
-    <SectionWrapper
-      as="section"
-      className="section-spacing relative isolate mt-14 overflow-hidden bg-transparent sm:mt-16 md:mt-0"
+      className="section-spacing relative isolate mt-14 overflow-hidden bg-transparent sm:mt-16 lg:mt-0 xl:mx-4"
     >
       <div className="section-content">
         <div className="relative">
           <div className="mx-auto w-full max-w-[1060px]">
-            <div className="relative flex flex-col gap-8 md:min-h-[420px] md:justify-center lg:min-h-[460px]">
-              <div className="relative z-20 mx-auto hidden md:absolute md:-left-[10px] md:top-1/2 md:block md:mx-0 md:-translate-y-1/2 lg:-left-[20px]">
+            <div className="relative flex flex-col gap-8 lg:min-h-[460px] lg:justify-center">
+              
+              {/* Desktop View (LG and above) */}
+              <div className="relative z-20 mx-auto hidden lg:absolute lg:-left-[20px] lg:top-1/2 lg:block lg:mx-0 lg:-translate-y-1/2">
                 <PromoStack />
               </div>
 
-              {/* 
-                Shifted left padding (pl) down from 320px to 270px (lg) and 300px to 260px (md).
-                This pulls the text block more left on the right side.
-              */}
+              {/* Black Container */}
               <div
-                className="relative overflow-hidden rounded-[28px] bg-[#0b0b0b] px-5 py-6 text-white shadow-[0_24px_44px_rgba(15,23,42,0.18)] sm:px-8 sm:py-9 md:ml-[80px] md:py-10 md:pl-[260px] md:pr-12 lg:ml-[60px] lg:pl-[270px]"
+                className="relative overflow-hidden rounded-[28px] bg-[#0b0b0b] px-5 py-6 text-white shadow-[0_24px_44px_rgba(15,23,42,0.18)] sm:px-8 sm:py-9 lg:ml-[60px] lg:py-10 lg:pl-[270px] lg:pr-10"
                 style={{ fontFamily: 'Visby', color: '#ffffff' }}
               >
                 <div className="pointer-events-none absolute right-[-30px] top-[-24px] h-[136px] w-[136px] rounded-full bg-[radial-gradient(circle,rgba(255,114,74,0.16)_0%,rgba(255,114,74,0.04)_48%,rgba(255,114,74,0)_76%)] blur-2xl" />
 
-                <div className="relative md:hidden">
-                  <div className="flex justify-center pb-6">
+                {/* Mobile/Tablet Stack View */}
+                <div className="relative lg:hidden">
+                  <div className="flex justify-center pb-10 sm:pb-14 md:pb-16">
                     <PromoStack />
                   </div>
                 </div>
 
-                <div className="relative max-w-[620px]">
-                  <h2
-                    className="text-[32px] font-semibold leading-[1.08] tracking-[-0.04em] sm:text-[40px] lg:text-[50px]"
-                    style={{ color: '#ffffff' }}
-                  >
+                <div className="relative mx-auto max-w-[620px] text-center lg:mx-0 lg:text-left">
+                  <h2 className="text-[32px] font-semibold leading-[1.08] tracking-[-0.04em] sm:text-[40px] lg:text-[50px]" style={{ color: '#ffffff' }}>
                     Ready to Elevate Your
                     <br />
                     Digital Presence?
                   </h2>
-                  <p
-                    className="mt-3 max-w-[44ch] text-[14px] leading-[1.55] sm:text-[15px]"
-                    style={{ color: '#ffffff', marginTop: '0.5rem' }}
-                  >
-                    Grow your business with smart digital solutions. From stunning websites and engaging social media campaigns to SEO that brings real results — we help your brand grow online.
+                  <p className="mt-3 mx-auto lg:mx-0 max-w-[44ch] text-[14px] leading-[1.55] sm:text-[15px]" style={{ color: '#ffffff' }}>
+                    Grow your business with smart digital solutions. From stunning websites and SEO that brings real results — we help your brand grow online.
                   </p>
 
-                  {/* 
-                    Fully curved borders (rounded-full)
-                    Width 240px and Height 50px on laptop, scaling responsively down. 
-                  */}
                   <Link
                     to="/contact"
-                    className="mt-6 flex h-[44px] w-[200px] items-center justify-center rounded-full bg-[#ff5b2e] text-[15px] font-medium text-white transition-transform duration-300 ease-out hover:-translate-y-0.5 active:translate-y-0 sm:h-[48px] sm:w-[220px] sm:text-[16px] lg:h-[50px] lg:w-[240px]"
+                    className="mt-6 mx-auto lg:mx-0 flex h-[44px] w-[200px] items-center justify-center rounded-full bg-[#ff5b2e] text-[15px] font-medium text-white transition-transform duration-300 ease-out hover:-translate-y-0.5 sm:h-[48px] sm:w-[220px] lg:h-[50px] lg:w-[240px]"
                   >
                     <OrangeButtonLabel>Book A Demo</OrangeButtonLabel>
                   </Link>

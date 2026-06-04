@@ -95,7 +95,7 @@ function CapabilityCardBody({ card, showImage }) {
           {titleSuffix}
         </h3>
         <p
-          className="max-w-[28ch] font-semibold leading-[1.28]  sm:max-w-[30ch] md:max-w-[32ch] lg:max-w-[30ch] xl:max-w-[31ch] 2xl:max-w-[32ch]"
+          className="max-w-[28ch] font-semibold leading-[1.28] sm:max-w-[30ch] md:max-w-[32ch] lg:max-w-[30ch] xl:max-w-[31ch] 2xl:max-w-[32ch]"
           style={{
             fontSize: 'clamp(1.3rem, 0.88rem + 0.42vw, var(--fs-section-subtitle))',
           }}
@@ -103,7 +103,7 @@ function CapabilityCardBody({ card, showImage }) {
           {card.subtitle}
         </p>
         <p
-          className="max-w-[42ch] font-medium leading-[1.65]  md:max-w-[48ch] 2xl:max-w-[50ch] 2xl:leading-[1.75]"
+          className="max-w-[42ch] font-medium leading-[1.65] md:max-w-[48ch] 2xl:max-w-[50ch] 2xl:leading-[1.75]"
           style={{
             fontSize: 'var(--fs-card-body)',
           }}
@@ -113,7 +113,7 @@ function CapabilityCardBody({ card, showImage }) {
       </div>
 
       {showImage ? (
-       <div className="mx-auto w-full max-w-[220px] bg-transparent sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px] 2xl:max-w-[320px]">
+        <div className="mx-auto w-full max-w-[220px] bg-transparent sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px] 2xl:max-w-[320px]">
           <img
             src={card.imageSrc}
             alt={card.title}
@@ -151,7 +151,6 @@ function CapabilityCardBody({ card, showImage }) {
             to="/contact"
             className="inline-flex shrink-0 items-start justify-start"
           >
-            {/* Reduced height & Increased width to create a flatter, wider pill shape */}
             <Button
               size="default"
               className="m-0 ml-0 mr-auto shrink-0 self-start h-[40px] w-[220px] min-h-[40px] pr-[60px] text-[14px] sm:h-[42px] sm:min-h-[42px] sm:w-[240px] sm:pr-[64px] sm:text-[14px] md:h-[44px] md:min-h-[44px] md:w-[260px] md:pr-[68px] md:text-[15px] lg:h-[44px] lg:min-h-[44px] lg:w-[280px] lg:pr-[72px] lg:text-[15px] xl:h-[46px] xl:min-h-[46px] xl:w-[300px] xl:pr-[76px] xl:text-[16px] 2xl:h-[48px] 2xl:min-h-[48px] 2xl:w-[320px] 2xl:pr-[80px] 2xl:text-[17px]"
@@ -168,7 +167,7 @@ function CapabilityCardBody({ card, showImage }) {
 function CapabilityCard({ card, isMobile }) {
   if (isMobile) {
     return (
-      <div className="relative overflow-hidden rounded-[24px] border border-white/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.99)_0%,rgba(255,255,255,0.95)_100%)] p-5 shadow-[0_8px_30px_rgba(0,0,0,0.06)] sm:rounded-[28px] sm:p-6">
+      <div className="relative overflow-hidden rounded-[24px] border border-white/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.99)_0%,rgba(255,255,255,0.95)_100%)] p-5 shadow-[0_8px_30px_rgba(0,0,0,0.06)] sm:rounded-[28px] sm:p-6 md:p-8">
         <CapabilityCardBody card={card} showImage={false} />
       </div>
     )
@@ -184,14 +183,14 @@ function CapabilityCard({ card, isMobile }) {
 export default function ServiceCapabilitiesSection() {
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window !== 'undefined') {
-      return window.innerWidth < 768
+      return window.innerWidth < 1024 // Now includes 'md' size
     }
     return false
   })
 
   useEffect(() => {
     const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
+      setIsMobile(window.innerWidth < 1024)
     }
 
     window.addEventListener('resize', handleResize)
@@ -199,7 +198,8 @@ export default function ServiceCapabilitiesSection() {
   }, [])
 
   return (
-    <SectionWrapper as="section" className="relative overflow-visible  bg-transparent pt-12 sm:pt-16 md:pt-[4.5rem] lg:pt-20 xl:pt-24 2xl:pt-28">
+    <SectionWrapper as="section" className="relative overflow-visible bg-transparent pt-12 sm:pt-16 md:pt-[4.5rem] lg:pt-20 xl:pt-24 2xl:pt-28 section-spacing">
+      {/* Glow effects */}
       <div className="pointer-events-none absolute left-[12%] top-[10%] h-[180px] w-[180px] rounded-full bg-[radial-gradient(circle,rgba(255,171,144,0.16)_0%,transparent_70%)] blur-3xl sm:h-[200px] sm:w-[200px] md:h-[220px] md:w-[220px] lg:left-[16%] lg:h-[220px] lg:w-[220px] xl:h-[240px] xl:w-[240px] 2xl:h-[280px] 2xl:w-[280px]" />
       <div className="pointer-events-none absolute right-[8%] top-[8%] h-[190px] w-[190px] rounded-full bg-[radial-gradient(circle,rgba(102,145,255,0.16)_0%,transparent_70%)] blur-3xl sm:h-[210px] sm:w-[210px] md:h-[230px] md:w-[230px] lg:right-[10%] lg:h-[240px] lg:w-[240px] xl:h-[260px] xl:w-[260px] 2xl:h-[300px] 2xl:w-[300px]" />
 
@@ -229,7 +229,8 @@ export default function ServiceCapabilitiesSection() {
 
       <div className="relative mx-auto mt-5 max-w-[1080px] px-1 sm:mt-6 sm:px-0 md:mt-7 lg:mt-8 xl:mt-10 2xl:mt-12 2xl:max-w-[1180px]">
         {isMobile ? (
-          <div className="flex flex-col gap-6 sm:gap-8">
+          /* Mobile & Tablet (MD) view: Static List */
+          <div className="flex flex-col gap-6 sm:gap-8 md:gap-10">
             {capabilityCards.map((card) => (
               <CapabilityCard
                 key={card.id}
@@ -239,6 +240,7 @@ export default function ServiceCapabilitiesSection() {
             ))}
           </div>
         ) : (
+          /* Large Screen view: Stacking animation */
           <ScrollStack
             useWindowScroll
             itemDistance={90}

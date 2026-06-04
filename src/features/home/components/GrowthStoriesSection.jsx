@@ -14,8 +14,7 @@ const solutionCards = [
     buttonLabel: "Let's Explore",
     ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/social-seo-thumbnail.webp',
-    videoSrc: '/videos/social-seo-video-main.mp4',
-    
+    videoSrc: '/videos/social-seo-video-main.webm',
   },
   {
     id: 2,
@@ -26,8 +25,7 @@ const solutionCards = [
     buttonLabel: "Let's Explore",
     ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/saves-matter-thumbnail.webp',
-    videoSrc: '/videos/saves-matter-video-main.mp4',
-    
+    videoSrc: '/videos/saves-matter-video-main.webm',
   },
   {
     id: 3,
@@ -38,8 +36,7 @@ const solutionCards = [
     buttonLabel: "Let's Explore",
     ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/human-glitch-thumbnail.webp',
-    videoSrc: '/videos/human-glitch-video-main.mp4',
-   
+    videoSrc: '/videos/human-glitch-video-main.webm',
   },
 ]
 
@@ -64,7 +61,6 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
   // --- LOGIC: AUTO-PAUSE ON SWITCH (Custom Event) ---
   useEffect(() => {
     const handleGlobalPlay = (e) => {
-      // If another card started playing (ID mismatch), pause this one
       if (e.detail.id !== card.id && isPlaying) {
         videoRef.current?.pause()
         setIsPlaying(false)
@@ -79,13 +75,12 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // If card is no longer visible and video is playing, pause it
         if (!entry.isIntersecting && isPlaying) {
           videoRef.current?.pause()
           setIsPlaying(false)
         }
       },
-      { threshold: 0.1 } // Triggers pause when only 10% of the card is visible
+      { threshold: 0.1 }
     )
 
     const currentRef = cardContainerRef.current
@@ -96,7 +91,7 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
     }
   }, [isPlaying])
 
-  // --- LOGIC: AUTO-PAUSE WHEN ANOTHER STACK CARD BECOMES ACTIVE ---
+  // --- LOGIC: AUTO-PAUSE WHEN ANOTHER STACK CARD BECOMES ACTIVE OR WHEN UNSTACKING ---
   useEffect(() => {
     if (!isPlaying || isMobile) {
       return undefined
@@ -108,23 +103,24 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
       animationFrameId = null
 
       const currentStackCard = cardContainerRef.current?.closest('.scroll-stack-card')
-      if (!currentStackCard) {
-        return
-      }
+      if (!currentStackCard) return
 
       const stackCards = Array.from(document.querySelectorAll('.scroll-stack-card'))
       const currentIndex = stackCards.indexOf(currentStackCard)
-      if (currentIndex === -1) {
-        return
-      }
+      if (currentIndex === -1) return
 
       const stackLine = window.innerHeight * 0.2
-      const activationBuffer = 48
+      const ITEM_STACK_DISTANCE = 28 // This matches itemStackDistance in ScrollStack configuration below
+      const activationBuffer = 60 // Clean buffer range
+
       const activeIndex = stackCards.reduce((latestActiveIndex, stackCard, index) => {
         const cardTop = stackCard.getBoundingClientRect().top
-        return cardTop <= stackLine + activationBuffer ? index : latestActiveIndex
+        // Calculate the actual position where this specific card rests when fully stacked.
+        const expectedPinnedTop = stackLine + (index * ITEM_STACK_DISTANCE)
+        return cardTop <= expectedPinnedTop + activationBuffer ? index : latestActiveIndex
       }, -1)
 
+      // If activeIndex changed (e.g. unstacking backward or stacking forward), pause.
       if (activeIndex >= 0 && activeIndex !== currentIndex) {
         videoRef.current?.pause()
         setIsPlaying(false)
@@ -132,10 +128,7 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
     }
 
     const handleScrollOrResize = () => {
-      if (animationFrameId !== null) {
-        return
-      }
-
+      if (animationFrameId !== null) return
       animationFrameId = window.requestAnimationFrame(pauseIfAnotherCardStacks)
     }
 
@@ -160,11 +153,36 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
   const handleToggleVideo = async () => {
     if (!videoRef.current) return
 
+    // --- PREVENT PLAY DURING STACKING / UNSTACKING ---
+    if (!isPlaying && !isMobile) {
+      const currentStackCard = cardContainerRef.current?.closest('.scroll-stack-card')
+      if (currentStackCard) {
+        const stackCards = Array.from(document.querySelectorAll('.scroll-stack-card'))
+        const currentIndex = stackCards.indexOf(currentStackCard)
+        
+        if (currentIndex !== -1) {
+          const stackLine = window.innerHeight * 0.2
+          const ITEM_STACK_DISTANCE = 28
+          const activationBuffer = 60
+          
+          const activeIndex = stackCards.reduce((latestActiveIndex, stackCard, index) => {
+            const cardTop = stackCard.getBoundingClientRect().top
+            const expectedPinnedTop = stackLine + (index * ITEM_STACK_DISTANCE)
+            return cardTop <= expectedPinnedTop + activationBuffer ? index : latestActiveIndex
+          }, -1)
+
+          // If this card hasn't locked into its active stack location, block play logic
+          if (activeIndex >= 0 && activeIndex !== currentIndex) {
+            return;
+          }
+        }
+      }
+    }
+
     if (isPlaying) {
       videoRef.current.pause()
       setIsPlaying(false)
     } else {
-      // Notify other cards to pause before starting
       window.dispatchEvent(new CustomEvent('solution-video-playing', { detail: { id: card.id } }))
 
       try {
@@ -185,7 +203,7 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
 
   const innerContent = (
     <div 
-      ref={cardContainerRef} // Ref attached for IntersectionObserver
+      ref={cardContainerRef} 
       className="grid gap-5 sm:gap-6 md:grid-cols-[minmax(0,1fr)_clamp(220px,28vw,270px)] md:items-center lg:gap-12 2xl:grid-cols-[minmax(0,1fr)_300px] 2xl:gap-14"
     >
       {/* LEFT CONTENT */}
