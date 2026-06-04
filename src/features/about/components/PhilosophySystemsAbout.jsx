@@ -36,8 +36,8 @@ const philosophyData = [
 function PhilosophyCard({ item, index, isActive, onEnter, onLeave }) {
   const shapeClass =
     index % 2 === 0
-      ? 'rounded-tl-[64px] rounded-tr-[0px] rounded-bl-[0px] rounded-br-[64px]'
-      : 'rounded-tl-[64px] rounded-tr-[0px] rounded-bl-[0px] rounded-br-[64px]'
+      ? 'rounded-tl-[clamp(2rem,4vw,5rem)] rounded-br-[clamp(2rem,4vw,5rem)]'
+      : 'rounded-tl-[clamp(2rem,4vw,5rem)] rounded-br-[clamp(2rem,4vw,5rem)]'
 
   const cardStateClass = isActive
     ? 'border-transparent bg-[#F45328] shadow-[0_20px_35px_rgba(244,83,40,0.18)]'
@@ -45,7 +45,8 @@ function PhilosophyCard({ item, index, isActive, onEnter, onLeave }) {
 
   return (
     <article
-      className="group relative z-10 min-w-0 w-full max-w-[420px] sm:max-w-[460px] lg:max-w-[490px]"
+      // Width scales completely fluidly up to 490px
+      className="group relative z-10 min-w-0 w-full max-w-[490px]"
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
       onFocus={onEnter}
@@ -53,37 +54,40 @@ function PhilosophyCard({ item, index, isActive, onEnter, onLeave }) {
     >
       <div
         className={[
-          'relative h-[190px] w-full overflow-hidden transition-all duration-500 ease-out sm:h-[206px] lg:h-[220px]',
+          // Height fluidly scales from 190px (mobile) up to precisely 220px
+          'relative w-full overflow-hidden transition-all duration-500 ease-out h-[clamp(190px,22vw,220px)]',
           shapeClass,
           cardStateClass,
           isActive ? 'z-20 scale-[1.035]' : 'z-10 scale-100',
         ].join(' ')}
       >
         <div
-          className="absolute inset-0 z-10 flex flex-col justify-center overflow-hidden px-7 py-7 text-left transition-colors duration-500 ease-out sm:px-12 sm:py-10 lg:px-14 lg:py-11"
+          // Padding fluidly scales up to your preferred desktop limits
+          className="absolute inset-0 z-10 flex flex-col justify-center overflow-hidden px-[clamp(1.75rem,4vw,3.5rem)] py-[clamp(1.75rem,3vw,2.75rem)] text-left transition-colors duration-500 ease-out"
         >
-          <div className="relative z-10 flex w-full max-w-[95%] flex-col items-start gap-1.5 sm:max-w-[320px] lg:max-w-[340px]">
+          <div className="relative z-10 flex w-full flex-col items-start gap-[clamp(4px,0.8vw,6px)] max-w-[340px]">
             <div
               className={[
-                'mb-2 flex h-14 w-14 items-center justify-center rounded-[10px] border transition-all duration-500 ease-out sm:h-12 sm:w-12',
+                'mb-[clamp(4px,0.6vw,8px)] flex items-center justify-center rounded-[10px] border transition-all duration-500 ease-out h-[clamp(48px,5vw,56px)] w-[clamp(48px,5vw,56px)]',
                 isActive ? 'border-white/70 bg-white shadow-[0_8px_18px_rgba(255,255,255,0.18)]' : 'border-[#dfe4ec] bg-white',
               ].join(' ')}
             >
-              <img src={item.icon} alt="" aria-hidden="true" className="h-10 w-10 object-contain sm:h-7 sm:w-7" />
+              <img src={item.icon} alt="" aria-hidden="true" className="object-contain h-[clamp(28px,3vw,32px)] w-[clamp(28px,3vw,32px)]" />
             </div>
 
             <h3
               className={[
-                'max-w-[30ch] text-[20px] font-bold leading-[1.18] tracking-[-0.03em] text-balance transition-colors duration-500 ease-out sm:text-[22px] lg:text-[24px]',
+                'line-clamp-2 font-bold leading-[1.18] tracking-[-0.03em] transition-colors duration-500 ease-out text-[clamp(18px,2.5vw,24px)]',
                 isActive ? '!text-white' : '!text-black',
               ].join(' ')}
+              title={item.title}
             >
               {item.title}
             </h3>
 
             <p
               className={[
-                'max-w-[34ch] text-[14px] font-medium leading-[1.45] transition-colors duration-500 ease-out lg:text-[15px]',
+                'mt-0.5 max-w-[36ch] font-medium leading-[1.25] xl:leading-[1.5] 2xl:leading-[1.5] transition-colors duration-500 ease-out text-[clamp(14px,1.5vw,15px)]',
                 isActive ? '!text-white/90' : '!text-black',
               ].join(' ')}
             >
@@ -97,16 +101,16 @@ function PhilosophyCard({ item, index, isActive, onEnter, onLeave }) {
 }
 
 export default function PhilosophySystemsAbout() {
-  const [activeIndex, setActiveIndex] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(null)
 
   return (
     <SectionWrapper as="section" className="relative bg-transparent section-spacing">
       <div className="relative mx-auto max-w-[1200px]">
-        <div className="mx-auto mb-10 max-w-[760px] text-center sm:mb-12">
-          <p className="mb-3 text-[16px] sm:text-[18px] lg:text-[20px] xl:text-[22px] 2xl:text-[24px] font-medium uppercase tracking-[0.28em] ">
+        <div className="mx-auto mb-[clamp(2.5rem,4vw,3rem)] max-w-[760px] text-center">
+          <p className="mb-3 font-medium uppercase tracking-[0.28em] text-[clamp(16px,2vw,24px)]">
             OUR PHILOSOPHY
           </p>
-          <h2 className="text-[32px] font-bold leading-[1.08] tracking-[-0.04em]  sm:text-[40px] lg:text-[50px]">
+          <h2 className="font-bold leading-[1.08] tracking-[-0.04em] text-[clamp(32px,4vw+10px,50px)]">
             We Build Brands, Products &
             <br />
             Systems{' '}
@@ -116,8 +120,8 @@ export default function PhilosophySystemsAbout() {
           </h2> 
         </div>
 
-        <div className="relative mt-12 lg:mt-16">
-          <div className="grid justify-items-center gap-x-6 gap-y-5 sm:grid-cols-2 sm:gap-y-6 lg:gap-x-10 lg:gap-y-6 xl:gap-y-7">
+        <div className="relative mt-[clamp(3rem,4.5vw,4rem)]">
+          <div className="grid justify-items-center sm:grid-cols-2 gap-x-[clamp(1.5rem,3vw,2.5rem)] gap-y-[clamp(1.25rem,2.5vw,1.75rem)]">
           {philosophyData.map((item, index) => (
             <PhilosophyCard
               key={item.id}
@@ -125,7 +129,7 @@ export default function PhilosophySystemsAbout() {
               index={index}
               isActive={activeIndex === index}
               onEnter={() => setActiveIndex(index)}
-              onLeave={() => setActiveIndex(0)}
+              onLeave={() => setActiveIndex(null)}
             />
           ))}
           </div>

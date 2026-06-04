@@ -913,6 +913,12 @@ input[type="reset"],
   transform: scaleX(1);
 }
 
+@media (max-width: 344px) {
+  .footer-email-text {
+    font-size: 22px !important;
+  }
+}
+
 .site-header {
   padding-inline: var(--nav-shell-px);
   padding-top: var(--nav-shell-pt);
@@ -1003,6 +1009,7 @@ input[type="reset"],
 
 .site-nav__mobile-link::after {
   content: "";
+  display: none;
   position: absolute;
   inset: auto 1rem 0.45rem;
   height: 1.5px;
@@ -1016,7 +1023,7 @@ input[type="reset"],
 .site-nav__mobile-link:hover::after,
 .site-nav__mobile-link:focus-visible::after,
 .site-nav__mobile-link.site-nav__mobile-link--active::after {
-  transform: scaleX(1);
+  transform: scaleX(0);
 }
 
 @media (min-width: 640px) {

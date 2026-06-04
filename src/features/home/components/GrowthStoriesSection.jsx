@@ -14,8 +14,8 @@ const solutionCards = [
     buttonLabel: "Let's Explore",
     ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/social-seo-thumbnail.webp',
-   
-    videoSrc: '/videos/saves-matter-video.webm',
+    videoSrc: '/videos/social-seo-video-main.mp4',
+    
   },
   {
     id: 2,
@@ -26,7 +26,8 @@ const solutionCards = [
     buttonLabel: "Let's Explore",
     ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/saves-matter-thumbnail.webp',
-    videoSrc: '/videos/social-seo-video.webm',
+    videoSrc: '/videos/saves-matter-video-main.mp4',
+    
   },
   {
     id: 3,
@@ -37,7 +38,8 @@ const solutionCards = [
     buttonLabel: "Let's Explore",
     ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/human-glitch-thumbnail.webp',
-    videoSrc: '/videos/human-glitch-video.mp4',
+    videoSrc: '/videos/human-glitch-video-main.mp4',
+   
   },
 ]
 
@@ -57,6 +59,99 @@ function PlayIconButton({ onClick, className = '', ariaLabel = 'Play' }) {
 function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
   const [isPlaying, setIsPlaying] = useState(false)
   const videoRef = useRef(null)
+  const cardContainerRef = useRef(null)
+
+  // --- LOGIC: AUTO-PAUSE ON SWITCH (Custom Event) ---
+  useEffect(() => {
+    const handleGlobalPlay = (e) => {
+      // If another card started playing (ID mismatch), pause this one
+      if (e.detail.id !== card.id && isPlaying) {
+        videoRef.current?.pause()
+        setIsPlaying(false)
+      }
+    }
+
+    window.addEventListener('solution-video-playing', handleGlobalPlay)
+    return () => window.removeEventListener('solution-video-playing', handleGlobalPlay)
+  }, [isPlaying, card.id])
+
+  // --- LOGIC: AUTO-PAUSE ON SCROLL BEYOND SECTION (Intersection Observer) ---
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // If card is no longer visible and video is playing, pause it
+        if (!entry.isIntersecting && isPlaying) {
+          videoRef.current?.pause()
+          setIsPlaying(false)
+        }
+      },
+      { threshold: 0.1 } // Triggers pause when only 10% of the card is visible
+    )
+
+    const currentRef = cardContainerRef.current
+    if (currentRef) observer.observe(currentRef)
+
+    return () => {
+      if (currentRef) observer.unobserve(currentRef)
+    }
+  }, [isPlaying])
+
+  // --- LOGIC: AUTO-PAUSE WHEN ANOTHER STACK CARD BECOMES ACTIVE ---
+  useEffect(() => {
+    if (!isPlaying || isMobile) {
+      return undefined
+    }
+
+    let animationFrameId = null
+
+    const pauseIfAnotherCardStacks = () => {
+      animationFrameId = null
+
+      const currentStackCard = cardContainerRef.current?.closest('.scroll-stack-card')
+      if (!currentStackCard) {
+        return
+      }
+
+      const stackCards = Array.from(document.querySelectorAll('.scroll-stack-card'))
+      const currentIndex = stackCards.indexOf(currentStackCard)
+      if (currentIndex === -1) {
+        return
+      }
+
+      const stackLine = window.innerHeight * 0.2
+      const activationBuffer = 48
+      const activeIndex = stackCards.reduce((latestActiveIndex, stackCard, index) => {
+        const cardTop = stackCard.getBoundingClientRect().top
+        return cardTop <= stackLine + activationBuffer ? index : latestActiveIndex
+      }, -1)
+
+      if (activeIndex >= 0 && activeIndex !== currentIndex) {
+        videoRef.current?.pause()
+        setIsPlaying(false)
+      }
+    }
+
+    const handleScrollOrResize = () => {
+      if (animationFrameId !== null) {
+        return
+      }
+
+      animationFrameId = window.requestAnimationFrame(pauseIfAnotherCardStacks)
+    }
+
+    window.addEventListener('scroll', handleScrollOrResize, { passive: true })
+    window.addEventListener('resize', handleScrollOrResize)
+    handleScrollOrResize()
+
+    return () => {
+      window.removeEventListener('scroll', handleScrollOrResize)
+      window.removeEventListener('resize', handleScrollOrResize)
+
+      if (animationFrameId !== null) {
+        window.cancelAnimationFrame(animationFrameId)
+      }
+    }
+  }, [isMobile, isPlaying])
 
   const handleStartJourney = () => {
     window.open(card.ctaHref, '_blank', 'noopener,noreferrer')
@@ -69,6 +164,9 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
       videoRef.current.pause()
       setIsPlaying(false)
     } else {
+      // Notify other cards to pause before starting
+      window.dispatchEvent(new CustomEvent('solution-video-playing', { detail: { id: card.id } }))
+
       try {
         if (videoRef.current.currentTime === videoRef.current.duration) {
           videoRef.current.currentTime = 0
@@ -85,12 +183,14 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
     setIsPlaying(false)
   }
 
-  // Inner content separated out so we can wrap it differently based on breakpoint
   const innerContent = (
-    <div className="grid gap-5 sm:gap-6 md:grid-cols-[minmax(0,1fr)_clamp(220px,28vw,270px)] md:items-center lg:gap-12 2xl:grid-cols-[minmax(0,1fr)_300px] 2xl:gap-14">
+    <div 
+      ref={cardContainerRef} // Ref attached for IntersectionObserver
+      className="grid gap-5 sm:gap-6 md:grid-cols-[minmax(0,1fr)_clamp(220px,28vw,270px)] md:items-center lg:gap-12 2xl:grid-cols-[minmax(0,1fr)_300px] 2xl:gap-14"
+    >
       {/* LEFT CONTENT */}
       <div className="flex w-full flex-col items-start justify-center gap-3 px-1 sm:gap-4 sm:px-3 md:px-2 lg:px-6 lg:py-4 2xl:gap-5 2xl:px-8 2xl:py-6">
-        <h2 className="w-full text-left font-[var(--font-heading)] text-[22px] font-semibold capitalize leading-[1.1] tracking-[-0.03em] sm:max-w-[18ch] sm:text-[26px] md:max-w-none md:text-[30px] lg:whitespace-nowrap lg:text-[36px] 2xl:text-[40px]">
+        <h2 className="w-full text-left font-[var(--font-heading)] text-[22px] font-semibold capitalize leading-[1.1] tracking-[-0.03em] sm:max-w-[18ch] sm:text-[26px] md:max-w-none md:text-[30px] lg:whitespace-nowrap lg:text-[36px] 2xl:max-w-[18ch] 2xl:whitespace-normal 2xl:text-[40px]">
           {card.title}
         </h2>
         
@@ -111,7 +211,6 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
             {card.buttonLabel}
           </Button>
 
-          {/* Simple Circular Play Button for Mobile */}
           <div className="md:hidden">
             <PlayIconButton ariaLabel="View video" onClick={() => onOpenMobileVideo(card)} />
           </div>
@@ -119,15 +218,16 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
       </div>
 
       {/* REEL PREVIEW */}
-      <div className="relative mx-auto hidden aspect-[0.64/1] w-full max-w-[250px] overflow-hidden rounded-[28px] bg-[#06131d] shadow-[0_16px_32px_rgba(4,8,15,0.24)] md:block 2xl:max-w-[300px] 2xl:rounded-[32px] 2xl:shadow-[0_20px_40px_rgba(4,8,15,0.26)]">
-        {!isPlaying ? (
-          <img
-            src={card.previewImageSrc}
-            alt={`${card.title} reel preview`}
-            className="h-full w-full cursor-pointer object-cover"
-            onClick={handleToggleVideo}
-          />
-        ) : null}
+      <div className="relative isolate mx-auto hidden aspect-[0.64/1] w-full max-w-[250px] overflow-hidden rounded-[28px] bg-[#06131d] shadow-[0_16px_32px_rgba(4,8,15,0.24)] [backface-visibility:hidden] [contain:layout_paint] md:block 2xl:max-w-[300px] 2xl:rounded-[32px] 2xl:shadow-[0_20px_40px_rgba(4,8,15,0.26)]">
+        <img
+          src={card.previewImageSrc}
+          alt={`${card.title} reel preview`}
+          className={[
+            'absolute inset-0 h-full w-full cursor-pointer object-cover transition-opacity duration-300 [backface-visibility:hidden]',
+            isPlaying ? 'pointer-events-none opacity-0' : 'opacity-100',
+          ].join(' ')}
+          onClick={handleToggleVideo}
+        />
 
         <video
           ref={videoRef}
@@ -138,12 +238,11 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
           onClick={handleToggleVideo}
           preload="metadata"
           className={[
-            'h-full w-full cursor-pointer object-cover transition-opacity duration-300',
-            isPlaying ? 'opacity-100' : 'absolute inset-0 opacity-0',
+            'absolute inset-0 h-full w-full cursor-pointer object-cover transition-opacity duration-300 [backface-visibility:hidden]',
+            isPlaying ? 'opacity-100' : 'opacity-0',
           ].join(' ')}
         />
 
-        {/* Updated Desktop Play Button (Same identical component) */}
         {!isPlaying ? (
           <PlayIconButton
             ariaLabel={`Play ${card.title} reel`}
@@ -155,7 +254,6 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
     </div>
   )
 
-  // Standard Div wrap for mobile devices
   if (isMobile) {
     return (
       <div className="relative w-full overflow-hidden rounded-[24px] border border-white/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.94)_100%)] p-5 shadow-[0_8px_30px_rgba(0,0,0,0.06)] sm:rounded-[28px] sm:p-6">
@@ -164,7 +262,6 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
     )
   }
 
-  // ScrollStackItem wrapper for desktop devices
   return (
     <ScrollStackItem itemClassName="border border-white/80 bg-[linear-gradient(180deg,rgba(255,255,255,0.98)_0%,rgba(255,255,255,0.94)_100%)]">
       {innerContent}
@@ -181,32 +278,23 @@ export default function GrowthStoriesSection() {
     return false
   })
 
-  // Listen to screen resizes to trigger standard rendering on mobile instead of ScrollStack
   useEffect(() => {
-    const handleResize = () => {
-      setIsMobile(window.innerWidth < 768)
-    }
-
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
     window.addEventListener('resize', handleResize)
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
-    if (!mobileVideoCard) {
-      return undefined
-    }
+    if (!mobileVideoCard) return undefined
 
     const previousOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
 
     const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        setMobileVideoCard(null)
-      }
+      if (event.key === 'Escape') setMobileVideoCard(null)
     }
 
     window.addEventListener('keydown', handleKeyDown)
-
     return () => {
       document.body.style.overflow = previousOverflow
       window.removeEventListener('keydown', handleKeyDown)
@@ -215,13 +303,11 @@ export default function GrowthStoriesSection() {
 
   return (
     <section className="section-spacing relative overflow-visible bg-transparent pb-14 sm:pb-16 md:pb-20 lg:pb-24 2xl:pb-28 3xl:pb-32">
-      {/* BACKGROUND GLOW */}
       <div className="pointer-events-none absolute left-[16%] top-[18%] h-[200px] w-[200px] rounded-full bg-[radial-gradient(circle,rgba(255,171,144,0.18)_0%,transparent_70%)] blur-3xl" />
       <div className="pointer-events-none absolute right-[10%] top-[10%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(102,145,255,0.18)_0%,transparent_70%)] blur-3xl" />
 
       <div className="site-container relative">
         <div className="section-content relative">
-          {/* SECTION HEADING */}
           <div className="mx-auto mb-2 max-w-[620px] text-center sm:mb-3 2xl:max-w-[760px]">
             <h2
               className="text-[32px] font-semibold leading-[1.08] tracking-[-0.05em] "
@@ -236,8 +322,7 @@ export default function GrowthStoriesSection() {
             </h2>
           </div>
 
-          {/* STACK / MOBILE LAYOUT */}
-          <div className="relative mx-auto mt-5 max-w-[1030px] sm:mt-6 lg:mt-8 2xl:mt-10 2xl:max-w-[1180px]">
+          <div className="relative mx-auto mt-5 max-w-[1030px] sm:mt-6 lg:mt-8 2xl:mt-10 2xl:max-w-[1280px]">
             {isMobile ? (
               <div className="flex flex-col gap-6 sm:gap-8">
                 {solutionCards.map((card) => (
@@ -258,7 +343,7 @@ export default function GrowthStoriesSection() {
                 stackPosition="20%"
                 scaleEndPosition="12%"
                 baseScale={0.94}
-                className="mx-auto max-w-[1030px] 2xl:max-w-[1180px]"
+                className="mx-auto max-w-[1030px] 2xl:max-w-[1280px]"
               >
                 {solutionCards.map((card) => (
                   <SolutionPreviewCard

@@ -4,6 +4,8 @@ import CurvedUnderlineText from '../../../components/common/CurvedUnderlineText'
 import HeroYellowUnderlineText from '../../../components/common/HeroYellowUnderlineText'
 import SectionWrapper from '../../../components/common/SectionWrapper'
 
+const MotionDiv = motion.div
+
 const timelineSteps = [
   {
     id: 1,
@@ -153,7 +155,7 @@ function TimelineImageCard({ item, isActive }) {
         style={{ perspective: 700 }}
       >
         {stack.map((image, index) => (
-          <motion.div
+          <MotionDiv
             key={`${item.id}-${image}`}
             className="absolute inset-0"
             animate={{
@@ -183,7 +185,7 @@ function TimelineImageCard({ item, isActive }) {
                 className="h-full w-full object-cover"
               />
             </div>
-          </motion.div>
+          </MotionDiv>
         ))}
       </div>
     </div>
@@ -193,8 +195,6 @@ function TimelineImageCard({ item, isActive }) {
 function TimelineTextCard({ item, align, isActive }) {
   const isLeft = align === 'left'
 
-  // On Mobile: Number is always on the left, Content on the right.
-  // On Desktop: Alternates based on side.
   const alignmentClass = isLeft
     ? 'items-end text-right md:items-start md:text-left'
     : 'items-end text-right'
@@ -203,12 +203,11 @@ function TimelineTextCard({ item, align, isActive }) {
     ? 'left-4 top-4 md:left-auto md:right-6 md:top-6'
     : 'left-4 top-4 md:left-6 md:top-6'
 
-  // Always point the "speech bubble notch" left towards the track on mobile view
   let bgFlipClass = ''
   if (isLeft) {
-    bgFlipClass = 'max-md:-scale-x-100' // Default points right, flip for mobile
+    bgFlipClass = 'max-md:-scale-x-100'
   } else {
-    bgFlipClass = '-scale-x-100' // Flips for both mobile & desktop
+    bgFlipClass = '-scale-x-100'
   }
 
   return (
@@ -291,9 +290,9 @@ function TimelineBubble({ item, align, isActive }) {
     <div
       className={[
         'relative flex justify-between gap-6 md:gap-4',
-        'flex-col items-start md:items-center', // Mobile: Stack Vertically
-        isLeft ? 'md:flex-row' : 'md:flex-row-reverse', // Desktop: Alternate
-        'pl-[44px] pr-2 md:px-0' // Mobile Left Padding Space for Track Line
+        'flex-col items-start md:items-center',
+        isLeft ? 'md:flex-row' : 'md:flex-row-reverse',
+        'pl-[44px] pr-2 md:px-0' 
       ].join(' ')}
     >
       <TimelineTextCard item={item} align={align} isActive={isActive} />
@@ -308,11 +307,10 @@ export default function PreCompanyTimelineAbout() {
   const finalConnectorRef = useRef(null)
   const finalLineRef = useRef(null)
   const dotRefs = useRef([])
-  const finalDotRef = useRef(null)
   
   const [progress, setProgress] = useState(0)
   const [dotOffsets, setDotOffsets] = useState([])
-  const [trackHeight, setTrackHeight] = useState(0) // Moved height from render phase to state
+  const [trackHeight, setTrackHeight] = useState(0) 
 
   const { scrollYProgress } = useScroll({
     target: timelineTrackRef,
@@ -333,7 +331,6 @@ export default function PreCompanyTimelineAbout() {
         return
       }
 
-      // Safe evaluation that doesn't trigger ref warnings in render
       setTrackHeight(trackRect.height)
 
       const nextDotOffsets = dotRefs.current.map((dot) => {
@@ -378,7 +375,6 @@ export default function PreCompanyTimelineAbout() {
     Math.max((progress - finalConnectorStart) / (1 - finalConnectorStart), 0),
     1,
   )
-  const isFinalDotActive = progress >= finalConnectorStart
 
   return (
     <SectionWrapper ref={sectionRef} as="section" className="relative overflow-hidden bg-transparent section-spacing">
@@ -401,11 +397,12 @@ export default function PreCompanyTimelineAbout() {
 
         <div ref={timelineTrackRef} className="relative mx-auto mt-12 max-w-[940px] sm:mt-14 lg:mt-16 xl:mt-18 2xl:mt-20 xl:max-w-[980px]">
           
-          {/* Timeline Tracking Line - Shifted left for Mobile, Centered for Desktop */}
+          {/* Timeline Tracking Line */}
           <div className="absolute bottom-0 left-[20px] top-0 w-px -translate-x-1/2 bg-[#d8dcef] md:left-1/2" />
           <div className="absolute bottom-0 left-[20px] top-0 w-[3px] -translate-x-1/2 md:left-1/2">
-            <motion.div
-              className="h-full w-full origin-top rounded-full bg-[linear-gradient(180deg,#f45328_0%,#7a4fff_48%,#5b4dff_100%)] shadow-[0_0_18px_rgba(122,79,255,0.18)]"
+            {/* Using rounded-t-full so the bottom remains completely flat/flush for the connection */}
+            <MotionDiv
+              className="h-full w-full origin-top rounded-t-full bg-[linear-gradient(180deg,#f45328_0%,#7a4fff_48%,#5b4dff_100%)] shadow-[0_0_18px_rgba(122,79,255,0.18)]"
               style={{ scaleY }}
             />
           </div>
@@ -444,25 +441,18 @@ export default function PreCompanyTimelineAbout() {
 
       <div className="relative mx-auto mt-14 max-w-[1140px] sm:mt-20">
         
+        {/* CHANGED: Removed top-[8px] to top-0 to close the gap completely */}
         <div ref={finalConnectorRef} className="pointer-events-none absolute left-[20px] top-[-56px] h-[56px] w-4 -translate-x-1/2 sm:top-[-80px] sm:h-[80px] md:left-1/2">
-          <div className="absolute bottom-0 left-1/2 top-[8px] w-px -translate-x-1/2 bg-[#d8dcef]" />
-          <div ref={finalLineRef} className="absolute bottom-0 left-1/2 top-[8px] w-[3px] -translate-x-1/2">
-            <motion.div
-              className="h-full w-full origin-top rounded-full bg-[linear-gradient(180deg,#5b4dff_0%,#f45328_100%)]"
+          <div className="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 bg-[#d8dcef]" />
+          <div ref={finalLineRef} className="absolute bottom-0 left-1/2 top-0 w-[3px] -translate-x-1/2">
+            {/* Using rounded-b-full so the top remains completely flat/flush for the connection */}
+            <MotionDiv
+              className="h-full w-full origin-top rounded-b-full bg-[linear-gradient(180deg,#5b4dff_0%,#f45328_100%)]"
               style={{
                 scaleY: Math.max(finalConnectorProgress, 0.001),
               }}
             />
           </div>
-          <div
-            ref={finalDotRef}
-            className={[
-              'absolute left-1/2 top-0 h-4 w-4 -translate-x-1/2 rounded-full border-2 transition-all duration-300',
-              isFinalDotActive
-                ? 'border-white bg-[#f45328] shadow-[0_0_0_6px_rgba(244,83,40,0.14)]'
-                : 'border-[#cfd6e6] bg-white',
-            ].join(' ')}
-          />
         </div>
 
         <div className="flex w-full flex-col overflow-hidden rounded-[28px] bg-[#f45328] shadow-[0_24px_50px_rgba(244,83,40,0.25)] lg:h-[492px] lg:flex-row lg:items-stretch lg:justify-between">

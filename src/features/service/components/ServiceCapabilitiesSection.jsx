@@ -97,7 +97,7 @@ function CapabilityCardBody({ card, showImage }) {
         <p
           className="max-w-[28ch] font-semibold leading-[1.28]  sm:max-w-[30ch] md:max-w-[32ch] lg:max-w-[30ch] xl:max-w-[31ch] 2xl:max-w-[32ch]"
           style={{
-            fontSize: 'clamp(1rem, 0.88rem + 0.42vw, var(--fs-section-subtitle))',
+            fontSize: 'clamp(1.3rem, 0.88rem + 0.42vw, var(--fs-section-subtitle))',
           }}
         >
           {card.subtitle}
@@ -113,11 +113,11 @@ function CapabilityCardBody({ card, showImage }) {
       </div>
 
       {showImage ? (
-        <div className="mx-auto hidden w-full max-w-[220px] overflow-hidden rounded-[22px] shadow-[0_16px_32px_rgba(15,23,42,0.1)] lg:block lg:max-w-[220px] xl:max-w-[240px] 2xl:max-w-[280px] 2xl:rounded-[26px]">
+       <div className="mx-auto w-full max-w-[220px] bg-transparent sm:max-w-[240px] md:max-w-[260px] lg:max-w-[280px] xl:max-w-[300px] 2xl:max-w-[320px]">
           <img
             src={card.imageSrc}
             alt={card.title}
-            className="h-[220px] w-full object-cover object-center lg:h-[220px] xl:h-[236px] 2xl:h-[276px]"
+            className="h-auto w-full object-contain object-center"
           />
         </div>
       ) : null}

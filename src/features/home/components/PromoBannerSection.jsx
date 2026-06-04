@@ -4,38 +4,44 @@ import { Link } from 'react-router-dom'
 import OrangeButtonLabel from '../../../components/common/OrangeButtonLabel'
 import SectionWrapper from '../../../components/common/SectionWrapper'
 
+const MotionDiv = motion.div
+
 const stackedPromoCards = [
   {
-    id: 'expertise',
-    stat: '15+',
-    label: 'Years of Expertise',
-    detailPrimary: '15+ Years of',
-    detailSecondary: 'Industry Expertise',
-    theme: 'orange',
-  },
-  {
-    id: 'clients',
-    stat: '15+',
-    label: 'Satisfied Clients',
-    detailPrimary: '15+ Happy',
-    detailSecondary: 'Satisfied Clients',
+    id: 'projects',
+    stat: '100+',
+    label: 'Live Projects',
+    detailPrimary: 'Real solutions delivered',
+    detailSecondary: 'across industries.',
     theme: 'white',
+    icon: '/images/hero/projects.webp',
   },
   {
     id: 'team',
     stat: '10+',
     label: 'Team Members',
-    detailPrimary: '10+ Skilled',
-    detailSecondary: 'Team Members',
+    detailPrimary: 'Collaboration that drives',
+    detailSecondary: 'innovation.',
     theme: 'orange',
+    icon: '/images/hero/team-member.webp',
   },
   {
-    id: 'operations',
-    stat: '1',
-    label: 'Year of Successful Operations',
-    detailPrimary: '1 Year of',
-    detailSecondary: 'Successful Operations',
+    id: 'clients',
+    stat: '15+',
+    label: 'Satisfied Clients',
+    detailPrimary: 'Building long-term',
+    detailSecondary: 'partnerships through results.',
     theme: 'white',
+    icon: '/images/hero/customer.webp',
+  },
+  {
+    id: 'expertise',
+    stat: '12+',
+    label: 'Years of Expertise',
+    detailPrimary: 'Decades of design and',
+    detailSecondary: 'strategy mastery.',
+    theme: 'orange',
+    icon: '/images/hero/expert.webp',
   },
 ]
 
@@ -59,14 +65,14 @@ function CardRotate({ children, onSendToBack, sensitivity, disableDrag = false }
 
   if (disableDrag) {
     return (
-      <motion.div className="absolute inset-0 cursor-pointer" style={{ x: 0, y: 0 }}>
+      <MotionDiv className="absolute inset-0 cursor-pointer" style={{ x: 0, y: 0 }}>
         {children}
-      </motion.div>
+      </MotionDiv>
     )
   }
 
   return (
-    <motion.div
+    <MotionDiv
       className="absolute inset-0 cursor-grab active:cursor-grabbing"
       style={{ x, y, rotateX, rotateY }}
       drag
@@ -76,7 +82,7 @@ function CardRotate({ children, onSendToBack, sensitivity, disableDrag = false }
       onDragEnd={handleDragEnd}
     >
       {children}
-    </motion.div>
+    </MotionDiv>
   )
 }
 
@@ -148,7 +154,7 @@ className="relative h-[240px] w-[220px] sm:h-[272px] sm:w-[246px] md:h-[312px] m
           sensitivity={sensitivity}
           disableDrag={shouldDisableDrag}
         >
-          <motion.div
+          <MotionDiv
             className={[
               'flex h-full w-full flex-col rounded-[24px] p-7 shadow-[0_24px_44px_rgba(15,23,42,0.2)]',
               card.theme === 'white'
@@ -219,16 +225,13 @@ className="relative h-[240px] w-[220px] sm:h-[272px] sm:w-[246px] md:h-[312px] m
 
             <div className="mt-auto flex justify-center pt-4">
               <img
-                src="/icons/brand-awareness.webp"
+                src={card.icon}
                 alt=""
                 aria-hidden="true"
-                className={[
-                  'h-[40px] w-[40px] object-contain sm:h-[42px] sm:w-[42px] md:h-[44px] md:w-[44px] lg:h-[46px] lg:w-[46px] xl:h-[48px] xl:w-[48px] 2xl:h-[50px] 2xl:w-[50px]',
-                  card.theme === 'white' ? 'brightness-0 saturate-0' : '',
-                ].join(' ')}
+                className="h-[40px] w-[40px] object-contain sm:h-[42px] sm:w-[42px] md:h-[44px] md:w-[44px] lg:h-[46px] lg:w-[46px] xl:h-[48px] xl:w-[48px] 2xl:h-[50px] 2xl:w-[50px]"
               />
             </div>
-          </motion.div>
+          </MotionDiv>
         </CardRotate>
       ))}
     </div>

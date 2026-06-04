@@ -33,7 +33,7 @@
   --fs-hero-subtitle: 16px;
 
   /* Section */
-  --fs-section-title: 32px;
+  --fs-section-title: 28px;
   --fs-section-subtitle: 16px;
 
   /* Cards */
@@ -77,12 +77,15 @@
   --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.06);
 }
 
+
+
+
 /* =====================================================
    SMALL DEVICES (≥ 640px)
    ===================================================== */
 @media (min-width: 640px) {
   :root {
-    /* Hero */
+    /* Hero */ 
     --fs-hero-title: 40px;
     --fs-hero-subtitle: 16px;
 

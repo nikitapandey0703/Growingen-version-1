@@ -21,6 +21,12 @@ const initialFormState = {
   message: '',
 }
 
+const FORMSUBMIT_ENDPOINT =
+  import.meta.env.VITE_FORMSUBMIT_ENDPOINT ||
+  (import.meta.env.VITE_FORMSUBMIT_EMAIL
+    ? `https://formsubmit.co/ajax/${import.meta.env.VITE_FORMSUBMIT_EMAIL}`
+    : '')
+
 const validationRules = {
   name: {
     required: 'Please enter your full name.',
@@ -181,7 +187,7 @@ export default function AnimatedContactForm() {
   const [formData, setFormData] = useState(initialFormState)
   const [activeField, setActiveField] = useState('')
   const [submitState, setSubmitState] = useState('idle')
-  const [errorMessage, setErrorMessage] = useState('') // Only used for global API failures now
+  const [errorMessage, setErrorMessage] = useState('')
   const [submittedName, setSubmittedName] = useState('')
   const [fieldErrors, setFieldErrors] = useState({})
 
@@ -254,23 +260,34 @@ export default function AnimatedContactForm() {
       return
     }
 
+    if (!FORMSUBMIT_ENDPOINT) {
+      setSubmitState('error')
+      setErrorMessage('The contact form is not configured yet.')
+      return
+    }
+
     setFieldErrors({})
     setSubmitState('sending')
 
     try {
-      const response = await fetch('/api/contact', {
+      const response = await fetch(FORMSUBMIT_ENDPOINT, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
         },
-        body: JSON.stringify(sanitizedFormData),
+        body: JSON.stringify({
+          ...sanitizedFormData,
+          _subject: `New ${sanitizedFormData.service} enquiry from ${sanitizedFormData.name}`,
+          _template: 'table',
+          _captcha: 'false',
+        }),
       })
 
       const result = await response.json()
 
-      if (!response.ok || !result.success) {
-        throw new Error(result.message || 'SMTP submission failed.')
+      if (!response.ok) {
+        throw new Error(result.message || 'FormSubmit submission failed.')
       }
 
       setSubmittedName(sanitizedFormData.name)

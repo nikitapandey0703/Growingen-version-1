@@ -36,7 +36,7 @@ function BenefitCard({ card, index, isActive, onEnter, onLeave }) {
   return (
     <article
       className={[
-        'group relative flex min-h-[248px] flex-col justify-between overflow-hidden border border-black/12 px-8 py-8 transition-colors duration-300 ease-out lg:min-h-[260px]',
+        'group relative flex min-h-[320px] flex-col justify-between overflow-hidden border border-black/12 px-8 py-8 transition-colors duration-300 ease-out sm:min-h-[348px] lg:min-h-[372px] 2xl:min-h-[393px]',
         isActive ? 'bg-black text-white shadow-[0_18px_38px_rgba(15,23,42,0.18)]' : 'bg-white text-[#000000]',
       ].join(' ')}
       onMouseEnter={onEnter}
@@ -54,14 +54,14 @@ function BenefitCard({ card, index, isActive, onEnter, onLeave }) {
       </span>
 
       <div className="relative z-10 flex flex-col gap-5">
-        <div className="flex h-[62px] w-[62px] items-center justify-center  p-3 transition-colors duration-300 ">
+        <div className="flex h-[68px] w-[68px] items-center justify-center  p-3 transition-colors duration-300 ">
           <img src={card.icon} alt="" aria-hidden="true" className="h-full w-full object-contain" />
         </div>
 
         <div className="max-w-[26ch] ">
           <h3
             className={[
-              'text-[24px] font-bold leading-[1.15] tracking-[-0.03em] transition-colors duration-300',
+              'text-[24px] font-bold leading-[1.15] tracking-[-0.03em] transition-colors duration-300 sm:text-[26px] lg:text-[28px] 2xl:text-[30px]',
               isActive ? '!text-white' : 'text-[#000000]',
             ].join(' ')}
           >
@@ -69,8 +69,8 @@ function BenefitCard({ card, index, isActive, onEnter, onLeave }) {
           </h3>
           <p
             className={[
-              'mt-4 text-[15px] font-medium leading-[1.55] transition-colors duration-300 space-y-4 pt-2',
-              isActive ? 'text-white/72' : 'text-[#000000]',
+              'mt-4 text-[14px] font-medium leading-[1.55] transition-colors duration-300 space-y-4 pt-2 lg:text-[15px] xl:text-[15px] 2xl:text-[17px]',
+              isActive ? 'text-white/72' : 'text-[#838181]',
             ].join(' ')}
           >
             {card.description}
@@ -85,8 +85,8 @@ export default function WhyGrowingenAboutSection() {
   const [activeId, setActiveId] = useState(null)
 
   return (
-    <section className="relative bg-transparent section-spacing">
-      <div className="relative mx-auto max-w-[1360px]">
+    <section className="relative left-1/2 w-screen -translate-x-1/2 bg-transparent section-spacing">
+      <div className="relative w-full max-w-none">
         <div className="mx-auto max-w-[760px] text-center">
           <p className="text-[16px] sm:text-[18px] lg:text-[20px] xl:text-[22px] 2xl:text-[24px] font-medium uppercase tracking-[0.28em] ">
             Why Growingen

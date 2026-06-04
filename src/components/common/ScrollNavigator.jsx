@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { FiArrowDown, FiArrowUp } from 'react-icons/fi'
 
+const MotionButton = motion.button
+const MotionSpan = motion.span
+
 export default function ScrollNavigator() {
   const [isBottom, setIsBottom] = useState(false)
   const [visible, setVisible] = useState(false)
@@ -41,7 +44,7 @@ export default function ScrollNavigator() {
   const progressDegrees = Math.max(scrollProgress * 360, 12)
 
   return (
-    <motion.button
+    <MotionButton
       type="button"
       aria-label={isBottom ? 'Scroll to top' : 'Scroll to bottom'}
       onClick={handleClick}
@@ -62,7 +65,7 @@ export default function ScrollNavigator() {
       <span className="absolute inset-[2px] rounded-full bg-[linear-gradient(180deg,rgba(255,255,255,0.88)_0%,rgba(244,247,255,0.8)_100%)]" />
       <span className="pointer-events-none absolute inset-[7px] rounded-full bg-[radial-gradient(circle_at_30%_30%,rgba(255,255,255,0.9),rgba(255,255,255,0.45)_42%,rgba(255,255,255,0.08)_72%)] opacity-90" />
 
-      <motion.span
+      <MotionSpan
         key={isBottom ? 'up' : 'down'}
         initial={{ opacity: 0, y: 8, rotate: isBottom ? -10 : 10 }}
         animate={{ opacity: 1, y: 0, rotate: 0 }}
@@ -71,7 +74,7 @@ export default function ScrollNavigator() {
         className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full bg-[#ffffff]/92 text-[#0f172a] shadow-[inset_0_1px_1px_rgba(255,255,255,0.8),0_8px_18px_rgba(15,23,42,0.12)]"
       >
         {isBottom ? <FiArrowUp size={20} /> : <FiArrowDown size={20} />}
-      </motion.span>
-    </motion.button>
+      </MotionSpan>
+    </MotionButton>
   )
 }

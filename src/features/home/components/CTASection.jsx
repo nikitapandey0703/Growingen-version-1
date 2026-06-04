@@ -94,6 +94,40 @@ function FeatureBullet() {
   )
 }
 
+// Reusable Navigation Arrow Component
+function NavArrow({ direction, onClick, disabled }) {
+  const isLeft = direction === 'left'
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      disabled={disabled}
+      className={[
+        'absolute top-1/2 z-20 flex h-[70px] w-[26px] sm:h-[100px] sm:w-[36px] lg:h-[110px] lg:w-[40px] -translate-y-1/2 items-center justify-center rounded-[24px] transition-all duration-300 ease-out outline-none',
+        'shadow-[0_0_18px_rgba(244,83,40,0.5)] border-[1.5px] border-[#F45328]/40', // Red/Orange glowing border and shadow
+        isLeft ? 'left-1 sm:left-4 lg:left-1 xl:-left-6' : 'right-1 sm:right-4 lg:right-1 xl:-right-6',
+        disabled ? 'opacity-0 pointer-events-none' : 'opacity-100 hover:scale-[1.05] cursor-pointer'
+      ].join(' ')}
+      aria-label={isLeft ? 'Previous plan' : 'Next plan'}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={2.5}
+        stroke="black"
+        className="h-5 w-5 sm:h-7 sm:w-7 lg:h-10 lg:w-8"
+      >
+        {isLeft ? (
+          <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        ) : (
+          <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        )}
+      </svg>
+    </button>
+  )
+}
+
 function PlanCard({ card, onAdvance, isActive }) {
   return (
     <article
@@ -108,7 +142,8 @@ function PlanCard({ card, onAdvance, isActive }) {
       }}
       className={[
         'group relative min-w-0 flex-none snap-center self-stretch cursor-pointer outline-none',
-        'w-full max-[399px]:w-[min(84vw,314px)] sm:w-[min(82vw,500px)] md:w-[min(70vw,540px)] lg:w-[calc(50%-12px)] xl:w-[calc(50%-14px)]',
+        // Updated Widths to account for the reduced gaps (gap-6)
+        'w-full max-[399px]:w-[min(84vw,314px)] sm:w-[min(82vw,500px)] md:w-[min(70vw,540px)] lg:w-[calc(50%-12px)]',
         'transition-transform duration-300 ease-out hover:-translate-y-1 focus-visible:-translate-y-1',
       ].join(' ')}
     >
@@ -219,7 +254,6 @@ export default function CTASection() {
   useEffect(() => {
     const updateCardsPerView = () => {
       if (typeof window !== 'undefined') {
-        // Breakpoint matching 'lg' exactly where you split the views to 'w-[calc(50%-12px)]'
         setCardsPerView(window.innerWidth >= 1024 ? 2 : 1)
       }
     }
@@ -255,7 +289,7 @@ export default function CTASection() {
 
     handleScroll()
     node.addEventListener('scroll', handleScroll, { passive: true })
-    window.addEventListener('resize', handleScroll) // Keep to recalculate closest correctly on resize
+    window.addEventListener('resize', handleScroll) 
 
     return () => {
       node.removeEventListener('scroll', handleScroll)
@@ -280,9 +314,14 @@ export default function CTASection() {
     })
   }
 
-  // 4. Update the card advancer function to target indicators instead of purely card index
-  const goToNextCard = () => {
-    const nextIndicator = (activeIndicator + 1) % numIndicators
+  // 4. Update the card advancer functions
+  const handlePrevCard = () => {
+    const prevIndicator = Math.max(0, activeIndicator - 1)
+    scrollToCard(prevIndicator)
+  }
+
+  const handleNextCard = () => {
+    const nextIndicator = Math.min(numIndicators - 1, activeIndicator + 1)
     scrollToCard(nextIndicator)
   }
 
@@ -294,7 +333,6 @@ export default function CTASection() {
       <div className="site-container relative lg:pt-12">
         <div className="section-content">
           
-          {/* UPDATED WRAPPER: Increased max-w for lg/xl/2xl so the large text doesn't overflow the container and push off-center */}
           <div className="mx-auto max-w-[520px] lg:max-w-[960px] xl:max-w-[1100px] 2xl:max-w-full px-4 text-center">
             <h2
               className="text-[32px] font-semibold leading-[1.08] tracking-[-0.05em]"
@@ -312,23 +350,28 @@ export default function CTASection() {
             </h2>
           </div>
 
-          <div className="relative mt-6 sm:mt-8 lg:mt-10">
+          <div className="relative mt-6 sm:mt-8 lg:mt-10 mx-auto max-w-[1080px]">
+            
+            {/* Custom Arrow Navigators */}
+            <NavArrow direction="left" onClick={handlePrevCard} disabled={activeIndicator === 0} />
+            <NavArrow direction="right" onClick={handleNextCard} disabled={activeIndicator === numIndicators - 1} />
+
             <div
               ref={scrollRef}
-              className="mx-auto flex items-stretch max-w-[1480px] snap-x snap-mandatory gap-12 px-4 pb-8 pt-4 sm:gap-12 sm:px-12 lg:gap-6 lg:px-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+              // SIGNIFICANTLY REDUCED GAPS: changed gap-12 to gap-4 sm:gap-6
+              className="mx-auto flex items-stretch snap-x snap-mandatory gap-4 sm:gap-6 px-4 sm:px-14 lg:px-8 pb-8 pt-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
             >
               {planCards.map((card, index) => (
                 <PlanCard
                   key={card.id}
                   card={card}
-                  onAdvance={goToNextCard}
+                  onAdvance={handleNextCard}
                   isActive={activeIndex === index}
                 />
               ))}
             </div>
 
             <div className="mt-3 flex items-center justify-center gap-2">
-              {/* Dynamically render dots based on our screen size view calculations */}
               {indicatorsArray.map((indicatorIndex) => (
                 <button
                   key={indicatorIndex}

@@ -5,6 +5,7 @@ export default {
     extend: {
       screens: {
         '3xl': '1800px',
+        'max360': { max: '344px' },
       },
     },
   },

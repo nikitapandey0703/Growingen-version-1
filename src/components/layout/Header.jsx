@@ -307,8 +307,6 @@ function NavLinks({ onNavigate, mobile = false }) {
 
 export default function Header({ logoSrc }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
-  // The header uses `isHeaderVisible` consistently; there is no `setIsHeadingVisible`
-  // setter in this file, so any IDE warning under that name is stale/incorrect.
   const [isHeaderVisible, setIsHeaderVisible] = useState(true)
   const [isScrolled, setIsScrolled] = useState(false)
 
@@ -344,19 +342,6 @@ export default function Header({ logoSrc }) {
   }
 
   useEffect(() => {
-    if (!isMenuOpen) {
-      return undefined
-    }
-
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
-
-    return () => {
-      document.body.style.overflow = previousOverflow
-    }
-  }, [isMenuOpen])
-
-  useEffect(() => {
     const handleResize = () => {
       if (window.innerWidth >= 1024) {
         setIsMenuOpen(false)
@@ -368,6 +353,8 @@ export default function Header({ logoSrc }) {
   }, [])
 
   useEffect(() => {
+    // Route changes must close the mobile menu and reveal the sticky header.
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsMenuOpen(false)
     setIsHeaderVisible(true)
     lastScrollYRef.current = window.scrollY
@@ -416,87 +403,94 @@ export default function Header({ logoSrc }) {
     <>
       <style>{headerStyles}</style>
       <header
-      className={[
-        // Shared responsive shell:
-        // laptop spacing stays visually close to the current layout,
-        // while desktop and large-desktop gain the approved horizontal breathing room.
-        'site-header sticky top-0 z-50 mx-auto w-full max-w-[1720px] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] 3xl:max-w-[1880px]',
-        isHeaderVisible ? 'translate-y-0' : '-translate-y-full',
-        isScrolled ? 'bg-transparent' : 'bg-transparent',
-      ].join(' ')}
-      >
-      <div
         className={[
-          // The navbar pill keeps its laptop width, then expands progressively on larger screens.
-          'site-header__inner mx-auto w-full rounded-full transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]',
-          isScrolled
-            ? 'border border-white/30 bg-white/34 shadow-[0_10px_24px_rgba(15,23,42,0.05)] backdrop-blur-md'
-            : 'border border-transparent bg-transparent',
+          // Shared responsive shell:
+          // laptop spacing stays visually close to the current layout,
+          // while desktop and large-desktop gain the approved horizontal breathing room.
+          'site-header sticky top-0 z-50 mx-auto w-full max-w-[1720px] transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] 3xl:max-w-[1880px]',
+          isHeaderVisible ? 'translate-y-0' : '-translate-y-full',
+          isScrolled ? 'bg-transparent' : 'bg-transparent',
         ].join(' ')}
       >
-        <div className="site-header__pill flex items-center justify-between gap-2 md:gap-3 lg:gap-4 xl:gap-6 2xl:gap-8 3xl:gap-10">
-          <LogoBlock logoSrc={logoSrc} onNavigate={handleRouteNavigation} />
+        <div
+          className={[
+            // The navbar pill keeps its laptop width, then expands progressively on larger screens.
+            // ADDED: `relative z-50` explicitly so it floats cleanly above the z-40 backdrop overlay
+            'site-header__inner relative z-50 mx-auto w-full rounded-full transition-all duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]',
+            isScrolled
+              ? 'border border-white/30 bg-white/34 shadow-[0_10px_24px_rgba(15,23,42,0.05)] backdrop-blur-md'
+              : 'border border-transparent bg-transparent',
+          ].join(' ')}
+        >
+          <div className="site-header__pill flex items-center justify-between gap-2 md:gap-3 lg:gap-4 xl:gap-6 2xl:gap-8 3xl:gap-10">
+            <LogoBlock logoSrc={logoSrc} onNavigate={handleRouteNavigation} />
 
-          {/* Promote the inline nav only when there is enough horizontal room for every link and CTA. */}
-          <NavLinks onNavigate={handleRouteNavigation} />
+            {/* Promote the inline nav only when there is enough horizontal room for every link and CTA. */}
+            <NavLinks onNavigate={handleRouteNavigation} />
 
-          <div className="hidden lg:flex">
-            {/* MANUAL KEEP: CTA width and 2xl scale are intentionally custom to preserve the navbar composition. */}
-            <Link
-              to="/contact"
-              onClick={handleRouteNavigation('/contact')}
-              className="site-header__cta header-cta w-[200px] shrink-0 justify-center whitespace-nowrap rounded-full font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B1CC1] 2xl:w-[232px] 2xl:px-7 2xl:py-4 3xl:w-[252px] 3xl:px-8"
-            >
-              <img
-                src={startProjectIconSrc}
-                alt=""
-                aria-hidden="true"
-                className="h-[18px] w-[18px] shrink-0 2xl:h-5 2xl:w-5"
-              />
-              <span>Start Project Brief</span>
-            </Link>
-          </div>
-
-          <button
-            type="button"
-            className="site-header__toggle inline-flex shrink-0 items-center justify-center rounded-full border border-black/10 bg-white/70 text-text transition-colors hover:border-[#2B1CC1] hover:text-[#2B1CC1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B1CC1] lg:hidden"
-            aria-expanded={isMenuOpen}
-            aria-controls="mobile-navigation"
-            aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
-            onClick={() => setIsMenuOpen((open) => !open)}
-          >
-            {isMenuOpen ? <X /> : <Menu />}
-          </button>
-        </div>
-      </div>
-
-      {isMenuOpen ? (
-        <div className="lg:hidden">
-          <div className="fixed inset-0 z-40 bg-[#020617]/18 backdrop-blur-[2px]" onClick={closeMenu} aria-hidden="true" />
-          <div
-            id="mobile-navigation"
-            className="site-header__menu site-header__inner relative z-50 mx-auto mt-2 w-full border border-white/30 bg-white/42 backdrop-blur-lg"
-          >
-            <div className="site-header__menu-panel mx-auto flex w-full flex-col">
-              <NavLinks mobile onNavigate={handleRouteNavigation} />
-
+            <div className="hidden lg:flex">
+              {/* MANUAL KEEP: CTA width and 2xl scale are intentionally custom to preserve the navbar composition. */}
               <Link
                 to="/contact"
                 onClick={handleRouteNavigation('/contact')}
-                className="site-header__cta header-cta inline-flex w-full max-w-[220px] self-center items-center justify-center gap-2 rounded-full px-5 py-3 font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B1CC1] sm:w-[200px]"
+                className="site-header__cta header-cta w-[200px] shrink-0 justify-center whitespace-nowrap rounded-full font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B1CC1] 2xl:w-[232px] 2xl:px-7 2xl:py-4 3xl:w-[252px] 3xl:px-8"
               >
                 <img
                   src={startProjectIconSrc}
                   alt=""
                   aria-hidden="true"
-                  className="h-[15px] w-[15px] shrink-0"
+                  className="h-[18px] w-[18px] shrink-0 2xl:h-5 2xl:w-5"
                 />
                 <span>Start Project Brief</span>
               </Link>
             </div>
+
+            <button
+              type="button"
+              className="site-header__toggle inline-flex shrink-0 items-center justify-center rounded-full border border-black/10 bg-white/70 text-text transition-colors hover:border-[#2B1CC1] hover:text-[#2B1CC1] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B1CC1] lg:hidden"
+              aria-expanded={isMenuOpen}
+              aria-controls="mobile-navigation"
+              aria-label={isMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              onClick={() => setIsMenuOpen((open) => !open)}
+            >
+              {isMenuOpen ? <X /> : <Menu />}
+            </button>
           </div>
         </div>
-      ) : null}
+
+        {isMenuOpen ? (
+          // CHANGED: Added `absolute left-0 right-0 top-full` to prevent it from pushing the document layout.
+          <div className="lg:hidden absolute left-0 right-0 top-full">
+            {/* CHANGED: Configured sizes dynamically to perfectly cover the viewport regardless of its nested tree bounds */}
+            <div 
+              className="fixed top-0 left-1/2 z-40 h-[100vh] w-[100vw] -translate-x-1/2 bg-[#020617]/18 backdrop-blur-[2px]" 
+              onClick={closeMenu} 
+              aria-hidden="true" 
+            />
+            <div
+              id="mobile-navigation"
+              className="site-header__menu site-header__inner relative z-50 mx-auto mt-2 w-full border border-white/30 bg-white/42 backdrop-blur-lg"
+            >
+              <div className="site-header__menu-panel mx-auto flex w-full flex-col">
+                <NavLinks mobile onNavigate={handleRouteNavigation} />
+
+                <Link
+                  to="/contact"
+                  onClick={handleRouteNavigation('/contact')}
+                  className="site-header__cta header-cta inline-flex w-full max-w-[220px] self-center items-center justify-center gap-2 rounded-full px-5 py-3 font-medium transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B1CC1] sm:w-[200px]"
+                >
+                  <img
+                    src={startProjectIconSrc}
+                    alt=""
+                    aria-hidden="true"
+                    className="h-[15px] w-[15px] shrink-0"
+                  />
+                  <span>Start Project Brief</span>
+                </Link>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </header>
     </>
   )

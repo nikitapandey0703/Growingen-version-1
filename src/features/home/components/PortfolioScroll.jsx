@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import CurvedUnderlineText from '../../../components/common/CurvedUnderlineText';
 
+const MotionDiv = motion.div;
+
 const portfolioScrollImages = {
   topLeft: "/images/portfolio/recent-project-skincare-product.webp",
   topCenter: "/images/portfolio/recent-project-social-campaign.webp",
@@ -152,29 +154,29 @@ export default function PortfolioScroll() {
         {/* 'overflow-hidden' roks it from creating horizontal scrolls */}
         <div className="hidden sticky top-0 h-screen w-full items-center justify-center overflow-hidden lg:flex">
           
-          <motion.div 
+          <MotionDiv 
             style={{ scale: mainScale }} 
             className="relative w-full max-w-[1400px] aspect-[1.6/1] origin-center 2xl:max-w-[1540px] 2xl:aspect-[1.57/1] 3xl:max-w-[1680px] 3xl:aspect-[1.54/1]"
           >
             
             {/* LIGHTING - Top Left */}
-            <motion.div 
+            <MotionDiv 
               style={{ x: xTopLeft, y: yTopLeft, rotate: rotateTopLeft }}
-              className="absolute top-[12.5%] left-[9%] w-[23.5%] aspect-[1/1.05] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:left-[8.4%] 2xl:w-[24.2%] 2xl:rounded-[12px] 3xl:left-[8.1%] 3xl:w-[24.8%] 3xl:rounded-[14px]"
+              className="absolute top-[20%] left-[9%] w-[23.5%] aspect-[1/1.05] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:left-[8.4%] 2xl:w-[24.2%] 2xl:rounded-[12px] 3xl:left-[8.1%] 3xl:w-[24.8%] 3xl:rounded-[14px]"
             >
               <img src={portfolioScrollImages.topLeft} className="w-full h-full object-cover" alt="Recent project showcase 1" />
-            </motion.div>
+            </MotionDiv>
 
             {/* SOFTWARE - Top Center */}
-            <motion.div 
+            <MotionDiv 
               style={{ y: yTopMid, rotate: rotateTopMid }}
-              className="absolute top-[5%] left-[36.8%] w-[37.5%] aspect-[16/7.5] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:left-[35.7%] 2xl:w-[38.8%] 2xl:rounded-[12px] 3xl:left-[35.3%] 3xl:w-[39.6%] 3xl:rounded-[14px]"
+              className="absolute top-[13%] left-[36.8%] w-[37.5%] aspect-[16/7] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:left-[35.7%] 2xl:w-[38.8%] 2xl:rounded-[12px] 3xl:left-[35.3%] 3xl:w-[39.6%] 3xl:rounded-[14px]"
             >
               <img src={portfolioScrollImages.topCenter} className="w-full h-full object-cover" alt="Recent project showcase 2" />
-            </motion.div>
+            </MotionDiv>
 
             {/* CENTER CARD (Stays put throughout) */}
-            <div className="absolute top-[38%] left-[36%] z-20 flex w-[28%] aspect-[1.9/1] flex-col items-center justify-center rounded-[8px] border border-gray-400 bg-transparent px-6 py-6 2xl:left-[35.1%] 2xl:w-[29.4%] 2xl:rounded-[10px] 2xl:px-7 2xl:py-7 3xl:left-[34.8%] 3xl:w-[30.2%] 3xl:rounded-[12px] 3xl:px-8 3xl:py-8">
+            <div className="absolute top-[41%] left-[36%] z-20 flex w-[28%] aspect-[1.9/1] flex-col items-center justify-center rounded-[8px] border border-gray-400 bg-transparent px-6 py-6 2xl:left-[35.1%] 2xl:w-[29.4%] 2xl:rounded-[10px] 2xl:px-7 2xl:py-7 3xl:left-[34.8%] 3xl:w-[30.2%] 3xl:rounded-[12px] 3xl:px-8 3xl:py-8">
               <h3 className="mb-6 text-[clamp(16px,1.7vw,30px)] font-semibold text-center leading-[1.25] 2xl:mb-7 2xl:text-[clamp(18px,1.55vw,32px)] 3xl:mb-8 3xl:text-[clamp(20px,1.5vw,34px)]">
                 “ Your Growth, Our Success ”
               </h3>
@@ -191,38 +193,38 @@ export default function PortfolioScroll() {
             </div>
 
             {/* SKINCARE - Top Right */}
-            <motion.div 
+            <MotionDiv 
               style={{ x: xTopRight, y: yTopRight, rotate: rotateTopRight }}
-              className="absolute top-[35.5%] left-[68.8%] w-[22.5%] aspect-[1.4/1] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:left-[69.2%] 2xl:w-[23.1%] 2xl:rounded-[12px] 3xl:left-[69.6%] 3xl:w-[23.6%] 3xl:rounded-[14px]"
+              className="absolute top-[42%] left-[68.8%] w-[22.5%] aspect-[3.5/1.8] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:left-[69.2%] 2xl:w-[23.1%] 2xl:rounded-[12px] 3xl:left-[69.6%] 3xl:w-[23.6%] 3xl:rounded-[14px]"
             >
               <img src={portfolioScrollImages.topRight} className="w-full h-full object-cover" alt="Recent project showcase 3" />
-            </motion.div>
+            </MotionDiv>
 
             {/* SKIN 1 - Bottom Left */}
-            <motion.div 
+            <MotionDiv 
               style={{ x: xBotLeft, y: yBotLeft, rotate: rotateBotLeft }}
-              className="absolute top-[64.5%] left-[11%] w-[29.5%] aspect-[21/9] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:left-[10.4%] 2xl:w-[30.4%] 2xl:rounded-[12px] 3xl:left-[10%] 3xl:w-[31%] 3xl:rounded-[14px]"
+              className="absolute top-[68.5%] left-[11%] w-[29.5%] aspect-[23/9] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:left-[10.4%] 2xl:w-[30.4%] 2xl:rounded-[12px] 3xl:left-[10%] 3xl:w-[31%] 3xl:rounded-[14px]"
             >
               <img src={portfolioScrollImages.bottomLeft} className="w-full h-full object-cover" alt="Recent project showcase 4" />
-            </motion.div>
+            </MotionDiv>
 
             {/* SPEAKER - Bottom Center */}
-            <motion.div 
+            <MotionDiv 
               style={{ y: yBotMid, rotate: rotateBotMid }}
-              className="absolute top-[65.5%] left-[45%] w-[20.5%] aspect-[1.5/1] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:w-[21.2%] 2xl:rounded-[12px] 3xl:left-[44.8%] 3xl:w-[21.7%] 3xl:rounded-[14px]"
+              className="absolute top-[66.5%] left-[45%] w-[20.5%] aspect-[1.8/1.2] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:w-[21.2%] 2xl:rounded-[12px] 3xl:left-[44.8%] 3xl:w-[21.7%] 3xl:rounded-[14px]"
             >
               <img src={portfolioScrollImages.bottomCenter} className="w-full h-full object-cover" alt="Recent project showcase 5" />
-            </motion.div>
+            </MotionDiv>
 
             {/* GRINDING - Bottom Right */}
-            <motion.div 
+            <MotionDiv 
               style={{ x: xBotRight, y: yBotRight, rotate: rotateBotRight }}
-              className="absolute top-[67.5%] left-[69%] z-10 w-[18.5%] aspect-[1.8/1] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:left-[69.8%] 2xl:w-[19.2%] 2xl:rounded-[12px] 3xl:left-[70.1%] 3xl:w-[19.6%] 3xl:rounded-[14px]"
+              className="absolute top-[64.5%] left-[69%] z-10 w-[18.5%] aspect-[2/1] overflow-hidden rounded-[10px] border border-gray-300 bg-gray-200 shadow-md 2xl:left-[69.8%] 2xl:w-[19.2%] 2xl:rounded-[12px] 3xl:left-[70.1%] 3xl:w-[19.6%] 3xl:rounded-[14px]"
             >
               <img src={portfolioScrollImages.bottomRight} className="w-full h-full object-cover" alt="Recent project showcase 6" />
-            </motion.div>
+            </MotionDiv>
 
-          </motion.div>
+          </MotionDiv>
         </div>
       </section>
     </>

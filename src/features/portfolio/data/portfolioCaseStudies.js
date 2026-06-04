@@ -6,6 +6,17 @@ const leadGrowthIcon = '/images/portfolio/pop-up/lead-growth.webp'
 const lowerCplIcon = '/images/portfolio/pop-up/lower-cpl.webp'
 const popupImageBase = '/images/portfolio/pop-up'
 
+const resultIcons = {
+  calendar: `${popupImageBase}/calendar.webp`,
+  consistent: `${popupImageBase}/consistent.webp`,
+  leadGrowth: leadGrowthIcon,
+  lowerCpl: lowerCplIcon,
+  marketReady: `${popupImageBase}/market-ready.webp`,
+  multiple: `${popupImageBase}/multiple.webp`,
+  strong: `${popupImageBase}/strong.webp`,
+  touchpoints: `${popupImageBase}/touchpoints.webp`,
+}
+
 const detailTones = {
   goal: 'bg-[#F1F9F5]',
   challenge: 'bg-[#FEF7F0]',
@@ -66,13 +77,13 @@ const createMetrics = (primary, secondary) => [
   {
     value: primary.value,
     label: primary.label,
-    icon: leadGrowthIcon,
+    icon: primary.icon ?? resultIcons.leadGrowth,
     ...metricTones.slate,
   },
   {
     value: secondary.value,
     label: secondary.label,
-    icon: lowerCplIcon,
+    icon: secondary.icon ?? resultIcons.lowerCpl,
     ...metricTones.mint,
   },
 ]
@@ -87,8 +98,8 @@ export const portfolioCaseStudies = [
     impact:
       'The website helped establish a more authentic and approachable online identity for the business. By aligning the digital experience with the client’s personality, the brand created better trust, stronger connection, and a more professional first impression for potential clients.',
     metrics: createMetrics(
-      { value: 'Stronger', label: 'Personal Brand Presence Online' },
-      { value: 'Improved', label: 'Client Trust & Professional Perception' }
+      { value: 'Stronger', label: 'Personal Brand Presence Online', icon: resultIcons.strong },
+      { value: 'Improved', label: 'Client Trust & Professional Perception', icon: resultIcons.leadGrowth }
     ),
     details: createDetails({
       goal: 'Build a professional online presence that reflects the client’s warm, trustworthy, and approachable personality.',
@@ -115,8 +126,8 @@ export const portfolioCaseStudies = [
     impact:
       'Established a professional and recognizable cloud kitchen brand presence, helping the business build trust and improve customer visibility from the early stage of launch.',
     metrics: createMetrics(
-      { value: '2.5X', label: 'Higher Brand Recall' },
-      { value: '100%', label: 'Consistent Brand Identity\nAcross Customer Touchpoints' }
+      { value: '2.5X', label: 'Higher Brand Recall', icon: resultIcons.leadGrowth },
+      { value: '100%', label: 'Consistent Brand Identity\nAcross Customer Touchpoints', icon: resultIcons.touchpoints }
     ),
     details: createDetails({
       goal: 'Build a strong local brand presence during the initial launch stage.',
@@ -143,8 +154,8 @@ export const portfolioCaseStudies = [
     impact:
       'The website helped establish a professional digital identity for the SaaS product, making it easier to communicate its value, support marketing efforts, and build trust with potential users and businesses.',
     metrics: createMetrics(
-      { value: 'Stronger', label: 'Product Authentication & Brand Credibility' },
-      { value: 'Improved', label: 'Marketing Readiness & Product Communication' }
+      { value: 'Stronger', label: 'Product Authentication & Brand Credibility', icon: resultIcons.strong },
+      { value: 'Improved', label: 'Marketing Readiness & Product Communication', icon: resultIcons.leadGrowth }
     ),
     details: createDetails({
       goal: 'Build a professional product website to establish market credibility, support marketing activities, and clearly communicate the product’s value proposition.',
@@ -172,8 +183,8 @@ export const portfolioCaseStudies = [
     'The platform evolved from a technically strong system into a polished and presentation-ready SaaS product. The improved UX helped build confidence for market launch, enhanced user experience, and strengthened the platform’s professional positioning in the tech space.',
 
   metrics: createMetrics(
-    { value: 'Market-Ready', label: 'Professional SaaS Product Experience' },
-    { value: 'Improved', label: 'Client Confidence for Product Demonstrations' }
+    { value: 'Market-Ready', label: 'Professional SaaS Product Experience', icon: resultIcons.marketReady },
+    { value: 'Improved', label: 'Client Confidence for Product Demonstrations', icon: resultIcons.leadGrowth }
   ),
 
   details: createDetails({
@@ -206,8 +217,8 @@ export const portfolioCaseStudies = [
   impact:
     'The platform transformed into a polished and professionally designed SaaS product that better reflected its capabilities. The improved UI/UX enhanced usability, strengthened client confidence, and helped position the software more effectively for business presentations and future growth.',
   metrics: createMetrics(
-    { value: '3X', label: 'Better Client Presentation Experience' },
-    { value: '40%', label: 'Improvement in Meeting-to-Conversion Confidence' }
+    { value: '3X', label: 'Better Client Presentation Experience', icon: resultIcons.leadGrowth },
+    { value: '40%', label: 'Improvement in Meeting-to-Conversion Confidence', icon: resultIcons.touchpoints }
   ),
   details: createDetails({
     goal: 'Strengthen brand presentation and create a professional company image for high-value client meetings and business expansion.',
@@ -234,8 +245,8 @@ export const portfolioCaseStudies = [
     impact:
       'The brand established a professional online presence with visually engaging content that simplified complex machine operations and improved product understanding for potential clients and industrial audiences.',
     metrics: createMetrics(
-      { value: '1 Year', label: 'Of Consistent Digital Growth' },
-      { value: 'Multiple', label: 'Technical Case Studies & Product Visuals Created' }
+      { value: '1 Year', label: 'Of Consistent Digital Growth', icon: resultIcons.leadGrowth },
+      { value: 'Multiple', label: 'Technical Case Studies & Product Visuals Created', icon: resultIcons.multiple }
     ),
     details: createDetails({
       goal: 'Build a strong digital presence and simplify product communication for a highly technical industrial product.',
@@ -262,8 +273,8 @@ export const portfolioCaseStudies = [
     impact:
       'The brand established a more active and professional online presence through consistent social media communication and strategic content execution. Improved visibility across social media and LinkedIn helped strengthen brand credibility and create better digital recognition in the industry.',
     metrics: createMetrics(
-      { value: '4X', label: 'Increase in Digital Visibility' },
-      { value: 'Consistent', label: 'Professional Brand Presence Across Platforms' }
+      { value: '4X', label: 'Increase in Digital Visibility', icon: resultIcons.leadGrowth },
+      { value: 'Consistent', label: 'Professional Brand Presence Across Platforms', icon: resultIcons.consistent }
     ),
     details: createDetails({
       goal: 'Build a stronger digital presence and improve online visibility across social media platforms and professional networks.',
@@ -286,12 +297,12 @@ export const portfolioCaseStudies = [
     title: 'IT Services',
     industry: 'Project Management & Business Consulting Solutions',
     img: `${popupImageBase}/it-service.webp`,
-    previewImg: `${popupImageBase}/it-service-preview.webp`,
+    previewImg: `${popupImageBase}/it-service-preview.png`,
     impact:
       'The company established a stronger and more modern corporate image that aligned with its industry reputation and large-scale operations. The redesigned branding and company profile helped improve presentation quality, strengthened business credibility, and created a more impressive experience during client interactions and proposals.',
     metrics: createMetrics(
-      { value: '3X', label: 'More Professional Brand Presentation' },
-      { value: '60%', label: 'Improved Client Engagement During Meetings' }
+      { value: '3X', label: 'More Professional Brand Presentation', icon: resultIcons.leadGrowth },
+      { value: '60%', label: 'Improved Client Engagement During Meetings', icon: resultIcons.touchpoints }
     ),
     details: createDetails({
       goal: 'Modernize the company’s brand presentation and create professional business assets that matched the scale and credibility of the organization.',
@@ -318,8 +329,8 @@ export const portfolioCaseStudies = [
     impact:
       'The website helped transform the brand from a locally popular tea business into a professionally presented franchise-ready brand. It strengthened business authenticity, supported franchise inquiries, and created better opportunities for corporate collaborations and vendor partnerships.',
     metrics: createMetrics(
-      { value: '20+', label: 'Branch Presence Digitally Showcased' },
-      { value: 'Improved', label: 'Franchise & Corporate Business Credibility' }
+      { value: '20+', label: 'Branch Presence Digitally Showcased', icon: resultIcons.touchpoints },
+      { value: 'Improved', label: 'Franchise & Corporate Business Credibility', icon: resultIcons.leadGrowth }
     ),
     details: createDetails({
       goal: 'Build a professional digital presence to support franchise expansion and corporate business opportunities.',
@@ -346,8 +357,8 @@ export const portfolioCaseStudies = [
     impact:
       'The website helped position the company as a professionally established business ready for international expansion. It strengthened digital credibility, supported offshore business development efforts, and created a more trustworthy presence for potential global clients and partners.',
     metrics: createMetrics(
-      { value: 'Stronger', label: 'International Business Presence' },
-      { value: 'Improved', label: 'Offshore Brand Credibility & Client Trust' }
+      { value: 'Stronger', label: 'International Business Presence', icon: resultIcons.strong },
+      { value: 'Improved', label: 'Offshore Brand Credibility & Client Trust', icon: resultIcons.leadGrowth }
     ),
     details: createDetails({
       goal: 'Build a strong digital presence to support offshore business expansion and strengthen international brand credibility.',
@@ -374,8 +385,8 @@ export const portfolioCaseStudies = [
     impact:
       'The platform transformed into a polished and professionally designed SaaS product that better reflected its capabilities. The improved UI/UX enhanced usability, strengthened client confidence, and helped position the software more effectively for business presentations and future growth.',
     metrics: createMetrics(
-      { value: 'Market-Ready', label: 'Professional Product Experience' },
-      { value: 'Improved', label: 'User Experience & Client Presentation Confidence' }
+      { value: 'Market-Ready', label: 'Professional Product Experience', icon: resultIcons.marketReady },
+      { value: 'Improved', label: 'User Experience & Client Presentation Confidence', icon: resultIcons.leadGrowth }
     ),
     details: createDetails({
       goal: 'Create a professional and user-friendly product experience for a document management platform preparing for market positioning and client demonstrations.',
@@ -402,8 +413,8 @@ export const portfolioCaseStudies = [
     impact:
       'The business established a professional digital presence that supported QR code functionality, improved customer trust, and enabled smoother onboarding on food delivery and third-party platforms. The website created a scalable foundation for future business growth and online visibility.',
     metrics: createMetrics(
-      { value: '1 Week', label: 'Higher Brand Recall' },
-      { value: 'Improved', label: 'Business Credibility & Platform Readiness' }
+      { value: '1 Week', label: 'Higher Brand Recall', icon: resultIcons.calendar },
+      { value: 'Improved', label: 'Business Credibility & Platform Readiness', icon: resultIcons.leadGrowth }
     ),
     details: createDetails({
       goal: 'Build a professional online presence and create a scalable digital foundation for business growth and food platform onboarding.',
@@ -430,8 +441,8 @@ export const portfolioCaseStudies = [
     impact:
       'The website helped establish a verified and professional corporate identity for the business, making it easier to participate in tenders, support official documentation requirements, and strengthen trust with industrial clients and partners.',
     metrics: createMetrics(
-      { value: 'Stronger', label: 'Business Authentication & Professional Presence' },
-      { value: 'Improved', label: 'Tender & Official Documentation Readiness' }
+      { value: 'Stronger', label: 'Business Authentication & Professional Presence', icon: resultIcons.strong },
+      { value: 'Improved', label: 'Tender & Official Documentation Readiness', icon: resultIcons.leadGrowth }
     ),
     details: createDetails({
       goal: 'Establish a professional online presence to support official business requirements, tenders, and corporate credibility.',
@@ -461,8 +472,8 @@ export const portfolioCaseStudies = [
     "The revamped website transformed TechSierra's digital identity from a generic IT provider into a polished, client-ready brand. It improved lead conversion, strengthened corporate credibility, and created a platform to showcase success stories and partnerships.",
 
   metrics: createMetrics(
-    { value: 'Stronger', label: 'Professional Brand Presence Digitally Established' },
-    { value: 'Improved', label: 'Client Trust & Lead Generation' }
+    { value: 'Stronger', label: 'Professional Brand Presence Digitally Established', icon: resultIcons.strong },
+    { value: 'Improved', label: 'Client Trust & Lead Generation', icon: resultIcons.leadGrowth }
   ),
 
   details: createDetails({
@@ -498,8 +509,8 @@ export const portfolioCaseStudies = [
     'The application successfully maintained a strong competitive edge with consistently high-quality design templates that became one of its biggest value propositions. The streamlined workflow enabled smooth large-scale production while ensuring zero compromise on creative standards, helping the platform deliver a premium user experience consistently.',
 
   metrics: createMetrics(
-    { value: '3000+', label: 'Premium Templates Delivered Every Month' },
-    { value: '100+', label: 'High-Quality Templates Delivered Daily' }
+    { value: '3000+', label: 'Premium Templates Delivered Every Month', icon: resultIcons.leadGrowth },
+    { value: '100+', label: 'High-Quality Templates Delivered Daily', icon: resultIcons.touchpoints }
   ),
 
   details: createDetails({

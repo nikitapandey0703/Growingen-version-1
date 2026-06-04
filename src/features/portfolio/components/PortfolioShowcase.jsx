@@ -12,7 +12,7 @@ const tabs = [
 ]
 
 const tabLayouts = [
-  // Tab 0: Web Design (Removed rigid min-h constraints to allow natural image flow)
+  // Tab 0: Web Design 
   [
     { id: 'wd-1', src: '/images/grid/web-design-1.webp', alt: 'Web design presentation 1', className: 'sm:col-span-1 lg:col-[1] lg:row-[1/5]' },
     { id: 'wd-2', src: '/images/grid/web-design-2.webp', alt: 'Web design presentation 2', className: 'sm:col-span-2 lg:col-[2/4] lg:row-[1/3]' },
@@ -22,12 +22,28 @@ const tabLayouts = [
     { id: 'wd-6', src: '/images/grid/web-design-6.webp', alt: 'Web design presentation 6', className: 'sm:col-span-1 lg:col-[3] lg:row-[5/7]' },
     { id: 'wd-7', src: '/images/grid/web-design-7.webp', alt: 'Web design presentation 7', className: 'sm:col-span-1 lg:col-[4] lg:row-[4/7]' },
   ],
-  // Tab 1: UI/UX
+  // Tab 1: UI/UX (Exact Layout as per Reference)
   [
-    { id: 'ui-1', src: '/images/grid/ui-ux-1.webp', alt: 'UI/UX interface 1', className: 'sm:col-span-1 lg:col-[1] lg:row-[1/3]' },
-    { id: 'ui-2', src: '/images/grid/ui-ux-2-1.webp', alt: 'UI/UX interface 2', className: 'sm:col-span-2 lg:col-[2/4] lg:row-[1]' },
-    { id: 'ui-3', src: '/images/grid/ui-ux-3.webp', alt: 'UI/UX interface 3', className: 'sm:col-span-1 lg:col-[4] lg:row-[1/3]' },
-    { id: 'ui-4', src: '/images/grid/ui-ux-4.webp', alt: 'UI/UX interface 4', className: 'sm:col-span-2 lg:col-[2/4] lg:row-[2]' },
+    { 
+      id: 'ui-top-left', 
+      src: '/images/grid/ui-ux-2-1.webp', 
+      alt: 'UI/UX interface Top Left', 
+      className: 'sm:col-span-1 lg:col-[1] lg:row-[1]' 
+    },
+    { 
+      id: 'ui-bottom-left', 
+      src: '/images/grid/ui-ux-4.webp', 
+      alt: 'UI/UX interface Bottom Left', 
+      className: 'sm:col-span-1 lg:col-[1] lg:row-[2]' 
+    },
+    { 
+      id: 'ui-right-tall', 
+      src: '/images/grid/ui-ux-3-1.webp', 
+      alt: 'UI/UX interface Right Tall', 
+      className: 'sm:col-span-2 lg:col-[2] lg:row-[1/3] '
+      
+      // Spans from row 1 to 3 to cover full height
+    },
   ],
   // Tab 2: Branding
   [
@@ -82,14 +98,13 @@ function ShowcaseCard({ item }) {
   return (
     <MotionArticle
       variants={cardVariants}
-      // Removed fixed background styles that were causing "white space" boxes
       className={`relative flex h-full w-full items-center justify-center ${item.className || ''}`}
     >
       <img
         src={item.src}
         alt={item.alt}
-        // Shadow and radius applied directly to the image so it hugs exactly to the uncropped image bounds
-        className={`block h-auto w-auto max-h-full max-w-full rounded-[clamp(14px,1.8vw,30px)] sm:rounded-[clamp(16px,2.2vw,36px)] shadow-[0_2px_12px_rgba(0,0,0,0.06)] ${item.imageClassName || ''}`}
+        // CHANGED: h-full w-full object-cover ensures it hugs the grid corners perfectly without distorting pixels
+        className={`block h-full w-full object-cover rounded-[clamp(14px,2vw,31px)] shadow-[0_2px_12px_rgba(0,0,0,0.06)] ${item.imageClassName || ''}`}
       />
     </MotionArticle>
   )
@@ -123,7 +138,7 @@ export default function PortfolioShowcase() {
             </h2>
           </div>
 
-          <div className="mx-auto mt-8 flex w-full max-w-[1200px] flex-wrap justify-between gap-y-3 sm:mt-10 lg:flex-nowrap lg:gap-0">
+          <div className="mx-auto mt-8 flex w-full max-w-[1200px] flex-wrap justify-between gap-y-4 sm:mt-10 lg:flex-nowrap lg:gap-0">
             {tabs.map((tab, index) => {
               const isActive = activeTab === index
 
@@ -148,7 +163,7 @@ export default function PortfolioShowcase() {
                     />
                   ) : null}
 
-                  <span className="relative z-10 font-extrabold leading-none">
+                  <span className="relative z-10 font-extrabold leading-[1.5]">
                     {isActive ? <OrangeButtonLabel>{tab}</OrangeButtonLabel> : tab}
                   </span>
                 </MotionButton>
@@ -164,10 +179,12 @@ export default function PortfolioShowcase() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                // Removed explicit fixed auto-rows heights to allow natural image proportion scaling
                 className={`mx-auto mt-8 grid max-w-[1200px] grid-cols-1 gap-4 sm:grid-cols-2 lg:mt-10 lg:gap-6 ${
                   activeTab === 0 || activeTab === 2
                     ? 'lg:grid-cols-[1.25fr_0.75fr_1.25fr_1.25fr]'
+                    : activeTab === 1
+                    // ADDED: lg:auto-rows-fr enforces the two left rows to share equal height, making alignment mathematically perfect
+                    ? 'lg:grid-cols-2 lg:auto-rows-fr' 
                     : 'lg:grid-cols-[1.25fr_1fr_1fr_1.25fr]'
                 }`}
               >

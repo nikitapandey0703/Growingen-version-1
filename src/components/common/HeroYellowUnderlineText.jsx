@@ -1,5 +1,7 @@
 import { motion } from 'framer-motion'
 
+const MotionImg = motion.img
+
 export default function HeroYellowUnderlineText({
   children,
   className = '',
@@ -9,7 +11,7 @@ export default function HeroYellowUnderlineText({
   return (
     <span className={`relative inline-block overflow-visible ${className}`.trim()}>
       <span className="relative z-10">{children}</span>
-      <motion.img
+      <MotionImg
         aria-hidden="true"
         src="/images/hero/yellow-line.svg"
         alt=""

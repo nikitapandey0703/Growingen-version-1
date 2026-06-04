@@ -18,9 +18,20 @@ export default function PortfolioCTASection({
   showSecondaryButton = true,
   primaryButtonClassName = "",
   primaryButtonTo,
+  secondaryButtonTargetId,
 }) {
   const actionButtonClassName =
     "inline-flex min-h-12 items-center justify-center rounded-full px-6 py-3 text-center font-medium shadow-[0_12px_24px_rgba(244,83,40,0.22)] transition-all duration-300 sm:min-h-[52px] sm:px-7 md:px-8";
+  const scrollToSecondaryTarget = () => {
+    if (!secondaryButtonTargetId) {
+      return
+    }
+
+    document.getElementById(secondaryButtonTargetId)?.scrollIntoView({
+      behavior: "smooth",
+      block: "start",
+    })
+  }
 
   return (
     <SectionWrapper as="section" className="relative bg-transparent section-spacing">
@@ -133,6 +144,8 @@ export default function PortfolioCTASection({
 
               {showSecondaryButton ? (
                 <button
+                  type="button"
+                  onClick={scrollToSecondaryTarget}
                   className={`${actionButtonClassName} w-full border border-white/35 bg-black/10 text-white backdrop-blur-[2px] hover:scale-[1.04] hover:bg-white/8 sm:w-auto sm:min-w-[176px]`}
                   style={{ fontSize: "var(--fs-button)" }}
                 >

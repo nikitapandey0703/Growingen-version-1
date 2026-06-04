@@ -22,7 +22,10 @@ export function PortfolioPage() {
       <PortfolioProblemsSection/>
       <PortfolioShowcase/>
       <PortfolioTestimonialSection />
-      <PortfolioCTASection />
+      <PortfolioCTASection
+        primaryButtonTo="/contact"
+        secondaryButtonTargetId="portfolio-carousel"
+      />
      
     </main>
   )

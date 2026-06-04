@@ -22,7 +22,7 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
-          {/* <Route path="*" element={<HomePage />} /> */}
+          <Route path="*" element={<HomePage />} />
         </Routes>
       </div>
       <ScrollNavigator />

@@ -288,6 +288,7 @@ export default function ScrollStack({
     }
 
     window.addEventListener('resize', handleResize)
+    const lastTransforms = lastTransformsRef.current
 
     return () => {
       window.removeEventListener('resize', handleResize)
@@ -303,7 +304,7 @@ export default function ScrollStack({
       stackCompletedRef.current = false
       cardsRef.current = []
       cardOffsetsRef.current = []
-      lastTransformsRef.current.clear()
+      lastTransforms.clear()
       isUpdatingRef.current = false
     }
   }, [

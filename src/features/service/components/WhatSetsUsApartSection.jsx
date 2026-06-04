@@ -54,57 +54,53 @@ export default function WhatSetsUsApartSection() {
             style={{ fontSize: 'clamp(32px, 1.55rem + 1.55vw, var(--fs-section-title))' }}
           >
             What{' '}
-            <CurvedUnderlineText className="growth-stories-title__accent pb-[0.16em] " lineClassName="h-[0.22em] w-full left-[0%] -bottom-[8px] sm:-bottom-[10px] md:-bottom-[12px] lg:-bottom-[14px] xl:-bottom-[16px] 2xl:-bottom-[18px]">
+            <CurvedUnderlineText className="growth-stories-title__accent pb-[0.16em] " lineClassName="h-[0.22em] w-full left-[0%] -bottom-[8px] sm:-bottom-[10px] md:-bottom-[12px] lg:-bottom-[14px] xl:-bottom:-[16px] 2xl:-bottom-[18px]">
                Sets Us Apart
             </CurvedUnderlineText>
           </h2>
         </div>
 
         {/* === CONTENT GRID === 
-            'items-start' perfectly aligns the left images and right card to the top
+            UPDATED: Increased the right column width to ensure single-line bullets
         */}
-        <div className="grid grid-cols-1 items-start gap-10 sm:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(340px,400px)] lg:gap-14 2xl:grid-cols-[minmax(0,1fr)_minmax(400px,460px)] 2xl:gap-18">
+        <div className="grid grid-cols-1 items-start gap-10 sm:gap-12 sm:grid-cols-[0px_1fr] md:grid-cols-[0px_1fr] lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-14 2xl:grid-cols-[minmax(0,1fr)_500px] 2xl:gap-18">
           
           {/* LEFT SIDE: Image Collage */}
           <div className="relative mx-auto aspect-[4/4.5] w-full max-w-[360px] sm:max-w-[430px] md:max-w-[500px] lg:mx-0 lg:max-w-none 2xl:aspect-[4.2/4.4]">
             
-            {/* 1. Main Large Image (Team) - Flush to the top */}
             <div className="hero-float absolute left-0 top-0 z-10 h-[72%] w-[62%] overflow-hidden rounded-[18px] shadow-lg transition-transform duration-500 ease-out hover:scale-105 hover:z-40 sm:rounded-[22px] lg:rounded-[24px] 2xl:rounded-[28px]">
               <img
-                src="/images/service/service-set-1.webp" /* <-- PLACEHOLDER */
+                src="/images/service/service-set-1.webp"
                 alt="Growingen Team"
                 className="h-full w-full object-cover"
                 style={{ backgroundColor: '#e2e8f0' }}
               />
             </div>
 
-            {/* 2. Middle Right Image (Solo Developer) */}
             <div 
               className="hero-float absolute right-[0%] top-[25%] z-20 h-[35%] w-[32%] overflow-hidden rounded-[16px] shadow-[0_12px_24px_rgba(0,0,0,0.12)] transition-transform duration-500 ease-out hover:scale-105 hover:z-40 sm:rounded-[18px] lg:rounded-[20px] 2xl:rounded-[24px]"
               style={{ animationDelay: '-2s' }}
             >
               <img
-                src="/images/service/service-set-2.webp"  /* <-- PLACEHOLDER */
+                src="/images/service/service-set-2.webp"
                 alt="Developer working"
                 className="h-full w-full object-cover"
                 style={{ backgroundColor: '#cbd5e1' }}
               />
             </div>
 
-            {/* 3. Bottom Overlap Image (Team Meeting) */}
             <div 
-              className="hero-float absolute bottom-[10%] left-[50%] z-30 h-[28%] w-[55%] overflow-hidden rounded-[16px] shadow-[0_16px_32px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out hover:scale-105 hover:z-40 sm:rounded-[18px] lg:rounded-[20px] 2xl:rounded-[24px]"
+              className="hero-float absolute bottom-[5%] left-[50%] z-30 h-[30%] w-[57%] overflow-hidden rounded-[16px] shadow-[0_16px_32px_rgba(0,0,0,0.18)] transition-transform duration-500 ease-out hover:scale-105 hover:z-40 sm:rounded-[18px] lg:rounded-[20px] 2xl:rounded-[24px]"
               style={{ animationDelay: '-4s' }}
             >
               <img
-                src="/images/service/service-set-3.webp" /* <-- PLACEHOLDER */
+                src="/images/service/service-set-3.webp"
                 alt="Team strategy meeting"
                 className="h-full w-full object-cover"
                 style={{ backgroundColor: '#94a3b8' }}
               />
             </div>
 
-            {/* 4. Spinning Circular Badge Element */}
             <div className="absolute right-[10%] top-[-4%] z-20 h-[82px] w-[82px] sm:right-[12%] sm:top-[-2%] sm:h-[100px] sm:w-[100px] md:h-[112px] md:w-[112px] lg:h-[120px] lg:w-[120px] 2xl:h-[144px] 2xl:w-[144px]">
               <div className="relative h-full w-full animate-[spin_12s_linear_infinite] rounded-full bg-white shadow-md">
                 <svg viewBox="0 0 100 100" className="h-full w-full">
@@ -123,16 +119,10 @@ export default function WhatSetsUsApartSection() {
           </div>
 
           {/* RIGHT SIDE: Content Card */}
-          {/* UPDATED: max-w-[400px] lg:w-[400px] */}
-          <div className="relative mx-auto w-full max-w-[420px] lg:mx-0 lg:max-w-none lg:w-full">
-            {/* 
-              - Fixed Height: h-[300px] 
-              - Custom Border Radius: Bottom right gets a massive curve (rounded-br-[70px])
-            */}
-            <div className="relative flex min-h-[300px] flex-col gap-4 rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] rounded-br-[58px] bg-white px-5 pb-20 pt-7 shadow-[0_20px_50px_rgba(15,23,42,0.08)] sm:min-h-[312px] sm:px-7 sm:pb-22 sm:pt-8 md:px-8 md:pt-9 lg:rounded-br-[70px] 2xl:min-h-[352px] 2xl:gap-5 2xl:px-10 2xl:pb-24 2xl:pt-10">
+          {/* UPDATED: max-w values expanded to allow single-line bullet points */}
+          <div className="relative mx-auto w-full max-w-[500px] lg:mx-0 lg:max-w-none lg:w-full">
+            <div className="relative flex min-h-[300px] flex-col gap-5 rounded-tl-[24px] rounded-tr-[24px] rounded-bl-[24px] rounded-br-[58px] bg-white px-5 pb-20 pt-7 shadow-[0_20px_50px_rgba(15,23,42,0.08)] sm:min-h-[312px] sm:px-7 sm:pb-22 sm:pt-8 md:px-8 md:pt-9 lg:rounded-br-[70px] 2xl:min-h-[352px] 2xl:gap-5 2xl:px-10 2xl:pb-24 2xl:pt-10">
               
-              {/* Card Title with Full-Circle SVG Animation */}
-              {/* UPDATED: text-[28px] to enforce exactly 28px size */}
               <h3
                 className="mb-4 text-[24px] font-bold leading-[1.2] tracking-[-0.02em]  sm:mb-5 sm:text-[28px] 2xl:text-[34px]"
                 style={{ fontSize: 'clamp(24px, 1.2rem + 0.7vw, 34px)' }}
@@ -141,7 +131,6 @@ export default function WhatSetsUsApartSection() {
                 <span className="relative z-10 inline-block whitespace-nowrap">
                   <span className="relative z-10">Growingen</span>
                   
-                  {/* ORGANIC ELLIPSE SVG PATH (Imported from BrandBanner & applied in Orange) */}
                   <svg
                     className="absolute -bottom-2 -left-3 -right-3 -top-1 z-0 h-[130%] w-[120%] text-[#F45328] 2xl:-bottom-3 2xl:-left-4 2xl:-right-4"
                     viewBox="0 0 100 40"
@@ -163,7 +152,6 @@ export default function WhatSetsUsApartSection() {
                 </span>
               </h3>
 
-              {/* Bullet List with checkmarks */}
               <ul className="flex flex-col gap-3.5 2xl:gap-4">
                 {[
                   'Strategy-first approach (not just execution)',
@@ -174,7 +162,7 @@ export default function WhatSetsUsApartSection() {
                   <li key={index} className="flex items-start gap-3">
                     <FeatureBullet />
                     <span
-                      className="text-[14px] font-medium leading-[1.35]  sm:text-[14.5px] 2xl:text-[17px] 2xl:leading-[1.4]"
+                      className="whitespace-nowrap text-[14px] font-medium leading-[1.35] sm:text-[14.5px] 2xl:text-[17px] 2xl:leading-[1.4]"
                       style={{ fontSize: 'clamp(14px, 0.88rem + 0.2vw, 17px)' }}
                     >
                       {item}
@@ -183,7 +171,6 @@ export default function WhatSetsUsApartSection() {
                 ))}
               </ul>
 
-              {/* Floating Center Button */}
               <div className="absolute -bottom-5 left-1/2 flex w-[calc(100%-24px)] max-w-full -translate-x-1/2 justify-center px-3 sm:w-full sm:px-0">
                 <Link
                   to="/contact"

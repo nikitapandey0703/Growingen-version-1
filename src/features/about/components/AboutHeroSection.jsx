@@ -6,7 +6,6 @@ import SectionWrapper from '../../../components/common/SectionWrapper'
 
 function AboutHeroVisual() {
   return (
-    // UPDATED: Changed xl:mx-0 to xl:ml-auto to push the visual entirely to the right edge
     <div className="hero-visual-reveal relative mx-auto flex w-full max-w-[360px] items-center justify-center sm:max-w-[460px] md:max-w-[540px] xl:ml-auto xl:max-w-[500px] xl:justify-end 2xl:max-w-[620px]">
       <div className="hero-stage relative flex w-full flex-col gap-3 sm:gap-4">
         <div className="hero-stage__glow" aria-hidden="true" />
@@ -34,13 +33,12 @@ export default function AboutHeroSection() {
 
       <SectionWrapper className="relative section-spacing !px-4 sm:!px-6 md:!px-8 lg:!px-10 xl:!px-[clamp(32px,3vw,40px)] 2xl:!px-[clamp(40px,4.8vw,72px)]">
         
-        {/* UPDATED: Increased gap and modified grid proportions for 2xl and 3xl (min-[1800px]) to prevent collision */}
+        {/* Grid layout with adjusted gap for wide screens to prevent visual collision */}
         <div className="grid w-full items-center gap-10 sm:gap-12 md:gap-14 lg:gap-12 xl:min-h-[calc(100vh-176px)] xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] xl:gap-12 2xl:min-h-[calc(100vh-160px)] 2xl:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] 2xl:gap-20 min-[1800px]:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] min-[1800px]:gap-24">
           
-          {/* UPDATED: Changed 2xl max-w to "full" to allow the heading wrapper to stretch without breaking out */}
           <div className="relative z-40 mx-auto flex w-full max-w-[34rem] flex-col items-center text-center sm:max-w-[40rem] md:max-w-[44rem] xl:ml-0 xl:max-w-[44rem] xl:items-start xl:text-left 2xl:max-w-full">
 
-            {/* Hero Heading Chunk */}
+            {/* Hero Heading Container */}
             <div className="mt-1 sm:mt-1 md:mt-2 lg:mt-2 xl:mt-3 2xl:mt-4">
               <h1
                 className="w-full max-w-[15ch] font-bold leading-[1.06] tracking-[-0.04em] text-black sm:max-w-[16ch] md:max-w-[18ch] xl:max-w-full"
@@ -65,7 +63,8 @@ export default function AboutHeroSection() {
             </div>
 
             {/* Description + CTA Chunk */}
-            <div className="mt-1 sm:mt-1 md:mt-2 lg:mt-2 xl:mt-3 2xl:mt-4 flex flex-col items-center xl:items-start">
+            {/* UPDATED: mt-8 (32px) added here for consistent spacing across all devices */}
+            <div className="mt-8 flex flex-col items-center xl:items-start">
               
               <p
                 className="w-full max-w-[39ch] font-medium leading-[1.65] tracking-normal text-gray-800 sm:max-w-[46ch] md:max-w-[52ch] xl:max-w-[50ch] 2xl:max-w-[54ch]"

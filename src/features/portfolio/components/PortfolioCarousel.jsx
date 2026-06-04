@@ -126,7 +126,10 @@ export default function PortfolioCarousel() {
 
   return (
     <>
-      <section className="relative overflow-hidden bg-transparent py-14 sm:py-16 md:py-[4.5rem] lg:py-20 xl:py-[5.5rem] 2xl:py-24">
+      <section
+        id="portfolio-carousel"
+        className="relative scroll-mt-24 overflow-hidden bg-transparent py-14 sm:py-16 md:py-[4.5rem] lg:py-20 xl:py-[5.5rem] 2xl:py-24"
+      >
         <div className="mx-auto max-w-[1320px] px-4 sm:px-6 md:px-8 lg:px-10 xl:px-12 2xl:max-w-[1560px] 2xl:px-16">
           <div className="mb-10 text-center sm:mb-12 md:mb-[3.25rem] lg:mb-14 xl:mb-[3.75rem] 2xl:mb-16">
             <h2 className="text-[32px] font-semibold leading-[1.08] tracking-[-0.04em] text-[#111827] sm:text-[40px] md:text-[42px] lg:text-[46px] xl:text-[50px] 2xl:text-[70px]">

@@ -9,7 +9,6 @@ const secondaryHeroButtonClassName =
 
 function ServiceVisual() {
   return (
-    // UPDATED: Changed xl:mx-0 to xl:ml-auto to push the visual entirely to the right edge
     <div className="hero-visual-reveal relative mx-auto flex w-full max-w-[360px] items-center justify-center sm:max-w-[460px] md:max-w-[540px] xl:ml-auto xl:max-w-[500px] xl:justify-end 2xl:max-w-[620px]">
       <div className="hero-stage relative flex w-full flex-col gap-3 sm:gap-4">
         <div className="hero-stage__glow" aria-hidden="true" />
@@ -34,7 +33,7 @@ function ServiceVisual() {
           </div>
 
           <div className="dashboard-hover relative z-10 flex h-full w-full flex-col items-start rounded-[14px] bg-[#f65a2d] p-2 text-white shadow-[0_24px_44px_rgba(246,90,45,0.24)] sm:p-3 lg:p-4">
-            <h3 className="w-full text-left text-[1.85rem] font-bold leading-none tracking-[-0.04em] text-white sm:text-[2.2rem] lg:text-[2.75rem]">
+            <h3 className="w-full text-left text-[1.85rem] font-bold leading-none tracking-[-0.04em] text-white sm:text-[2.2rem] lg:text-[2.25rem] xl:text-[2.50rem] 2xl:text-[2.75rem]">
               Branding
             </h3>
 
@@ -68,10 +67,8 @@ export default function ServiceHero() {
 
       <SectionWrapper className="relative section-spacing !px-4 sm:!px-6 md:!px-8 lg:!px-10 xl:!px-[clamp(32px,3vw,40px)] 2xl:!px-[clamp(40px,4.8vw,72px)]">
         
-        {/* UPDATED: Increased gap and modified grid proportions for 2xl and 3xl (min-[1800px]) to prevent collision */}
         <div className="grid w-full items-center gap-10 sm:gap-12 md:gap-14 lg:gap-12 xl:min-h-[calc(100vh-176px)] xl:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] xl:gap-12 2xl:min-h-[calc(100vh-160px)] 2xl:grid-cols-[minmax(0,1.25fr)_minmax(0,0.75fr)] 2xl:gap-20 min-[1800px]:grid-cols-[minmax(0,1.3fr)_minmax(0,0.7fr)] min-[1800px]:gap-24">
           
-          {/* UPDATED: Changed 2xl max-w to "full" to allow the heading wrapper to stretch, stopping the text from visually breaking out of it */}
           <div className="relative z-40 mx-auto flex w-full max-w-[34rem] flex-col items-center text-center sm:max-w-[40rem] md:max-w-[44rem] xl:ml-0 xl:max-w-[44rem] xl:items-start xl:text-left 2xl:max-w-full">
 
             {/* Hero Heading Chunk */}
@@ -99,7 +96,8 @@ export default function ServiceHero() {
             </div>
 
             {/* Description + CTA Chunk */}
-            <div className="mt-1 sm:mt-1 md:mt-2 lg:mt-2 xl:mt-3 2xl:mt-4 flex flex-col items-center xl:items-start">
+            {/* UPDATED: Changed dynamic mt classes to mt-8 (32px) */}
+            <div className="mt-8 flex flex-col items-center xl:items-start">
 
               <p
                 className="w-full max-w-[39ch] font-medium leading-[1.65] tracking-normal text-gray-800 sm:max-w-[46ch] md:max-w-[52ch] xl:max-w-[50ch] 2xl:max-w-[54ch]"

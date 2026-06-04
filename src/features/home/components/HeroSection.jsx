@@ -12,7 +12,7 @@ const heroDashboards = [
   {
     src: '/images/hero/frame-2.webp',
     className:
-      'absolute z-30 bottom-[9%] left-[0%] w-[clamp(128px,34vw,208px)] sm:bottom-[7%] sm:left-[0%] sm:w-[clamp(148px,33vw,228px)] md:bottom-[5%] md:left-[-1%] md:w-[clamp(166px,31vw,248px)] lg:bottom-[5%] lg:left-[0%] lg:w-[clamp(178px,20vw,248px)] xl:bottom-[-10%] xl:left-[-10%] xl:w-[clamp(192px,20vw,285px)] 2xl:bottom-[-18%] 2xl:left-[-10%] 2xl:w-[320px]',
+      'absolute z-30 bottom-[2%] left-[-4%] w-[clamp(128px,34vw,208px)] sm:bottom-[0%] sm:left-[-5%] sm:w-[clamp(148px,33vw,228px)] md:bottom-[0%] md:left-[-5%] md:w-[clamp(166px,31vw,248px)] lg:bottom-[0%] lg:left-[-5%] lg:w-[clamp(178px,20vw,248px)] xl:bottom-[-10%] xl:left-[-10%] xl:w-[clamp(192px,20vw,285px)] 2xl:bottom-[-18%] 2xl:left-[-10%] 2xl:w-[320px]',
     floatClassName: 'hero-float hero-float-delay-1',
   },
   {
@@ -24,7 +24,7 @@ const heroDashboards = [
   {
     src: '/images/hero/Frame-5.webp',
     className:
-      'absolute z-30 bottom-[10%] right-[0%] w-[clamp(136px,35vw,214px)] sm:bottom-[8%] sm:right-[0%] sm:w-[clamp(156px,34vw,236px)] md:bottom-[5%] md:right-[-1%] md:w-[clamp(174px,31vw,256px)] lg:bottom-[4%] lg:right-[0%] lg:w-[clamp(182px,20vw,252px)] xl:bottom-[-10%] xl:right-[-10%] xl:w-[clamp(198px,20vw,288px)] 2xl:bottom-[-18%] 2xl:right-[-14%] 2xl:w-[330px]',
+      'absolute z-30 bottom-[2%] right-[-4%] w-[clamp(136px,35vw,214px)] sm:bottom-[0%] sm:right-[-5%] sm:w-[clamp(156px,34vw,236px)] md:bottom-[0%] md:right-[-5%] md:w-[clamp(174px,31vw,256px)] lg:bottom-[4%] lg:right-[0%] lg:w-[clamp(182px,20vw,252px)] xl:bottom-[-10%] xl:right-[-10%] xl:w-[clamp(198px,20vw,288px)] 2xl:bottom-[-18%] 2xl:right-[-14%] 2xl:w-[330px]',
     floatClassName: 'hero-float hero-float-delay-3',
   },
 ]
@@ -76,7 +76,6 @@ export default function HeroSection() {
             </p>
             <div className="mt-1 sm:mt-1 md:mt-2 lg:mt-2 xl:mt-3 2xl:mt-4">
               <h1
-                // Removed the restrictive ch limits on lg, xl, 2xl to allow the full 2 lines to stretch
                 className="hero-copy-reveal hero-copy-reveal--2 w-full max-w-[15ch] font-bold leading-[1.04] tracking-[-0.05em] sm:max-w-[15.5ch] md:max-w-[16ch] md:leading-[1.02] lg:max-w-full lg:leading-[0.98]"
                 style={{ fontSize: 'var(--fs-hero-title)' }}
               >
@@ -84,7 +83,6 @@ export default function HeroSection() {
                   Elevate Your Digital
                 </span> 
 
-                {/* Added lg:whitespace-nowrap to guarantee the second line never breaks into a 3rd line */}
                 <span className="mt-2 block sm:mt-1 md:mt-2 lg:mt-1 lg:whitespace-nowrap">
                   Footprint with{' '}
                   <HeroYellowUnderlineText
@@ -97,7 +95,8 @@ export default function HeroSection() {
               </h1>
             </div>
             
-            <div className="hero-copy-reveal hero-copy-reveal--3 mt-1 flex flex-col items-center sm:mt-1 md:mt-2 lg:mt-2 lg:items-start xl:mt-3 2xl:mt-4">
+            {/* UPDATED: mt-8 provides exactly 32px of spacing */}
+            <div className="hero-copy-reveal hero-copy-reveal--3 mt-8 flex flex-col items-center lg:items-start">
               <p
                 className="max-w-[34ch] font-medium leading-[1.68] tracking-normal sm:max-w-[42ch] md:max-w-[48ch] lg:max-w-[52ch] xl:max-w-[56ch] 2xl:max-w-[58ch]"
                 style={{ fontSize: 'var(--fs-hero-subtitle)' }}

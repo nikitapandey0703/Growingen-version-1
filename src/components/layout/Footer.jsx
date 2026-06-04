@@ -14,8 +14,13 @@ const socialIcons = [
   { href: 'https://www.linkedin.com/company/growingen-solutions/', src: footerMedia.linkedinIcon, alt: 'LinkedIn' },
   { href: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==', src: footerMedia.instagramIcon, alt: 'Instagram' },
   { href: 'https://www.facebook.com/profile.php?id=61576986820913', src: footerMedia.facebookIcon, alt: 'Facebook' },
-  { href: 'https://in.pinterest.com/infogrowingen/', src: footerMedia.pinterestIcon, alt: 'Pinterest' },
+  // { href: 'https://in.pinterest.com/infogrowingen/', src: footerMedia.pinterestIcon, alt: 'Pinterest' },
 ];
+
+const contactEmail = 'connect@growingen.com';
+const contactEmailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${contactEmail}`;
+const contactPhoneLabel = '+91 86 2591 2593';
+const contactPhoneHref = 'https://wa.me/918625912593';
 
 const Footer = ({
   logoSrc = '/images/hero/logo.png',
@@ -97,7 +102,13 @@ const Footer = ({
           {/* Contact Methods */}
           <div className="flex w-full flex-col gap-5 border-b border-black/10 pb-8 sm:gap-6 lg:pb-10">
             {/* Email */}
-            <div className="group flex cursor-pointer items-center gap-4 sm:gap-5">
+            <a
+              href={contactEmailHref}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex cursor-pointer items-center gap-4 sm:gap-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B1CC1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF1F0]"
+              aria-label={`Email ${contactEmail}`}
+            >
               <div className="h-10 w-10 flex-shrink-0 transition-transform group-hover:-translate-y-1 sm:h-12 sm:w-12 lg:h-[48px] lg:w-[48px]">
                 <img
                   src={footerMedia.emailIcon}
@@ -107,15 +118,21 @@ const Footer = ({
               </div>
               {/* Inherits `--fs-card-title` for responsive 24px -> 40px scaling. Uses break-all on mobile to stop screen blowout. */}
               <span
-                className="break-all font-bold leading-none tracking-tight transition-colors group-hover:text-blue-600 sm:break-normal"
+                className="footer-email-text break-all font-bold leading-none tracking-tight transition-colors group-hover:text-blue-600 sm:break-normal "
                 style={{ fontSize: 'var(--fs-card-title)' }}
               >
-                connect@growingen.com
+                {contactEmail}
               </span>
-            </div>
+            </a>
 
             {/* Phone */}
-            <div className="group flex cursor-pointer items-center gap-4 sm:gap-5">
+            <a
+              href={contactPhoneHref}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex cursor-pointer items-center gap-4 sm:gap-5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2B1CC1] focus-visible:ring-offset-4 focus-visible:ring-offset-[#FFF1F0]"
+              aria-label={`Message ${contactPhoneLabel} on WhatsApp`}
+            >
               <div className="h-10 w-10 flex-shrink-0 transition-transform group-hover:-translate-y-1 sm:h-12 sm:w-12 lg:h-[48px] lg:w-[48px]">
                 <img
                   src={footerMedia.whatsappIcon}
@@ -127,9 +144,9 @@ const Footer = ({
                 className="font-bold leading-none tracking-tight transition-colors group-hover:text-green-600"
                 style={{ fontSize: 'var(--fs-card-title)' }}
               >
-                +91 86 2591 2593
+                {contactPhoneLabel}
               </span>
-            </div>
+            </a>
           </div>
 
           {/* Menus & Socials Container */}
@@ -147,8 +164,8 @@ const Footer = ({
                 </h4>
                 <ul className="flex flex-col gap-3">
                   {['Website Optimization', 'Business Growth', 'Social Media Management', 'SEO Development'].map((item) => (
-                    <li key={item}>
-                      <a href="#" className=" relative inline-flex w-fit pr-5">
+                    <li key={item} className=" relative inline-flex w-fit pr-5">
+                     
                         <span
                           className="footer-link__text font-medium leading-relaxed tracking-normal text-[#6B7280]"
                           style={{ fontSize: 'var(--fs-card-body)' }}
@@ -156,7 +173,7 @@ const Footer = ({
                           {item}
                         </span>
                         <span className="footer-link__line w-[118%]"></span>
-                      </a>
+                     
                     </li>
                   ))}
                 </ul>

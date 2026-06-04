@@ -7,38 +7,44 @@ const cards = [
   {
     title: 'AI-Powered Software Solutions',
     imageSrc: '/images/featured/card-1.svg',
-    badgeIconSrc: '/icons/optimizing-speed.svg',
-    badgeAlt: 'Optimizing speed icon',
+    badgeIconSrc: '/icons/ai-powered-white.svg',
+    activeBadgeIconSrc: '/icons/ai-powered-orange.svg',
+    badgeAlt: 'AI software solutions icon',
   },
   {
     title: 'Content & Campaign Management',
     imageSrc: '/images/featured/card-2.png',
-    badgeIconSrc: '/icons/digital-strategy.svg',
-    badgeAlt: 'Integrated digital strategy icon',
+    badgeIconSrc: '/icons/content-white.svg',
+    activeBadgeIconSrc: '/icons/content-orange.svg',
+    badgeAlt: 'Content and campaign management icon',
   },
   {
     title: 'Website & App Development',
     imageSrc: '/images/featured/card-3.png',
-    badgeIconSrc: '/icons/web-platform.svg',
-    badgeAlt: 'Custom web platform engineering icon',
+    badgeIconSrc: '/icons/website-development-white.svg',
+    activeBadgeIconSrc: '/icons/website-development-orange.svg',
+    badgeAlt: 'Website and app development icon',
   },
   {
     title: 'Social Media & Digital Marketing ',
     imageSrc: '/images/featured/card-4.png',
-    badgeIconSrc: '/icons/optimizing-speed.svg',
-    badgeAlt: 'Cloud hosting solutions icon',
+    badgeIconSrc: '/icons/social-media-white.svg',
+    activeBadgeIconSrc: '/icons/social-media-orange.svg',
+    badgeAlt: 'Digital marketing icon',
   },
   {
     title: 'Business Growth Strategy ',
     imageSrc: '/images/featured/card-5.png',
-    badgeIconSrc: '/icons/digital-strategy.svg',
-    badgeAlt: 'Mobile app development icon',
+    badgeIconSrc: '/icons/business-growth-white.svg',
+    activeBadgeIconSrc: '/icons/business-growth-orange.svg',
+    badgeAlt: 'Business growth strategy icon',
   },
   {
     title: 'Branding & Creative Design',
     imageSrc: '/images/featured/card-6.png',
-    badgeIconSrc: '/icons/web-platform.svg',
-    badgeAlt: 'Data analytics icon',
+    badgeIconSrc: '/icons/branding-white.svg',
+    activeBadgeIconSrc: '/icons/branding-orange.svg',
+    badgeAlt: 'Branding and creative design icon',
   },
 ]
 
@@ -130,9 +136,9 @@ function FeatureCard({ card, isActive, onSelect }) {
         </div>
       </div>
 
-      <div className="absolute bottom-[-0px] left-1/2 z-20 -translate-x-1/2 translate-y-1/2">
+      <div className="absolute bottom-[-1px] left-1/2 z-20 -translate-x-1/2 translate-y-1/2">
         <span
-          className={`inline-flex h-[34px] w-[34px] items-center justify-center rounded-full border shadow-md transition-[background-color,border-color,transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:h-[36px] sm:w-[36px] lg:h-[38px] lg:w-[38px] 2xl:h-[46px] 2xl:w-[46px] 3xl:h-[50px] 3xl:w-[50px] ${
+          className={`inline-flex h-[36px] w-[36px] items-center justify-center rounded-full border shadow-md transition-[background-color,border-color,transform,box-shadow] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] sm:h-[37px] sm:w-[37px] lg:h-[38px] lg:w-[38px] 2xl:h-[46px] 2xl:w-[46px] 3xl:h-[50px] 3xl:w-[50px] ${
             isActive
               ? 'scale-105 border-[#F45328] bg-[#F45328] shadow-[0_12px_24px_rgba(244,83,40,0.24)]'
               : 'border-[#f3d8d0] bg-white'
@@ -140,11 +146,11 @@ function FeatureCard({ card, isActive, onSelect }) {
         >
           {card.badgeIconSrc ? (
             <img
-              src={card.badgeIconSrc}
+              src={isActive ? card.activeBadgeIconSrc ?? card.badgeIconSrc : card.badgeIconSrc}
               alt={card.badgeAlt}
               className={[
                 'h-[18px] w-[18px] object-contain sm:h-[19px] sm:w-[19px] lg:h-[20px] lg:w-[20px] 2xl:h-[24px] 2xl:w-[24px] 3xl:h-[26px] 3xl:w-[26px]',
-                isActive ? 'brightness-0 invert' : 'opacity-90',
+                isActive ? 'opacity-100' : 'opacity-90',
               ].join(' ')}
             />
           ) : (
