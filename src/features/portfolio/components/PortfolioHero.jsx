@@ -34,7 +34,8 @@ export default function PortfolioHero() {
         }
       `}</style>
 
-      <SectionWrapper className="relative pt-8 sm:pt-10 md:pt-12 lg:pt-10 xl:pt-8 2xl:pt-12">
+      {/* Added pb-12 to ensure mobile images don't touch the section edge */}
+      <SectionWrapper className="relative pt-8 pb-12 sm:pt-10 md:pt-12 lg:pt-10 lg:pb-0 xl:pt-8 2xl:pt-12">
         <div className="grid items-center gap-10 sm:gap-12 md:gap-16 lg:min-h-[calc(100vh-140px)] lg:grid-cols-[minmax(0,1.3fr)_minmax(260px,0.7fr)] lg:gap-x-10 xl:grid-cols-[minmax(0,1.35fr)_minmax(300px,0.65fr)] xl:gap-x-12 2xl:grid-cols-[minmax(0,1.4fr)_minmax(340px,0.6fr)] 2xl:gap-x-16">
           
           {/* Left Text Container */}
@@ -79,7 +80,6 @@ export default function PortfolioHero() {
             </div>
 
             {/* Description + Meta Chunk */}
-            {/* UPDATED: mt-8 provides exactly 32px of spacing */}
             <div className="mt-8 flex flex-col">
 
               {/* Description */}
@@ -112,7 +112,8 @@ export default function PortfolioHero() {
 
           {/* Right Image Container */}
           <div className="relative mx-auto flex w-full items-center justify-center lg:mx-0 lg:justify-end">
-            <div className="relative flex aspect-[1.12/1] w-full max-w-[26rem] items-center justify-center sm:max-w-[32rem] md:max-w-[38rem] lg:max-w-[28rem] xl:max-w-[36rem] 2xl:max-w-[40rem]">
+            {/* UPDATED: Added w-[90%] sm:w-full and reduced mobile max-w-[22rem] to prevent cutting */}
+            <div className="relative flex aspect-[1.12/1] w-[90%] sm:w-full max-w-[22rem] sm:max-w-[32rem] md:max-w-[38rem] lg:max-w-[28rem] xl:max-w-[36rem] 2xl:max-w-[40rem]">
               <div
                 className="absolute inset-x-[4%] top-[2%] bottom-[12%] rounded-full blur-[70px]"
                 style={visualGlowStyle}

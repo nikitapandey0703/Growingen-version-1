@@ -6,7 +6,7 @@ const MotionDiv = motion.div;
 
 const portfolioScrollImages = {
   topLeft: "/images/portfolio/recent-project-skincare-product.webp",
-  topCenter: "/images/portfolio/recent-project-social-campaign.webp",
+  topCenter: "/images/portfolio/recent-project-social-campaign.png",
   topRight: "/images/portfolio/recent-project-tech-brochure.webp",
   bottomLeft: "/images/portfolio/recent-project-dashboard-ui.webp",
   bottomCenter: "/images/portfolio/recent-project-digital-it.webp",

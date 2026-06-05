@@ -45,7 +45,6 @@ function PhilosophyCard({ item, index, isActive, onEnter, onLeave }) {
 
   return (
     <article
-      // Width scales completely fluidly up to 490px
       className="group relative z-10 min-w-0 w-full max-w-[490px]"
       onMouseEnter={onEnter}
       onMouseLeave={onLeave}
@@ -54,7 +53,6 @@ function PhilosophyCard({ item, index, isActive, onEnter, onLeave }) {
     >
       <div
         className={[
-          // Height fluidly scales from 190px (mobile) up to precisely 220px
           'relative w-full overflow-hidden transition-all duration-500 ease-out h-[clamp(190px,22vw,220px)]',
           shapeClass,
           cardStateClass,
@@ -62,33 +60,33 @@ function PhilosophyCard({ item, index, isActive, onEnter, onLeave }) {
         ].join(' ')}
       >
         <div
-          // Padding fluidly scales up to your preferred desktop limits
-          className="absolute inset-0 z-10 flex flex-col justify-center overflow-hidden px-[clamp(1.75rem,4vw,3.5rem)] py-[clamp(1.75rem,3vw,2.75rem)] text-left transition-colors duration-500 ease-out"
+          // FIXED: Reduced py (padding-y) to ensure white space is visible even with fixed height
+          // px (padding-x) also reduced slightly so text doesn't wrap into too many lines vertically
+          className="absolute inset-0 z-10 flex flex-col justify-center overflow-hidden px-[clamp(1.25rem,3vw,2rem)] py-[clamp(1rem,2vw,1.5rem)] text-left transition-colors duration-500 ease-out"
         >
-          <div className="relative z-10 flex w-full flex-col items-start gap-[clamp(4px,0.8vw,6px)] max-w-[340px]">
+          <div className="relative z-10 flex w-full flex-col items-start gap-1.5 sm:gap-2">
             <div
               className={[
-                'mb-[clamp(4px,0.6vw,8px)] flex items-center justify-center rounded-[10px] border transition-all duration-500 ease-out h-[clamp(48px,5vw,56px)] w-[clamp(48px,5vw,56px)]',
+                'mb-1 flex items-center justify-center rounded-[10px] border transition-all duration-500 ease-out h-[clamp(42px,4vw,50px)] w-[clamp(42px,4vw,50px)]',
                 isActive ? 'border-white/70 bg-white shadow-[0_8px_18px_rgba(255,255,255,0.18)]' : 'border-[#dfe4ec] bg-white',
               ].join(' ')}
             >
-              <img src={item.icon} alt="" aria-hidden="true" className="object-contain h-[clamp(28px,3vw,32px)] w-[clamp(28px,3vw,32px)]" />
+              <img src={item.icon} alt="" aria-hidden="true" className="object-contain h-6 w-6 sm:h-7 sm:w-7" />
             </div>
 
             <h3
               className={[
-                'line-clamp-2 font-bold leading-[1.18] tracking-[-0.03em] transition-colors duration-500 ease-out text-[clamp(18px,2.5vw,24px)]',
+                'line-clamp-2 font-bold leading-[1.15] tracking-[-0.02em] transition-colors duration-500 ease-out text-[clamp(17px,2vw,22px)]',
                 isActive ? '!text-white' : '!text-black',
               ].join(' ')}
-              title={item.title}
             >
               {item.title}
             </h3>
 
             <p
               className={[
-                'mt-0.5 max-w-[36ch] font-medium leading-[1.25] xl:leading-[1.5] 2xl:leading-[1.5] transition-colors duration-500 ease-out text-[clamp(14px,1.5vw,15px)]',
-                isActive ? '!text-white/90' : '!text-black',
+                'max-w-[40ch] font-medium leading-[1.3] transition-colors duration-500 ease-out text-[clamp(13px,1.2vw,14.5px)]',
+                isActive ? '!text-white/90' : '!text-[#4b5563]',
               ].join(' ')}
             >
               {item.description}
@@ -107,10 +105,10 @@ export default function PhilosophySystemsAbout() {
     <SectionWrapper as="section" className="relative bg-transparent section-spacing">
       <div className="relative mx-auto max-w-[1200px]">
         <div className="mx-auto mb-[clamp(2.5rem,4vw,3rem)] max-w-[760px] text-center">
-          <p className="mb-3 font-medium uppercase tracking-[0.28em] text-[clamp(16px,2vw,24px)]">
+          <p className="mb-3 font-medium uppercase tracking-[0.28em] text-[clamp(14px,1.5vw,18px)] text-[#7a7f8e]">
             OUR PHILOSOPHY
           </p>
-          <h2 className="font-bold leading-[1.08] tracking-[-0.04em] text-[clamp(32px,4vw+10px,50px)]">
+          <h2 className="font-bold leading-[1.08] tracking-[-0.04em] text-[clamp(30px,4vw+8px,48px)]">
             We Build Brands, Products &
             <br />
             Systems{' '}
@@ -120,7 +118,7 @@ export default function PhilosophySystemsAbout() {
           </h2> 
         </div>
 
-        <div className="relative mt-[clamp(3rem,4.5vw,4rem)]">
+        <div className="relative mt-[clamp(2.5rem,4vw,3.5rem)] px-4">
           <div className="grid justify-items-center sm:grid-cols-2 gap-x-[clamp(1.5rem,3vw,2.5rem)] gap-y-[clamp(1.25rem,2.5vw,1.75rem)]">
           {philosophyData.map((item, index) => (
             <PhilosophyCard

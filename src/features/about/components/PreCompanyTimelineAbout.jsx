@@ -214,7 +214,7 @@ function TimelineTextCard({ item, align, isActive }) {
     <article className="group relative z-10 w-full min-w-0 md:w-[calc(50%_-_18px)] lg:w-[calc(50%_-_26px)]">
       <div
         className={[
-          'relative h-[176px] w-full drop-shadow-[0_12px_22px_rgba(15,23,42,0.06)] transition-all duration-500 ease-out md:h-[198px] lg:h-[216px] xl:h-[228px]',
+          'relative h-auto min-h-[176px] w-full drop-shadow-[0_12px_22px_rgba(15,23,42,0.06)] transition-all duration-500 ease-out md:h-[198px] lg:h-[216px] xl:h-[228px]',
           isActive ? 'scale-[1.02] drop-shadow-[0_20px_35px_rgba(244,83,40,0.15)]' : 'scale-100',
         ].join(' ')}
       >
@@ -236,7 +236,7 @@ function TimelineTextCard({ item, align, isActive }) {
         />
 
         <div
-          className={`absolute inset-0 z-10 flex flex-col justify-center overflow-hidden px-4 py-4 transition-colors duration-500 ease-out sm:px-7 sm:py-6 lg:px-8 lg:py-7 xl:px-9 ${alignmentClass}`}
+          className={`relative z-10 flex flex-col justify-center overflow-hidden px-4 pb-6 pt-6 pl-11 transition-colors duration-500 ease-out sm:px-7 sm:py-6 md:absolute md:inset-0 lg:px-8 lg:py-7 xl:px-9 ${alignmentClass}`}
         >
           <span
             className={`pointer-events-none absolute select-none text-[28px] font-bold leading-none transition-all duration-500 ease-out sm:text-[38px] lg:text-[46px] ${numberPosClass} ${
@@ -251,7 +251,7 @@ function TimelineTextCard({ item, align, isActive }) {
             {item.tag && (
               <span
                 className={[
-                  'mb-0.5 text-[clamp(6px,1.1vw,18px)] font-light uppercase tracking-[0.18em] leading-none transition-colors duration-500 ease-out',
+                  'mb-1 text-[clamp(12px,0.8rem+0.4vw,20px)] font-light uppercase tracking-[0.18em] leading-none transition-colors duration-500 ease-out',
                   isActive ? '!text-white/80' : '!text-[#7a7f8e]',
                 ].join(' ')}
               >
@@ -270,7 +270,7 @@ function TimelineTextCard({ item, align, isActive }) {
             
             <div
               className={[
-                'mt-1 text-[13px] font-medium leading-[1.34] transition-colors duration-500 ease-out md:mt-1.5 md:text-[14px] md:leading-[1.58] lg:text-[15px]',
+                'mt-1.5 text-[13px] font-medium leading-[1.4] transition-colors duration-500 ease-out md:mt-1.5 md:text-[14px] md:leading-[1.58] lg:text-[15px]',
                 isActive ? '!text-white/90' : '!text-black',
               ].join(' ')}
             >
@@ -292,7 +292,7 @@ function TimelineBubble({ item, align, isActive }) {
         'relative flex justify-between gap-6 md:gap-4',
         'flex-col items-start md:items-center',
         isLeft ? 'md:flex-row' : 'md:flex-row-reverse',
-        'pl-[44px] pr-2 md:px-0' 
+        'pl-[44px] pr-3 md:px-0' 
       ].join(' ')}
     >
       <TimelineTextCard item={item} align={align} isActive={isActive} />
@@ -377,11 +377,11 @@ export default function PreCompanyTimelineAbout() {
   )
 
   return (
-    <SectionWrapper ref={sectionRef} as="section" className="relative overflow-hidden bg-transparent section-spacing">
+    <SectionWrapper ref={sectionRef} as="section" className="relative overflow-hidden bg-transparent section-spacing px-0 sm:px-1 md:px-2">
       <div className="pointer-events-none absolute left-[8%] top-[18%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(244,83,40,0.16)_0%,rgba(244,83,40,0.08)_45%,rgba(244,83,40,0)_75%)] blur-3xl" />
       <div className="pointer-events-none absolute bottom-[12%] right-[10%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(65,94,255,0.16)_0%,rgba(65,94,255,0.08)_45%,rgba(65,94,255,0)_75%)] blur-3xl" />
 
-      <div className="relative mx-auto max-w-[1180px] xl:px-10 ">
+      <div className="relative mx-auto max-w-[1180px] xl:px-10">
         <div className="mx-auto max-w-[600px] text-center">
           <p className="text-[16px] sm:text-[18px] lg:text-[20px] xl:text-[22px] 2xl:text-[24px] font-medium uppercase tracking-[0.28em]">
             Before Growingen
@@ -397,10 +397,8 @@ export default function PreCompanyTimelineAbout() {
 
         <div ref={timelineTrackRef} className="relative mx-auto mt-12 max-w-[940px] sm:mt-14 lg:mt-16 xl:mt-18 2xl:mt-20 xl:max-w-[980px]">
           
-          {/* Timeline Tracking Line */}
           <div className="absolute bottom-0 left-[20px] top-0 w-px -translate-x-1/2 bg-[#d8dcef] md:left-1/2" />
           <div className="absolute bottom-0 left-[20px] top-0 w-[3px] -translate-x-1/2 md:left-1/2">
-            {/* Using rounded-t-full so the bottom remains completely flat/flush for the connection */}
             <MotionDiv
               className="h-full w-full origin-top rounded-t-full bg-[linear-gradient(180deg,#f45328_0%,#7a4fff_48%,#5b4dff_100%)] shadow-[0_0_18px_rgba(122,79,255,0.18)]"
               style={{ scaleY }}
@@ -420,7 +418,7 @@ export default function PreCompanyTimelineAbout() {
                     }}
                     className={[
                       'absolute z-20 h-3.5 w-3.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 transition-all duration-300 md:h-4 md:w-4',
-                      'left-[20px] top-[88px] md:left-1/2 md:top-1/2', 
+                      'left-[20px] top-1/2 md:left-1/2', 
                       isActive
                         ? 'border-white bg-[#f45328] shadow-[0_0_0_6px_rgba(244,83,40,0.14)]'
                         : 'border-[#cfd6e6] bg-white',
@@ -440,12 +438,9 @@ export default function PreCompanyTimelineAbout() {
       </div>
 
       <div className="relative mx-auto mt-14 max-w-[1140px] sm:mt-20">
-        
-        {/* CHANGED: Removed top-[8px] to top-0 to close the gap completely */}
         <div ref={finalConnectorRef} className="pointer-events-none absolute left-[20px] top-[-56px] h-[56px] w-4 -translate-x-1/2 sm:top-[-80px] sm:h-[80px] md:left-1/2">
           <div className="absolute bottom-0 left-1/2 top-0 w-px -translate-x-1/2 bg-[#d8dcef]" />
           <div ref={finalLineRef} className="absolute bottom-0 left-1/2 top-0 w-[3px] -translate-x-1/2">
-            {/* Using rounded-b-full so the top remains completely flat/flush for the connection */}
             <MotionDiv
               className="h-full w-full origin-top rounded-b-full bg-[linear-gradient(180deg,#5b4dff_0%,#f45328_100%)]"
               style={{
@@ -456,8 +451,7 @@ export default function PreCompanyTimelineAbout() {
         </div>
 
         <div className="flex w-full flex-col overflow-hidden rounded-[28px] bg-[#f45328] shadow-[0_24px_50px_rgba(244,83,40,0.25)] lg:h-[492px] lg:flex-row lg:items-stretch lg:justify-between">
-          
-          <div className="flex flex-col justify-center px-7 py-8 lg:w-[50%] lg:px-[56px] lg:py-0">
+          <div className="flex flex-col justify-center px-8 py-10 sm:px-12 md:px-14 lg:w-[50%] lg:px-[60px] lg:py-0">
             <h3 className="!text-white text-[32px] font-bold leading-[1.04] tracking-[-0.03em] sm:text-[42px] lg:text-[54px]">
               <span className="block whitespace-nowrap">Most Offer Services.</span>
               <HeroYellowUnderlineText className="hero-highlight mt-2 inline-block whitespace-nowrap !text-white pb-2" lineClassName=" left-[10%] h-[16px] !w-[70%] -bottom-[8px] sm:-bottom-[10px] md:-bottom-[12px] lg:-bottom-[14px] xl:-bottom-[16px] 2xl:-bottom-[18px]">
@@ -499,7 +493,7 @@ export default function PreCompanyTimelineAbout() {
             </p>
           </div>
 
-          <div className="flex flex-col justify-center px-7 pb-8 lg:w-[45%] lg:pl-0 lg:pr-[56px] lg:py-0">
+          <div className="flex flex-col justify-center px-8 pb-10 sm:px-12 md:px-14 lg:w-[45%] lg:pl-0 lg:pr-[60px] lg:py-0">
             <div className="flex w-full flex-col gap-3.5">
               {closingOffers.map((offer) => (
                 <div
@@ -521,7 +515,6 @@ export default function PreCompanyTimelineAbout() {
               ))}
             </div>
           </div>
-
         </div>
       </div>
     </SectionWrapper>

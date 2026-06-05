@@ -120,7 +120,7 @@ function MetricCard({ value, label, icon, tone, iconBg, valueColor, labelColor }
           {value}
         </p>
         <p
-          className="mt-1 whitespace-pre-line text-[9.5px] font-medium leading-[1.15] sm:text-[11px] md:text-[11.5px] lg:text-[11.5px] xl:text-[12px] 2xl:text-[14px]"
+          className="mt-1 whitespace-pre-line text-[10px] font-medium leading-[1.15] sm:text-[11px] md:text-[11.5px] lg:text-[11.5px] xl:text-[12px] 2xl:text-[14px]"
           style={{ color: labelColor }}
         >
           {label}
