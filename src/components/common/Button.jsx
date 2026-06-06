@@ -1,7 +1,7 @@
 import { ArrowRight } from 'lucide-react'
-import Particles, { initParticlesEngine } from '@tsparticles/react'
 import { useEffect, useId, useMemo, useState } from 'react'
-import { loadFull } from 'tsparticles'
+
+let particlesEnginePromise
 
 const particleOptions = {
   key: 'star',
@@ -81,16 +81,39 @@ export default function Button({
 }) {
   const currentSize = sizeClasses[size] ?? sizeClasses.default
   const particleId = useId()
+  const [ParticlesComponent, setParticlesComponent] = useState(null)
   const [particleState, setParticleState] = useState()
   const [isHovering, setIsHovering] = useState(false)
 
   useEffect(() => {
-    initParticlesEngine(async (engine) => {
-      await loadFull(engine)
-    }).then(() => {
-      setParticleState('loaded')
+    if (!isHovering || ParticlesComponent) {
+      return undefined
+    }
+
+    let cancelled = false
+
+    particlesEnginePromise ??= Promise.all([
+      import('@tsparticles/react'),
+      import('tsparticles'),
+    ]).then(async ([particlesModule, tsparticlesModule]) => {
+      await particlesModule.initParticlesEngine(async (engine) => {
+        await tsparticlesModule.loadFull(engine)
+      })
+
+      return particlesModule.default
     })
-  }, [])
+
+    particlesEnginePromise.then((Component) => {
+      if (!cancelled) {
+        setParticlesComponent(() => Component)
+        setParticleState('loaded')
+      }
+    })
+
+    return () => {
+      cancelled = true
+    }
+  }, [ParticlesComponent, isHovering])
 
   const modifiedOptions = useMemo(() => {
     // Keep the particle engine dormant until hover so the CTA remains lightweight on smaller or low-power devices.
@@ -109,8 +132,8 @@ export default function Button({
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {!!particleState && (
-        <Particles
+      {ParticlesComponent && particleState ? (
+        <ParticlesComponent
           id={`${particleId}-particles`}
           className={`pointer-events-none absolute -inset-5 z-0 opacity-0 transition-opacity duration-300 sm:-inset-8 ${
             particleState === 'ready' ? 'group-hover:opacity-100' : ''
@@ -120,7 +143,7 @@ export default function Button({
           }}
           options={modifiedOptions}
         />
-      )}
+      ) : null}
 
       <button
         type={type}

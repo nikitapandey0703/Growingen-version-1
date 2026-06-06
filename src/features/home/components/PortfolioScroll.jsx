@@ -6,7 +6,7 @@ const MotionDiv = motion.div;
 
 const portfolioScrollImages = {
   topLeft: "/images/portfolio/recent-project-skincare-product.webp",
-  topCenter: "/images/portfolio/recent-project-social-campaign.png",
+  topCenter: "/images/portfolio/recent-project-social-campaign.webp",
   topRight: "/images/portfolio/recent-project-tech-brochure.webp",
   bottomLeft: "/images/portfolio/recent-project-dashboard-ui.webp",
   bottomCenter: "/images/portfolio/recent-project-digital-it.webp",
@@ -111,7 +111,7 @@ export default function PortfolioScroll() {
             viewport={{ once: true, amount: 0.1 }}
             className="w-full overflow-hidden rounded-[11px] bg-gray-200 shadow-md"
           >
-            <img src={portfolioScrollImages.topLeft} className="h-auto w-full object-contain" alt="Recent project showcase 1" />
+            <img src={portfolioScrollImages.topLeft} loading="lazy" decoding="async" className="h-auto w-full object-contain" alt="Recent project showcase 1" />
           </MotionDiv>
 
           {/* Transparent Text Div */}
@@ -129,7 +129,7 @@ export default function PortfolioScroll() {
 
             <div className="mt-4 sm:mt-5 flex items-center justify-center gap-3">
               <div className="flex h-12 w-12 sm:h-14 sm:w-14 shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#F47A14]">
-                <img src="/images/portfolio/mini-illustration.png" alt="avatar" className="h-full w-full object-contain" />
+                <img src="/images/portfolio/mini-illustration.png" loading="lazy" decoding="async" alt="avatar" className="h-full w-full object-contain" />
               </div>
 
               <div className="flex flex-col leading-tight text-left">
@@ -148,7 +148,7 @@ export default function PortfolioScroll() {
             viewport={{ once: true, amount: 0.1 }}
             className="w-full overflow-hidden rounded-[11px] bg-gray-200 shadow-md"
           >
-            <img src={portfolioScrollImages.bottomRight} className="h-auto w-full object-contain" alt="Recent project showcase 2" />
+            <img src={portfolioScrollImages.bottomRight} loading="lazy" decoding="async" className="h-auto w-full object-contain" alt="Recent project showcase 2" />
           </MotionDiv>
 
         </div>
@@ -184,7 +184,7 @@ export default function PortfolioScroll() {
               style={{ x: xTopLeft, y: yTopLeft, rotate: rotateTopLeft }}
               className="absolute top-[20%] left-[9%] w-[23.5%] aspect-[1/1.05] overflow-hidden rounded-[8px]  bg-gray-200 shadow-md 2xl:left-[8.4%] 2xl:w-[24.2%] 2xl:rounded-[12px] 3xl:left-[8.1%] 3xl:w-[24.8%] 3xl:rounded-[14px]"
             >
-              <img src={portfolioScrollImages.topLeft} className="w-full h-full object-cover" alt="Recent project showcase 1" />
+              <img src={portfolioScrollImages.topLeft} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 1" />
             </MotionDiv>
 
             {/* SOFTWARE - Top Center */}
@@ -192,7 +192,7 @@ export default function PortfolioScroll() {
               style={{ y: yTopMid, rotate: rotateTopMid }}
               className="absolute top-[13%] left-[36.8%] w-[37.5%] aspect-[16/7] overflow-hidden rounded-[8px] bg-gray-200 shadow-md 2xl:left-[35.7%] 2xl:w-[38.8%] 2xl:rounded-[12px] 3xl:left-[35.3%] 3xl:w-[39.6%] 3xl:rounded-[14px]"
             >
-              <img src={portfolioScrollImages.topCenter} className="w-full h-full object-cover" alt="Recent project showcase 2" />
+              <img src={portfolioScrollImages.topCenter} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 2" />
             </MotionDiv>
 
             {/* CENTER CARD (Stays put throughout) */}
@@ -202,7 +202,7 @@ export default function PortfolioScroll() {
               </h3>
               <div className="flex items-center gap-3 pt-4 2xl:gap-4 2xl:pt-5 3xl:pt-6">
                 <div className="flex h-[clamp(56px,4.5vw,72px)] w-[clamp(56px,4.5vw,72px)] shrink-0 items-center justify-center overflow-hidden rounded-full bg-[#F47A14] 2xl:h-[clamp(64px,4.2vw,82px)] 2xl:w-[clamp(64px,4.2vw,82px)] 3xl:h-[clamp(70px,4vw,88px)] 3xl:w-[clamp(70px,4vw,88px)]">      
-                  <img src="/images/portfolio/mini-illustration.png" alt="avatar" className="w-full h-full object-contain" />
+                  <img src="/images/portfolio/mini-illustration.png" loading="lazy" decoding="async" alt="avatar" className="w-full h-full object-contain" />
                 </div>
                 <div className="flex flex-col leading-tight">
                   <span className="whitespace-nowrap text-[clamp(14px,1.2vw,24px)] font-semibold 2xl:text-[clamp(16px,1.1vw,26px)] 3xl:text-[clamp(18px,1vw,28px)]">                  
@@ -217,7 +217,7 @@ export default function PortfolioScroll() {
               style={{ x: xTopRight, y: yTopRight, rotate: rotateTopRight }}
               className="absolute top-[42%] left-[68.8%] w-[22.5%] aspect-[3.5/1.8] overflow-hidden rounded-[8px] bg-gray-200 shadow-md 2xl:left-[69.2%] 2xl:w-[23.1%] 2xl:rounded-[12px] 3xl:left-[69.6%] 3xl:w-[23.6%] 3xl:rounded-[14px]"
             >
-              <img src={portfolioScrollImages.topRight} className="w-full h-full object-cover" alt="Recent project showcase 3" />
+              <img src={portfolioScrollImages.topRight} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 3" />
             </MotionDiv>
 
             {/* SKIN 1 - Bottom Left */}
@@ -225,7 +225,7 @@ export default function PortfolioScroll() {
               style={{ x: xBotLeft, y: yBotLeft, rotate: rotateBotLeft }}
               className="absolute top-[68.5%] left-[11%] w-[29.5%] aspect-[23/9] overflow-hidden rounded-[8px] bg-gray-200 shadow-md 2xl:left-[10.4%] 2xl:w-[30.4%] 2xl:rounded-[12px] 3xl:left-[10%] 3xl:w-[31%] 3xl:rounded-[14px]"
             >
-              <img src={portfolioScrollImages.bottomLeft} className="w-full h-full object-cover" alt="Recent project showcase 4" />
+              <img src={portfolioScrollImages.bottomLeft} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 4" />
             </MotionDiv>
 
             {/* SPEAKER - Bottom Center */}
@@ -233,7 +233,7 @@ export default function PortfolioScroll() {
               style={{ y: yBotMid, rotate: rotateBotMid }}
               className="absolute top-[66.5%] left-[45%] w-[20.5%] aspect-[1.8/1.2] overflow-hidden rounded-[8px] bg-gray-200 shadow-md 2xl:w-[21.2%] 2xl:rounded-[12px] 3xl:left-[44.8%] 3xl:w-[21.7%] 3xl:rounded-[14px]"
             >
-              <img src={portfolioScrollImages.bottomCenter} className="w-full h-full object-cover" alt="Recent project showcase 5" />
+              <img src={portfolioScrollImages.bottomCenter} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 5" />
             </MotionDiv>
 
             {/* GRINDING - Bottom Right */}
@@ -241,7 +241,7 @@ export default function PortfolioScroll() {
               style={{ x: xBotRight, y: yBotRight, rotate: rotateBotRight }}
               className="absolute top-[64.5%] left-[69%] z-10 w-[18.5%] aspect-[2/1] overflow-hidden rounded-[8px] bg-gray-200 shadow-md 2xl:left-[69.8%] 2xl:w-[19.2%] 2xl:rounded-[12px] 3xl:left-[70.1%] 3xl:w-[19.6%] 3xl:rounded-[14px]"
             >
-              <img src={portfolioScrollImages.bottomRight} className="w-full h-full object-cover" alt="Recent project showcase 6" />
+              <img src={portfolioScrollImages.bottomRight} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 6" />
             </MotionDiv>
 
           </MotionDiv>
