@@ -62,7 +62,10 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
   useEffect(() => {
     const handleGlobalPlay = (e) => {
       if (e.detail.id !== card.id && isPlaying) {
-        videoRef.current?.pause()
+        if (videoRef.current) {
+          videoRef.current.pause()
+          videoRef.current.currentTime = 0
+        }
         setIsPlaying(false)
       }
     }
@@ -71,12 +74,29 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
     return () => window.removeEventListener('solution-video-playing', handleGlobalPlay)
   }, [isPlaying, card.id])
 
-  // --- LOGIC: AUTO-PAUSE ON SCROLL BEYOND SECTION (Intersection Observer) ---
+  // --- LOGIC: RESET ALL VIDEOS WHEN ENTIRE SECTION LEAVES VIEWPORT ---
+  useEffect(() => {
+    const handleSectionLeave = () => {
+      if (videoRef.current) {
+        videoRef.current.pause()
+        videoRef.current.currentTime = 0
+      }
+      setIsPlaying(false)
+    }
+
+    window.addEventListener('reset-all-solution-videos', handleSectionLeave)
+    return () => window.removeEventListener('reset-all-solution-videos', handleSectionLeave)
+  }, [])
+
+  // --- LOGIC: AUTO-PAUSE ON SCROLL BEYOND CARD (Intersection Observer) ---
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting && isPlaying) {
-          videoRef.current?.pause()
+          if (videoRef.current) {
+            videoRef.current.pause()
+            videoRef.current.currentTime = 0 
+          }
           setIsPlaying(false)
         }
       },
@@ -122,7 +142,10 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
 
       // If activeIndex changed (e.g. unstacking backward or stacking forward), pause.
       if (activeIndex >= 0 && activeIndex !== currentIndex) {
-        videoRef.current?.pause()
+        if (videoRef.current) {
+          videoRef.current.pause()
+          videoRef.current.currentTime = 0
+        }
         setIsPlaying(false)
       }
     }
@@ -179,6 +202,7 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
       }
     }
 
+    // MANUAL TOGGLE: If it's playing, just pause (Do NOT reset currentTime here)
     if (isPlaying) {
       videoRef.current.pause()
       setIsPlaying(false)
@@ -288,6 +312,7 @@ function SolutionPreviewCard({ card, onOpenMobileVideo, isMobile }) {
 }
 
 export default function GrowthStoriesSection() {
+  const sectionRef = useRef(null)
   const [mobileVideoCard, setMobileVideoCard] = useState(null)
   const [isMobile, setIsMobile] = useState(() => {
     if (typeof window !== 'undefined') {
@@ -295,6 +320,25 @@ export default function GrowthStoriesSection() {
     }
     return false
   })
+
+  // --- OBSERVE ENTIRE SECTION SCROLLING OUT OF VIEW ---
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // When the section is entirely scrolled out of the viewport (top or bottom)
+        if (!entry.isIntersecting) {
+          window.dispatchEvent(new CustomEvent('reset-all-solution-videos'))
+        }
+      },
+      { threshold: 0 }
+    )
+
+    if (sectionRef.current) observer.observe(sectionRef.current)
+
+    return () => {
+      observer.disconnect()
+    }
+  }, [])
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth < 768)
@@ -320,7 +364,10 @@ export default function GrowthStoriesSection() {
   }, [mobileVideoCard])
 
   return (
-    <section className="section-spacing relative overflow-visible bg-transparent pb-14 sm:pb-16 md:pb-20 lg:pb-24 2xl:pb-28 3xl:pb-32">
+    <section 
+      ref={sectionRef} 
+      className="section-spacing relative overflow-visible bg-transparent pb-14 sm:pb-16 md:pb-20 lg:pb-24 2xl:pb-28 3xl:pb-32"
+    >
       <div className="pointer-events-none absolute left-[16%] top-[18%] h-[200px] w-[200px] rounded-full bg-[radial-gradient(circle,rgba(255,171,144,0.18)_0%,transparent_70%)] blur-3xl" />
       <div className="pointer-events-none absolute right-[10%] top-[10%] h-[220px] w-[220px] rounded-full bg-[radial-gradient(circle,rgba(102,145,255,0.18)_0%,transparent_70%)] blur-3xl" />
 
