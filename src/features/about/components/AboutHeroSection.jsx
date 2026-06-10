@@ -15,7 +15,7 @@ function AboutHeroVisual() {
 
         <div className="dashboard-hover relative z-10 w-full">
           <img
-            src="/images/about/about-hero-img.svg"
+            src="/images/about/about-hero-img.webp"
             alt="Growingen about page hero visual"
             className="block h-auto w-full object-contain transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] hover:scale-[1.04]"
           />

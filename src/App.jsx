@@ -49,7 +49,7 @@ function App() {
       </Suspense>
       <Footer
         logoSrc="/images/hero/logo.png"
-        illustrationSrc="/images/banners/footer-character.png"
+        illustrationSrc="/images/hero/footer-character.webp"
         width="100%"
         maxWidth="100%"
         minHeight="490px"

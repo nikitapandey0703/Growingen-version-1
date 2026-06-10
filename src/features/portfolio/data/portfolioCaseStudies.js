@@ -297,7 +297,7 @@ export const portfolioCaseStudies = [
     title: 'IT Services',
     industry: 'Project Management & Business Consulting Solutions',
     img: `${popupImageBase}/it-service.webp`,
-    previewImg: `${popupImageBase}/it-service-preview.png`,
+    previewImg: `${popupImageBase}/it-service-preview.webp`,
     impact:
       'The company established a stronger and more modern corporate image that aligned with its industry reputation and large-scale operations. The redesigned branding and company profile helped improve presentation quality, strengthened business credibility, and created a more impressive experience during client interactions and proposals.',
     metrics: createMetrics(

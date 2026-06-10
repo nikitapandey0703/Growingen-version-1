@@ -24,7 +24,7 @@ const contactPhoneHref = 'https://wa.me/918625912593';
 
 const Footer = ({
   logoSrc = '/images/hero/logo.png',
-  illustrationSrc = '/images/banners/footer-character.png',
+  illustrationSrc = '/images/hero/footer-character.webp',
 }) => {
   return (
     <footer className="relative overflow-hidden bg-[#FFF1F0] font-sans text-[var(--color-text)]">

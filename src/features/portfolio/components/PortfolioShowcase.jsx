@@ -26,19 +26,19 @@ const tabLayouts = [
   [
     { 
       id: 'ui-top-left', 
-      src: '/images/grid/ui-ux-2-1.webp', 
+      src: '/images/grid/ui-ux-1.webp', 
       alt: 'UI/UX interface Top Left', 
       className: 'sm:col-span-1 lg:col-[1] lg:row-[1]' 
     },
     { 
       id: 'ui-bottom-left', 
-      src: '/images/grid/ui-ux-4.webp', 
+      src: '/images/grid/ui-ux-3.webp', 
       alt: 'UI/UX interface Bottom Left', 
       className: 'sm:col-span-1 lg:col-[1] lg:row-[2]' 
     },
     { 
       id: 'ui-right-tall', 
-      src: '/images/grid/ui-ux-3-1.webp', 
+      src: '/images/grid/ui-ux-2.webp', 
       alt: 'UI/UX interface Right Tall', 
       className: 'sm:col-span-2 lg:col-[2] lg:row-[1/3] '
       
