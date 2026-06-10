@@ -14,7 +14,7 @@ const solutionCards = [
     buttonLabel: "Let's Explore",
     ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/social-seo-thumbnail.webp',
-    videoSrc: '/videos/social-seo-video-main.webm',
+    videoSrc: '/videos/social-seo-video-main.mp4',
   },
   {
     id: 2,
@@ -25,7 +25,7 @@ const solutionCards = [
     buttonLabel: "Let's Explore",
     ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/saves-matter-thumbnail.webp',
-    videoSrc: '/videos/saves-matter-video-main.webm',
+    videoSrc: '/videos/saves-matter-video-main.mp4',
   },
   {
     id: 3,
@@ -36,7 +36,7 @@ const solutionCards = [
     buttonLabel: "Let's Explore",
     ctaHref: 'https://www.instagram.com/growin.gen?igsh=MWZiemU5cHZwa3VoYQ==',
     previewImageSrc: '/images/hero/human-glitch-thumbnail.webp',
-    videoSrc: '/videos/human-glitch-video-main.webm',
+    videoSrc: '/videos/human-glitch-video-main.mp4',
   },
 ]
 

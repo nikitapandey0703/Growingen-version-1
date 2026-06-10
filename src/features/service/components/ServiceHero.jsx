@@ -25,9 +25,9 @@ function ServiceVisual() {
               }}
             >
               <img
-                src="/images/service/service-header-3.png"
+                src="/images/service/service-header.webp"
                 alt="Marketing analytics dashboard"
-                className="absolute inset-[1.5%] h-[100%] w-[100%] object-contain object-center"
+                className="absolute inset-[1.5%] h-[100%] w-[100%] object-contain object-center scale-[1]"
               />
             </div>
           </div>

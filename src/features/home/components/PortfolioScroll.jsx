@@ -4,17 +4,68 @@ import CurvedUnderlineText from '../../../components/common/CurvedUnderlineText'
 
 const MotionDiv = motion.div;
 
+// 1. Structure your images to have mobile, tablet, and desktop paths
 const portfolioScrollImages = {
-  topLeft: "/images/portfolio/recent-project-skincare-product.webp",
-  topCenter: "/images/portfolio/recent-project-social-campaign.webp",
-  topRight: "/images/portfolio/recent-project-tech-brochure.webp",
-  bottomLeft: "/images/portfolio/recent-project-dashboard-ui.webp",
-  bottomCenter: "/images/portfolio/recent-project-digital-it.webp",
-  bottomRight: "/images/portfolio/recent-project-herbal-tea-landing.webp",
+  topLeft: {
+    mobile: "/images/portfolio/recent-project-skincare-product-mobile.webp",
+    tablet: "/images/portfolio/recent-project-skincare-product-tablet.webp",
+    desktop: "/images/portfolio/recent-project-skincare-product.webp",
+    alt: "Recent project showcase 1"
+  },
+  topCenter: {
+    mobile: "/images/portfolio/recent-project-social-campaign-mobile.webp",
+    tablet: "/images/portfolio/recent-project-social-campaign-tablet.webp",
+    desktop: "/images/portfolio/recent-project-social-campaign.webp",
+    alt: "Recent project showcase 2"
+  },
+  topRight: {
+    mobile: "/images/portfolio/recent-project-tech-brochure-mobile.webp",
+    tablet: "/images/portfolio/recent-project-tech-brochure-tablet.webp",
+    desktop: "/images/portfolio/recent-project-tech-brochure.webp",
+    alt: "Recent project showcase 3"
+  },
+  bottomLeft: {
+    mobile: "/images/portfolio/recent-project-dashboard-ui-mobile.webp",
+    tablet: "/images/portfolio/recent-project-dashboard-ui-tablet.webp",
+    desktop: "/images/portfolio/recent-project-dashboard-ui.webp",
+    alt: "Recent project showcase 4"
+  },
+  bottomCenter: {
+    mobile: "/images/portfolio/recent-project-digital-it-mobile.webp",
+    tablet: "/images/portfolio/recent-project-digital-it-tablet.webp",
+    desktop: "/images/portfolio/recent-project-digital-it.webp",
+    alt: "Recent project showcase 5"
+  },
+  bottomRight: {
+    mobile: "/images/portfolio/recent-project-herbal-tea-landing-mobile.webp",
+    tablet: "/images/portfolio/recent-project-herbal-tea-landing-tablet.webp",
+    desktop: "/images/portfolio/recent-project-herbal-tea-landing.webp",
+    alt: "Recent project showcase 6"
+  },
+};
+
+// 2. Create a reusable Picture component for strict art-direction/breakpoints
+const ResponsiveImage = ({ image, className }) => {
+  return (
+    <picture className="contents">
+      {/* Desktop View: 1024px and up */}
+      <source media="(min-width: 1024px)" srcSet={image.desktop} />
+      {/* Tablet View: 768px to 1023px */}
+      <source media="(min-width: 768px)" srcSet={image.tablet} />
+      {/* Mobile View: Default fallback (under 768px) */}
+      <img
+        src={image.mobile}
+        alt={image.alt}
+        className={className}
+        loading="lazy"
+        decoding="async"
+      />
+    </picture>
+  );
 };
 
 export default function PortfolioScroll() {
-  // ======================= DESKTOP ANIMATION REFS (UNTOUCHED) =======================
+  // ======================= DESKTOP ANIMATION REFS =======================
   const containerRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
@@ -53,7 +104,7 @@ export default function PortfolioScroll() {
   const yBotRight = useTransform(smoothProgress, scrollTimeline, ["0%", "20%", "20%", "0%"]);
   const rotateBotRight = useTransform(smoothProgress, scrollTimeline, [0, 8, 8, 0]);
 
-  // ======================= MOBILE REVEAL ANIMATION (JUMP & STACK) =======================
+  // ======================= MOBILE REVEAL ANIMATION =======================
   const mobileHeadingVariants = {
     hidden: { opacity: 0, y: 30 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
@@ -79,7 +130,6 @@ export default function PortfolioScroll() {
       {/* ======================= MOBILE / TABLET VIEW ======================= */}
       <section className="site-container relative w-full pb-16 pt-6 sm:pt-8 lg:hidden px-4 overflow-hidden">
         
-        {/* Heading: once: true ensures it plays only one time when scrolled into view */}
         <MotionDiv 
           variants={mobileHeadingVariants}
           initial="hidden"
@@ -109,9 +159,9 @@ export default function PortfolioScroll() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            className="w-full overflow-hidden rounded-[11px] bg-gray-200 shadow-md"
+            className="w-full overflow-hidden rounded-[10px] bg-gray-200 shadow-md"
           >
-            <img src={portfolioScrollImages.topLeft} loading="lazy" decoding="async" className="h-auto w-full object-contain" alt="Recent project showcase 1" />
+            <ResponsiveImage image={portfolioScrollImages.topLeft} className="h-auto w-full object-contain" />
           </MotionDiv>
 
           {/* Transparent Text Div */}
@@ -122,7 +172,6 @@ export default function PortfolioScroll() {
             viewport={{ once: true, amount: 0.1 }}
             className="flex w-full flex-col items-center justify-center rounded-[10px] sm:rounded-[12px] border border-gray-400 bg-transparent px-2 py-6 sm:px-4 sm:py-8 shadow-sm"
           >
-            {/* whitespace-nowrap added so quotes never wrap, font clamp adjusted to fit perfectly */}
             <h3 className="whitespace-nowrap text-[clamp(18px,4.5vw,28px)] sm:text-[clamp(24px,4vw,28px)] font-semibold text-center leading-[1.5] tracking-[0.05em]">
               “ Your Growth, Our Success ”
             </h3>
@@ -146,14 +195,13 @@ export default function PortfolioScroll() {
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
-            className="w-full overflow-hidden rounded-[11px] bg-gray-200 shadow-md"
+            className="w-full overflow-hidden rounded-[10px] bg-gray-200 shadow-md"
           >
-            <img src={portfolioScrollImages.bottomRight} loading="lazy" decoding="async" className="h-auto w-full object-contain" alt="Recent project showcase 2" />
+            <ResponsiveImage image={portfolioScrollImages.bottomRight} className="h-auto w-full object-contain" />
           </MotionDiv>
 
         </div>
       </section>
-
 
       {/* ======================= DESKTOP VIEW ======================= */}
       <div className="hidden mx-auto max-w-[760px] lg:max-w-[960px] xl:max-w-[1100px] 2xl:max-w-full px-4 text-center pt-4 pb-10 lg:block">
@@ -182,20 +230,20 @@ export default function PortfolioScroll() {
             {/* LIGHTING - Top Left */}
             <MotionDiv 
               style={{ x: xTopLeft, y: yTopLeft, rotate: rotateTopLeft }}
-              className="absolute top-[20%] left-[9%] w-[23.5%] aspect-[1/1.05] overflow-hidden rounded-[8px]  bg-gray-200 shadow-md 2xl:left-[8.4%] 2xl:w-[24.2%] 2xl:rounded-[12px] 3xl:left-[8.1%] 3xl:w-[24.8%] 3xl:rounded-[14px]"
+              className="absolute top-[20%] left-[9%] w-[23.5%] aspect-[1/1.05] overflow-hidden rounded-[8px] sm:rounded-[9px] md:rounded-[10px] lg:rounded-[10px] xl:rounded-[10px] bg-gray-200 shadow-md 2xl:left-[8.4%] 2xl:w-[24.2%] 2xl:rounded-[10px] 3xl:left-[8.1%] 3xl:w-[24.8%] "
             >
-              <img src={portfolioScrollImages.topLeft} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 1" />
+              <ResponsiveImage image={portfolioScrollImages.topLeft} className="w-full h-full object-cover" />
             </MotionDiv>
 
             {/* SOFTWARE - Top Center */}
             <MotionDiv 
               style={{ y: yTopMid, rotate: rotateTopMid }}
-              className="absolute top-[13%] left-[36.8%] w-[37.5%] aspect-[16/7] overflow-hidden rounded-[8px] bg-gray-200 shadow-md 2xl:left-[35.7%] 2xl:w-[38.8%] 2xl:rounded-[12px] 3xl:left-[35.3%] 3xl:w-[39.6%] 3xl:rounded-[14px]"
+              className="absolute top-[13%] left-[36.8%] w-[37.5%] aspect-[16/7] overflow-hidden rounded-[8px] sm:rounded-[9px] md:rounded-[10px] lg:rounded-[10px] xl:rounded-[10px] bg-gray-200 shadow-md 2xl:left-[35.7%] 2xl:w-[38.8%] 2xl:rounded-[10px] 3xl:left-[35.3%] 3xl:w-[39.6%] 3xl:rounded-[10px]"
             >
-              <img src={portfolioScrollImages.topCenter} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 2" />
+              <ResponsiveImage image={portfolioScrollImages.topCenter} className="w-full h-full object-cover" />
             </MotionDiv>
 
-            {/* CENTER CARD (Stays put throughout) */}
+            {/* CENTER CARD */}
             <div className="absolute top-[41%] left-[36%] z-20 flex w-[28%] aspect-[1.9/1] flex-col items-center justify-center rounded-[8px] border border-gray-400 bg-transparent px-6 py-6 2xl:left-[35.1%] 2xl:w-[29.4%] 2xl:rounded-[10px] 2xl:px-7 2xl:py-7 3xl:left-[34.8%] 3xl:w-[30.2%] 3xl:rounded-[12px] 3xl:px-8 3xl:py-8">
               <h3 className="mb-6 whitespace-nowrap text-[clamp(16px,1.7vw,30px)] font-semibold text-center leading-[1.25] 2xl:mb-7 2xl:text-[clamp(18px,1.55vw,32px)] 3xl:mb-8 3xl:text-[clamp(20px,1.5vw,34px)]">
                 “ Your Growth, Our Success ”
@@ -215,33 +263,33 @@ export default function PortfolioScroll() {
             {/* SKINCARE - Top Right */}
             <MotionDiv 
               style={{ x: xTopRight, y: yTopRight, rotate: rotateTopRight }}
-              className="absolute top-[42%] left-[68.8%] w-[22.5%] aspect-[3.5/1.8] overflow-hidden rounded-[8px] bg-gray-200 shadow-md 2xl:left-[69.2%] 2xl:w-[23.1%] 2xl:rounded-[12px] 3xl:left-[69.6%] 3xl:w-[23.6%] 3xl:rounded-[14px]"
+              className="absolute top-[42%] left-[68.8%] w-[22.5%] aspect-[3.5/1.8] overflow-hidden rounded-[8px] sm:rounded-[9px] md:rounded-[10px] lg:rounded-[10px] xl:rounded-[10px] bg-gray-200 shadow-md 2xl:left-[69.2%] 2xl:w-[23.1%] 2xl:rounded-[10px] 3xl:left-[69.6%] 3xl:w-[23.6%] 3xl:rounded-[10px]"
             >
-              <img src={portfolioScrollImages.topRight} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 3" />
+              <ResponsiveImage image={portfolioScrollImages.topRight} className="w-full h-full object-cover" />
             </MotionDiv>
 
             {/* SKIN 1 - Bottom Left */}
             <MotionDiv 
               style={{ x: xBotLeft, y: yBotLeft, rotate: rotateBotLeft }}
-              className="absolute top-[68.5%] left-[11%] w-[29.5%] aspect-[23/9] overflow-hidden rounded-[8px] bg-gray-200 shadow-md 2xl:left-[10.4%] 2xl:w-[30.4%] 2xl:rounded-[12px] 3xl:left-[10%] 3xl:w-[31%] 3xl:rounded-[14px]"
+              className="absolute top-[68.5%] left-[11%] w-[29.5%] aspect-[23/9] overflow-hidden rounded-[8px] sm:rounded-[9px] md:rounded-[10px] lg:rounded-[10px] xl:rounded-[10px] bg-gray-200 shadow-md 2xl:left-[10.4%] 2xl:w-[30.4%] 2xl:rounded-[10px] 3xl:left-[10%] 3xl:w-[31%] 3xl:rounded-[10px]"
             >
-              <img src={portfolioScrollImages.bottomLeft} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 4" />
+              <ResponsiveImage image={portfolioScrollImages.bottomLeft} className="w-full h-full object-cover" />
             </MotionDiv>
 
             {/* SPEAKER - Bottom Center */}
             <MotionDiv 
               style={{ y: yBotMid, rotate: rotateBotMid }}
-              className="absolute top-[66.5%] left-[45%] w-[20.5%] aspect-[1.8/1.2] overflow-hidden rounded-[8px] bg-gray-200 shadow-md 2xl:w-[21.2%] 2xl:rounded-[12px] 3xl:left-[44.8%] 3xl:w-[21.7%] 3xl:rounded-[14px]"
+              className="absolute top-[66.5%] left-[45%] w-[20.5%] aspect-[1.8/1.2] overflow-hidden rounded-[8px] sm:rounded-[9px] md:rounded-[10px] lg:rounded-[10px] xl:rounded-[10px] bg-gray-200 shadow-md 2xl:w-[21.2%] 2xl:rounded-[10px] 3xl:left-[44.8%] 3xl:w-[21.7%] 3xl:rounded-[10px]"
             >
-              <img src={portfolioScrollImages.bottomCenter} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 5" />
+              <ResponsiveImage image={portfolioScrollImages.bottomCenter} className="w-full h-full object-cover" />
             </MotionDiv>
 
             {/* GRINDING - Bottom Right */}
             <MotionDiv 
               style={{ x: xBotRight, y: yBotRight, rotate: rotateBotRight }}
-              className="absolute top-[64.5%] left-[69%] z-10 w-[18.5%] aspect-[2/1] overflow-hidden rounded-[8px] bg-gray-200 shadow-md 2xl:left-[69.8%] 2xl:w-[19.2%] 2xl:rounded-[12px] 3xl:left-[70.1%] 3xl:w-[19.6%] 3xl:rounded-[14px]"
+              className="absolute top-[64.5%] left-[69%] z-10 w-[18.5%] aspect-[2/1] overflow-hidden rounded-[8px] sm:rounded-[9px] md:rounded-[10px] lg:rounded-[10px] xl:rounded-[10px] bg-gray-200 shadow-md 2xl:left-[69.8%] 2xl:w-[19.2%] 2xl:rounded-[10px] 3xl:left-[70.1%] 3xl:w-[19.6%] 3xl:rounded-[10px]"
             >
-              <img src={portfolioScrollImages.bottomRight} loading="lazy" decoding="async" className="w-full h-full object-cover" alt="Recent project showcase 6" />
+              <ResponsiveImage image={portfolioScrollImages.bottomRight} className="w-full h-full object-cover" />
             </MotionDiv>
 
           </MotionDiv>

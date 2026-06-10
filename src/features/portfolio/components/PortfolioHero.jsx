@@ -120,7 +120,7 @@ export default function PortfolioHero() {
               />
               <div className="relative z-10 flex h-full w-full items-center justify-center">
                 <img
-                  src="/images/portfolio/Desktop-image.svg"
+                  src="/images/portfolio/Desktop-image.webp"
                   alt="Portfolio desktop showcase"
                   className="relative z-10 block h-auto w-full object-contain transition-transform duration-500 ease-out group-hover:scale-[1.02]"
                 />
